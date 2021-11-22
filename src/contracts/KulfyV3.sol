@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
-contract Decentragram {
-  string public name = "Decentragram";
+contract KulfyV3 {
+  string public name = "Kulfy-V3";
   mapping(uint => Image) public images;
   uint public imageCount = 0;
 

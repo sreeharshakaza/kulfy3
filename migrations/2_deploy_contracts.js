@@ -1,5 +1,5 @@
-const Decentragram = artifacts.require("Decentragram");
+const KulfyV3 = artifacts.require("KulfyV3");
 
 module.exports = function(deployer) {
-  deployer.deploy(Decentragram);
+  deployer.deploy(KulfyV3);
 };

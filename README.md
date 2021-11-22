@@ -1,5 +1,14 @@
 # kulfy3
 
+## Set Privatekey information local .env file
+
+
+    copy .env_example to .env 
+    export private key from metamask
+    update same as value to key PRIVATE_KEYS in .env file
+    
+Note: .env file is marked in .gitignore so it is not expected to be committed to git to avoid accidental leakage of sensitive private keys in github repo 
+
 ## Steps to deplay contracts to Harmony 1
 
     npm install --save-dev @truffle/hdwallet-provider
