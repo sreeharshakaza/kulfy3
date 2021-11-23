@@ -281,7 +281,7 @@ a.tag > span {
   width: 14px !important;
   transition: all 0.8s;
   opacity: 0;
-  background: url(../content/images/play_overlay.svg);
+  background: url(../assets/images/play_overlay.svg);
   background-size: 100% 100%;
 }
 
@@ -361,7 +361,7 @@ a.tag > span {
 }
 
 .grid-image {
-  background: url(../content/images/sample1.png);
+  background: url(../assets/images/sample1.png);
   width: 100%;
   height: calc(width * 1);
   border-radius: 11px 11px 0px 0px;
