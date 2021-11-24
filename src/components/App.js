@@ -42,14 +42,14 @@ class App extends Component {
     if (networkData) {
       const kulfyV3 = new web3.eth.Contract(KulfyV3.abi, networkData.address)
       this.setState({ kulfyV3 })
-      const imagesCount = await kulfyV3.methods.imageCount().call()
-      this.setState({ imagesCount })
+      const kulfiesCount = await kulfyV3.methods.kulfyCount().call()
+      this.setState({ kulfiesCount })
 
       // Load Images
-      for (var i = 1; i <= imagesCount; i++) {
-        const image = await kulfyV3.methods.images(i).call()
+      for (var i = 1; i <= kulfiesCount; i++) {
+        const kulfy = await kulfyV3.methods.kulfies(i).call()
         this.setState({
-          images: [...this.state.images, image]
+          kulfies: [...this.state.kulfies, kulfy]
         })
       }
 
@@ -74,7 +74,7 @@ class App extends Component {
     }
   }
 
-  uploadImage = async description => {
+  uploadKulfy = async description => {
     // upload file to kulfy server to preprocess
     console.log("Submitting file to kulfy for preprocessing...", this.state.file);
     let formData = new FormData();
@@ -106,16 +106,16 @@ class App extends Component {
 
     this.setState({ loading: true })
     this.state.kulfyV3.methods
-      .uploadImage(result.path, description)
+      .uploadKulfy(result.path, description)
       .send({ from: this.state.account })
       .on('transactionHash', (hash) => {
         this.setState({ loading: false })
       })
   }
 
-  tipImageOwner(id, tipAmount) {
+  tipKulfyOwner(id, tipAmount) {
     this.setState({ loading: true })
-    this.state.kulfyV3.methods.tipImageOwner(id).send({
+    this.state.kulfyV3.methods.tipKulfyOwner(id).send({
       from: this.state.account,
       value: tipAmount
     }).on('transactionHash', (hash) => {
@@ -129,7 +129,7 @@ class App extends Component {
     this.state = {
       account: '',
       kulfyV3: '',
-      images: [],
+      kulfies: [],
       loading: true
     }
   }
@@ -141,10 +141,10 @@ class App extends Component {
         {this.state.loading
           ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
           : <Main
-            images={this.state.images}
+            kulfies={this.state.kulfies}
             captureFile={this.captureFile}
-            uploadImage={this.uploadImage}
-            tipImageOwner={this.tipImageOwner}
+            uploadKulfy={this.uploadKulfy}
+            tipkulfyOwner={this.tipKulfyOwner}
           />
         }
       </div>

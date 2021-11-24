@@ -1,59 +1,65 @@
 pragma solidity ^0.5.0;
 
 contract KulfyV3 {
-  string public name = "Kulfy-V3";
-  mapping(uint => Image) public images;
-  uint public imageCount = 0;
+    string public name = "Kulfy-V3";
+    mapping(uint256 => Kulfy) public kulfies;
+    uint256 public kulfyCount = 0;
 
-  struct Image {
-    uint id;
-    string description;
-    string hash;
-    uint tipAmount;
-    address payable author;
-  }
+    struct Kulfy {
+        uint256 id;
+        string description;
+        string hash;
+        uint256 tipAmount;
+        address payable author;
+    }
 
-  event ImageCreated(
-    uint id,
-    string hash,
-    string description,
-    uint tipAmount,
-    address payable author
-  );
+    event KulfyCreated(
+        uint256 id,
+        string hash,
+        string description,
+        uint256 tipAmount,
+        address payable author
+    );
 
-  event ImageTipped(
-    uint id,
-    string hash,
-    string description,
-    uint tipAmount,
-    address payable author
-  );
+    event KulfyTipped(
+        uint256 id,
+        string hash,
+        string description,
+        uint256 tipAmount,
+        address payable author
+    );
 
-  function uploadImage(string memory _imgHash, string memory _description) public {
-    //Add some validations
-    require(bytes(_imgHash).length > 0);
-    require(bytes(_description).length > 0);
-    require(msg.sender != address(0x0));
+    function uploadKulfy(string memory _kulfyHash, string memory _description)
+        public
+    {
+        //Add some validations
+        require(bytes(_kulfyHash).length > 0);
+        require(bytes(_description).length > 0);
+        require(msg.sender != address(0x0));
 
+        kulfyCount++;
+        kulfies[1] = Kulfy(kulfyCount, _description, _kulfyHash, 0, msg.sender);
+        emit KulfyCreated(kulfyCount, _kulfyHash, _description, 0, msg.sender);
+    }
 
-    imageCount ++;
-    images[1] = Image(imageCount, _description, _imgHash, 0, msg.sender);
-    emit ImageCreated(imageCount, _imgHash, _description, 0, msg.sender);
-  }
+    function tipKulfyOwner(uint256 _id) public payable {
+        require(_id > 0 && _id <= kulfyCount);
+        Kulfy memory _kulfy = kulfies[_id];
 
-  function tipImageOwner(uint _id) public payable {
+        address payable _author = _kulfy.author;
 
-    require(_id > 0 && _id <= imageCount);
-    Image memory _image = images[_id];
+        address(_author).transfer(msg.value);
 
-    address payable _author = _image.author;
+        _kulfy.tipAmount = _kulfy.tipAmount + msg.value;
 
-    address(_author).transfer(msg.value);
+        kulfies[_id] = _kulfy;
 
-    _image.tipAmount = _image.tipAmount + msg.value;
-
-    images[_id] = _image;
-
-    emit ImageTipped(_id, _image.hash, _image.description, _image.tipAmount, _author);
-  }
+        emit KulfyTipped(
+            _id,
+            _kulfy.hash,
+            _kulfy.description,
+            _kulfy.tipAmount,
+            _author
+        );
+    }
 }
