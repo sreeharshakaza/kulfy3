@@ -55,6 +55,8 @@ class App extends Component {
         })
       }
 
+    console.log(this.state.kulfies);
+
       this.setState({ loading: false })
     } else {
       window.alert('Kulfy contarct not deployed to any network')
@@ -95,17 +97,17 @@ class App extends Component {
     console.log(kulfy.data);
 
     // upon success download image from kulfy s3 as binary
-    // let fileBuffer = Buffer((await httpClient.get(kulfy.data.kulfy_info.gif_url, {
-    //   responseType: 'arraybuffer',
-    // })).data);
+    let fileBuffer = Buffer((await httpClient.get(kulfy.data.kulfy_info.gif_url, {
+      responseType: 'arraybuffer',
+    })).data);
 
     // submit it to IPFS
     // console.log(fileBuffer);
     console.log("Submitting file to ipfs...")
 
     //adding file to the IPFS
-    // const result = await ipfs.add(this.state.buffer);
-    const result = await ipfs.addAll(urlSource(kulfy.data.kulfy_info.gif_url));
+    const result = await ipfs.add(this.state.buffer);
+    // const result = await ipfs.add(urlSource(kulfy.data.kulfy_info.gif_url));
 
     console.log('Ipfs result', result)
 
