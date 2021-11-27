@@ -30,7 +30,7 @@ contract KulfyV3 {
     );
 
     function uploadKulfy(string memory _kulfyHash, string memory _description)
-        public
+    public
     {
         //Add some validations
         require(bytes(_kulfyHash).length > 0);
@@ -38,7 +38,7 @@ contract KulfyV3 {
         require(msg.sender != address(0x0));
 
         kulfyCount++;
-        kulfies[1] = Kulfy(kulfyCount, _description, _kulfyHash, 0, msg.sender);
+        kulfies[kulfyCount] = Kulfy(kulfyCount, _description, _kulfyHash, 0, msg.sender);
         emit KulfyCreated(kulfyCount, _kulfyHash, _description, 0, msg.sender);
     }
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 // import Identicon from 'identicon.js';
 // import photo from '../photo.png'
-import { ReactComponent as UserProfile} from '../assets/images/dp.svg';
+import { ReactComponent as UserProfile } from '../assets/images/dp.svg';
 import { ReactComponent as Logo } from '../assets/images/logo_green.svg'
-import { ReactComponent as NavHam} from '../assets/images/hamburger.svg'
+import { ReactComponent as NavHam } from '../assets/images/hamburger.svg'
 
 class Navbar extends Component {
 
@@ -13,14 +13,14 @@ class Navbar extends Component {
         <nav className="navbar  navbar-light bg-none">
           <div className="container-fluid">
             <button className="navbar-dp">
-                <UserProfile />
+              <UserProfile/>
               <small id="account">{this.props.account}</small>
             </button>
             <button className="navbar-logo">
-              <Logo />
+              <Logo/>
             </button>
             <button className="navbar-ham">
-              <NavHam />
+              <NavHam/>
             </button>
           </div>
         </nav>

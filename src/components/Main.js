@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Identicon from 'identicon.js';
 
-
 class Main extends Component {
 
   render() {
@@ -38,13 +37,15 @@ class Main extends Component {
                 return (
                   <div className="card mb-4" key={key}>
                     <div className="card-header">
-                      <img className='mr-2' alt="Author" width='30' height='30' src={`data:image/png;base64,${new Identicon(kulfy.author, 30).toString()}`} />
+                      <img className='mr-2' alt="Author" width='30' height='30'
+                           src={`data:image/png;base64,${new Identicon(kulfy.author, 30).toString()}`}/>
                       <small className="text-muted">{kulfy.author}</small>
                     </div>
                     <ul id="imageList" className="list-group list-group-flush">
                       <li className="list-group-item">
                         <p className="text-center">
-                          <img alt="Kulfy" src={`https://ipfs.infura.io/ipfs/${kulfy.hash}`} style={{ maxWidth: '420px' }}/>
+                          <img alt="Kulfy" src={`https://ipfs.infura.io/ipfs/${kulfy.hash}`}
+                               style={{ maxWidth: '420px' }}/>
                         </p>
                         <p>{kulfy.description}</p>
                       </li>
