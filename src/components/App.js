@@ -6,8 +6,8 @@ import Navbar from './Navbar'
 import Main from './Main'
 import axios from "axios";
 
-const ipfsClient = require('ipfs-http-client')
-const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
+const { create, urlSource } = require('ipfs-http-client')
+const ipfs = create({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
 
 const httpClient = axios.create();
 httpClient.defaults.timeout = 500000;
@@ -41,12 +41,14 @@ class App extends Component {
     const networkData = KulfyV3.networks[networkId]
     if (networkData) {
       const kulfyV3 = new web3.eth.Contract(KulfyV3.abi, networkData.address)
+      console.log(`kulfyV3`, kulfyV3);
       this.setState({ kulfyV3 })
       const kulfiesCount = await kulfyV3.methods.kulfyCount().call()
+      console.log(`kulfiesCount`, kulfiesCount);
       this.setState({ kulfiesCount })
 
       // Load Images
-      for (var i = 1; i <= kulfiesCount; i++) {
+      for (let i = 1; i <= kulfiesCount; i++) {
         const kulfy = await kulfyV3.methods.kulfies(i).call()
         this.setState({
           kulfies: [...this.state.kulfies, kulfy]
@@ -82,26 +84,29 @@ class App extends Component {
     formData.append('language', 'TELUGU');
     formData.append('tags', 'gif,Remove it');
     formData.append('title', description);
+    console.log(formData);
+    console.log(this.state.file);
 
     let kulfy = await httpClient.post('https://gateway.kulfyapp.com/V3/gifs/upload',
       formData,
       {
-        'Content-Type': 'multipart/form-data',
         'Accept': 'application/json'
       });
     console.log(kulfy.data);
 
     // upon success download image from kulfy s3 as binary
-    let fileBuffer = Buffer((await httpClient.get(kulfy.data.kulfy_info.gif_url, {
-      responseType: 'arraybuffer',
-    })).data);
+    // let fileBuffer = Buffer((await httpClient.get(kulfy.data.kulfy_info.gif_url, {
+    //   responseType: 'arraybuffer',
+    // })).data);
 
     // submit it to IPFS
-    console.log(fileBuffer);
+    // console.log(fileBuffer);
     console.log("Submitting file to ipfs...")
 
     //adding file to the IPFS
-    const result = await ipfs.add(fileBuffer);
+    // const result = await ipfs.add(this.state.buffer);
+    const result = await ipfs.addAll(urlSource(kulfy.data.kulfy_info.gif_url));
+
     console.log('Ipfs result', result)
 
     this.setState({ loading: true })
