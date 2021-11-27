@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <title>Hello, world!</title>
+</head>
+
+<body class="body-to-margin">
+    <header>
+        <nav class="navbar  navbar-light bg-none">
+            <div class="container-fluid justify-content-start">
+                <a class="navbar-dp" href="#">
+                    <img src="assets/images/back-white.svg" alt="back">
+                </a>
+                <a class="navbar-logo" href="#">
+                    <img class="creator" src="assets/images/kulfy-creator.svg" alt="kulfy-creator-logo">
+                </a>
+                <span class="navbar-text-right" >Almost there!</span>
+            </div>
+        </nav>
+    </header>
+
+
+    <section class="container">
+        <div class="row">
+            <div class="col-md-6 my-4">
+                <img class="w-100" src="./assets/images/sample-image.png" alt="">
+            </div>
+            <div class="col-md-6 d-flex justify-content-between flex-column">
+                <div class="form publish-form">
+                    <div class="form-group text-input-with-label my-3">
+                        <label for="filename">File Name</label>
+                        <input type="text" class="form-control" id="filename" aria-describedby="filename" placeholder="Ex. Naku English Raadu">
+                    </div>
+                    <div class="form-group d-flex flex-column my-3">
+                        <label for="tags my-2">Add Tags</label>
+                        <input type="text" class="tag-input my-1" name="tags" id="tags" placeholder="Ex. Chiru, Happy, Comedy, LOL">
+                        <div class="tags-list  my-1">
+                            <span>Chiru <a href="#"><img src="./assets/images/delete-circle-small.svg" width="8px" alt=""></a></span>
+                            <span>Happy <a href="#"><img src="./assets/images/delete-circle-small.svg" width="8px" alt=""></a></span>
+                        </div>
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="language">Language</label>
+                        <div class="language-lists my-1">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="hindi" value="hindi">
+                                <label class="form-check-label" for="hindi">Hindi</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="telugu" value="telugu">
+                                <label class="form-check-label" for="telugu">Telugu</label>
+                              </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="bar-publish">
+                    <div class="content-type">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="hindi" value="hindi">
+                            <label class="form-check-label" for="hindi">Video</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="telugu" value="telugu">
+                            <label class="form-check-label" for="telugu">GIF</label>
+                          </div>
+                    </div>
+                    <div class="publish-actions">
+                        <button><img src="./assets/images/delete-white.svg" alt=""></button>
+                        <button type="submit"><img src="./assets/images/check-black.svg" alt=""> <span>Publish</span></button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-12 bar-publish">
+                <div class="content-type">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="hindi" value="hindi">
+                        <label class="form-check-label" for="hindi">Video</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="telugu" value="telugu">
+                        <label class="form-check-label" for="telugu">GIF</label>
+                      </div>
+                </div>
+                <div class="publish-actions">
+                    <button><img src="./assets/images/delete-white.svg" alt=""></button>
+                    <button type="submit"><img src="./assets/images/check-black.svg" alt=""> <span>Publish</span></button>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    
+    
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar  navbar-light bg-none">
+            <div class="container-fluid">
+                <a class="navbar-dp" href="#">
+                    <img src="assets/images/nav-back.svg" alt="navigation-back">
+                </a>
+                <a class="navbar-logo" href="#">
+                    <img src="assets/images/logo_green.svg" alt="kulfy-logo">
+                </a>
+                <a class="navbar-ham" href="#">
+                    <img src="assets/images/hamburger.svg" alt="hamburger-menu-icon">
+                </a>
+            </div>
+        </nav>
+    </header>
+    <section class="clip-player" style="background: url(assets/images/sample1.png);">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <img src="assets/images/sample2.png" alt="" width="100%">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="clip-details" style="margin-top: -1rem;">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="title">
+                        <h3>Birthday GIF By The Office. Season 3 Ep 1</h3>
+                        <button type="button" class="btn btn-primary border-none btn-bookmark bg-none " data-bs-toggle="button" autocomplete="off">
+                                <img src="assets/images/more-icon.svg" alt="" class="language-icon">
+                            </button>
+                    </div>
+                    <div class="actions">
+                        <button type="button" class="btn btn-primary border-none bg-none btn-clip-action">
+                            <img src="assets/images/share-action.svg" alt="" class="language-icon"> Share GIF
+                        </button>
+                        <button type="button" class="btn btn-primary border-none bg-none btn-clip-action">
+                            <img src="assets/images/copy-action.svg" alt="" class="language-icon"> Copy Clip link
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="clip-other">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 other-actions">
+                    <span>Re-mix</span> <img src="assets/images/remix-icon.svg" alt="">
+                </div>
+                <div class="col-4 other-actions">
+                    <span>Download</span> <img src="assets/images/download-icon.svg" alt="">
+                </div>
+                <div class="col-4 other-actions">
+                    <span>Embed</span> <img src="assets/images/embed-icon.svg" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 other-actions">
+                    <span>Source</span>
+                    <img src="assets/images/youtube-icon.svg" alt="">
+                    <span>Youtube</span>
+                </div>
+                <div class="col-6 other-actions">
+                    <span>Stream on</span>
+                    <img src="assets/images/netflix-logo.svg" alt="">
+                </div>
+            </div>
+            <!-- <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <button class="accordin-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    </button>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div> -->
+            <div class="row accordion" id="accordionTags">
+                <div class="col text-left accordion-item bg-none border-none">
+                    <span class="accordion-header" id="headingOne">
+                        <button class="accordion-button bg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        </button>
+                    </span>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionTags">
+                        <div class="accordion-body">
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                            <span><a href="">tagname</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row channel-details">
+                <div class="col-9 text-left d-flex align-items-center">
+                    <a href="">
+                        <img src="assets/images/sample2.png" alt="" width="32" height="32" class="border-circle me-2">
+                    </a>
+                    <div class="d-flex flex-column ">
+                        <a href="">Chai Biscuit</a>
+                        <span>213k Followes</span>
+                    </div>
+                </div>
+                <div class="col-3 text-left">
+                    <button type="button" class="btn btn-dark">Follow</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="more-keyword-items">
+        <div class="container">
+            <div class="row">
+                <div class="col justify-content-between d-flex align-items-center">
+                    <h5>More Keyword Videos</h5>
+                    <button type="button" class="btn btn-primary border-none btn-bookmark bg-none " data-bs-toggle="button" autocomplete="off">
+                        <img src="assets/images/arrow-gradient.svg" alt="" class="language-icon">
+                    </button>
+                </div>
+            </div>
+            <div class="row d-flex flex-row">
+                <div class="col justify-content-between d-flex">
+                    <a href="" class="keyword-item">
+                        <img src="assets/images/sample2.png" alt="">
+                    </a>
+                    <a href="" class="keyword-item">
+                        <img src="assets/images/sample2.png" alt="" class="keyword-item">
+                    </a>
+                    <a href="" class="keyword-item">
+                        <img src="assets/images/sample2.png" alt="" class="keyword-item">
+                    </a>
+                    <a href="" class="keyword-item">
+                        <img src="assets/images/sample2.png" alt="" class="keyword-item">
+                    </a>
+                    <a href="" class="keyword-item">
+                        <img src="assets/images/sample2.png" alt="" class="keyword-item">
+                    </a>
+                    <a href="" class="keyword-item">
+                        <img src="assets/images/sample2.png" alt="" class="keyword-item">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="tab-bar footer fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="tabs">
+                    <a href=""><img src="assets/images/tab-bar_home_active.svg" alt=""></a>
+                    <a href=""><img src="assets/images/tab-bar-search-inactive.svg" alt=""></a>
+                    <a href=""><img src="assets/images/tab-bar-create-inactive.svg" alt=""></a>
+                    <a href=""><img src="assets/images/tab-bar-bookmark-inactive.svg" alt=""></a>
+                    <a href=""><img src="assets/images/tab-bar-switch-to-app.svg" alt=""></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="container-fluid featured-grid">
+        <div class="row d-flex justify-content-between">
+            <div class="col-6">
+                <button class="btn btn-outline-secondary dropdown-toggle filter-featured" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        FEATURED GIFS<img src="assets/images/downarrow_2.svg" alt="" class="dropdown-arrow2">
+                    </button>
+                <ul class="dropdown-menu dropdown-menu-featured bg-color2">
+                    <li>
+                        <a class="dropdown-item" href="#">FRESH-IN</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">POPULAR</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-primary border-none bg-none" data-bs-toggle="button" autocomplete="off">
+                        <img src="assets/images/grid_play.svg" alt="" class="language-icon">
+                    </button>
+            </div>
+        </div>
+        <div class="row p-05">
+            <div class="col-6 col-md-4 col-lg-3 grid-item">
+                <div class="grid-image" style="background: url(assets/images/sample1.png)">
+                    <div class="grid-info">
+                        <div>
+                            <img src="assets/images/gifs_stack.svg" alt="">
+                            <span>GIF</span>
+                            <span>16s</span>
+                        </div>
+                        <button type="button" class="btn btn-primary border-none btn-bookmark " data-bs-toggle="button" autocomplete="off">
+                            <img src="assets/images/bookmarks_small.svg" alt="" class="language-icon">
+                        </button>
+                    </div>
+                </div>
+                <h6>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                </h6>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3 grid-item">
+                <div class="grid-image" style="background: url(assets/images/sample1.png)">
+                    <div class="grid-info">
+                        <div>
+                            <img src="assets/images/gifs_stack.svg" alt="">
+                            <span>GIF</span>
+                            <span>16s</span>
+                        </div>
+                        <button type="button" class="btn btn-primary border-none btn-bookmark" data-bs-toggle="button" autocomplete="off">
+                            <img src="assets/images/bookmarks_small.svg" alt="" class="language-icon">
+                        </button>
+                    </div>
+                </div>
+                <h6>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                </h6>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3 grid-item">
+                <div class="grid-image" style="background: url(assets/images/sample1.png)">
+                    <div class="grid-info">
+                        <div>
+                            <img src="assets/images/gifs_stack.svg" alt="">
+                            <span>GIF</span>
+                            <span>16s</span>
+                        </div>
+                        <button type="button" class="btn btn-primary border-none btn-bookmark" data-bs-toggle="button" autocomplete="off">
+                            <img src="assets/images/bookmarks_small.svg" alt="" class="language-icon">
+                        </button>
+                    </div>
+                </div>
+                <h6>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                </h6>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3 grid-item">
+                <div class="grid-image" style="background: url(assets/images/sample1.png)">
+                    <div class="grid-info">
+                        <div>
+                            <img src="assets/images/gifs_stack.svg" alt="">
+                            <span>GIF</span>
+                            <span>16s</span>
+                        </div>
+                        <button type="button" class="btn btn-primary border-none btn-bookmark" data-bs-toggle="button" autocomplete="off">
+                            <img src="assets/images/bookmarks_small.svg" alt="" class="language-icon">
+                        </button>
+                    </div>
+                </div>
+                <h6>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                </h6>
+            </div>
+            <div class="col-6 col-md-4 col-lg-3 grid-item">
+                <div class="grid-image" style="background: url(assets/images/sample1.png)">
+                    <div class="grid-info">
+                        <div>
+                            <img src="assets/images/gifs_stack.svg" alt="">
+                            <span>GIF</span>
+                            <span>16s</span>
+                        </div>
+                        <button type="button" class="btn btn-primary border-none btn-bookmark" data-bs-toggle="button" autocomplete="off">
+                            <img src="assets/images/bookmarks_small.svg" alt="" class="language-icon">
+                        </button>
+                    </div>
+                </div>
+                <h6>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                </h6>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>
