@@ -1,14 +1,24 @@
-pragma solidity ^0.5.0;
+//Contract based on [https://docs.openzeppelin.com/contracts/3.x/erc721](https://docs.openzeppelin.com/contracts/3.x/erc721)
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.7;
 
-contract KulfyV3 {
-    string public name = "Kulfy-V3";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+
+contract KulfyV3 is ERC721URIStorage, Ownable {
+    //string public name = "KulfyV3";
     mapping(uint256 => Kulfy) public kulfies;
-    uint256 public kulfyCount = 0;
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
+
+    constructor() public ERC721("KULFY", "KUL") {}
 
     struct Kulfy {
         uint256 id;
         string description;
-        string hash;
+        string tokenURI;
         uint256 tipAmount;
         address payable author;
     }
@@ -29,26 +39,25 @@ contract KulfyV3 {
         address payable author
     );
 
-    function uploadKulfy(string memory _kulfyHash, string memory _description)
-    public
+    function mintNFT(address payable recipient, string memory _tokenURI, string memory _description) public returns (uint256)
     {
-        //Add some validations
-        require(bytes(_kulfyHash).length > 0);
-        require(bytes(_description).length > 0);
-        require(msg.sender != address(0x0));
+        _tokenIds.increment();
 
-        kulfyCount++;
-        kulfies[kulfyCount] = Kulfy(kulfyCount, _description, _kulfyHash, 0, msg.sender);
-        emit KulfyCreated(kulfyCount, _kulfyHash, _description, 0, msg.sender);
+        uint256 newItemId = _tokenIds.current();
+        _mint(recipient, newItemId);
+        _setTokenURI(newItemId, _tokenURI);
+        kulfies[newItemId] = Kulfy(newItemId, _description, _tokenURI, 0, recipient);
+
+        return newItemId;
     }
 
     function tipKulfyOwner(uint256 _id) public payable {
-        require(_id > 0 && _id <= kulfyCount);
+        require(_id > 0 && _id <= _tokenIds.current());
         Kulfy memory _kulfy = kulfies[_id];
 
         address payable _author = _kulfy.author;
 
-        address(_author).transfer(msg.value);
+        //address(_author).transfer(msg.value);
 
         _kulfy.tipAmount = _kulfy.tipAmount + msg.value;
 
@@ -56,7 +65,7 @@ contract KulfyV3 {
 
         emit KulfyTipped(
             _id,
-            _kulfy.hash,
+            _kulfy.tokenURI,
             _kulfy.description,
             _kulfy.tipAmount,
             _author

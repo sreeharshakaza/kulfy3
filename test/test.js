@@ -1,49 +1,54 @@
 const { assert } = require('chai')
 
-const KulfyV3 = artifacts.require('./KulfyV3.sol')
+const KulfyNFTs = artifacts.require('./KulfyNFTs.sol')
 
 require('chai')
   .use(require('chai-as-promised'))
   .should()
 
-contract('KulfyV3', ([deployer, author, tipper]) => {
-  let KulfyV3
+contract('KulfyNFTs', ([deployer, author, tipper]) => {
+  let kulfyNFTs
 
   before(async () => {
-    KulfyV3 = await KulfyV3.deployed()
+    kulfyNFTs = await KulfyNFTs.deployed()
   })
 
   describe('deployment', async () => {
     it('deploys successfully', async () => {
-      const address = await KulfyV3.address
+      const address = await kulfyNFTs.address
       assert.notEqual(address, 0x0)
       assert.notEqual(address, '')
       assert.notEqual(address, null)
+       console.log('address of Kulfy smart contract is ',address)
       assert.notEqual(address, undefined)
     })
 
     it('has a name', async () => {
-      const name = await KulfyV3.name()
-      assert.equal(name, 'Kulfy-V3')
+      const name = await kulfyNFTs.name()
+      assert.equal(name, 'KULFY')
     })
   })
 
-  describe('Upload Image', async () => {
-    let result, imageCount;
-    const hash = "abc123";
 
-    before(async() => {
-      result = await KulfyV3.uploadImage(hash, 'Image Description', { from : author})
-      imageCount = await KulfyV3.imageCount()
-    });
+ describe('Minting', async () => {
+    let result, imageCount
+    const hash = 'https://ipfs.io/ipfs/QmWfwAaASNnTDZd6J5UGPwo3yUYXo7dWPgh6cTQMRh6KtQ'
 
-    it('Created Images', async () => {
-      assert.equal(imageCount, 1)
-      const event = result.logs[0].args
-      assert.equal(event.id.toNumber(), imageCount.toNumber(), 'id is correct')
-      assert.equal(event.hash, hash, 'hash is correct')
-      assert.equal(event.description, 'Image Description', 'Description is correct')
-      assert.equal(event.author, author, 'Author is correct')
+    before(async () => {
+
+      console.log(" author ",author);
+      result = await kulfyNFTs.mintNFT( author,hash)
     })
+
+   it('has a name', async () => {
+      console.log('result for mint ',result);
+      //assert.equal(name, 'KULFY')
+    })
+
+
+
   })
+
+
 })
+

@@ -4,6 +4,7 @@
   "description": "description...",
   "author": "gregory@dappuniversity.com",
   "dependencies": {
+    "@openzeppelin/contracts": "^4.4.0",
     "@truffle/hdwallet-provider": "^1.7.0",
     "axios": "^0.24.0",
     "babel-polyfill": "^6.26.0",
@@ -23,7 +24,9 @@
     "react-bootstrap": "^2.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
-    "truffle": "^5.4.21",
+    "solc": "^0.8.10",
+    "truffle": "^5.4.23",
+    "truffle-flattener": "^1.5.0",
     "truffle-hdwallet-provider-privkey": "^0.3.0",
     "web3": "^1.6.1"
   },
