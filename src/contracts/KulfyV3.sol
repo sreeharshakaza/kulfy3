@@ -39,14 +39,23 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
         address payable author
     );
 
-    function mintNFT(address payable recipient, string memory _tokenURI, string memory _description) public returns (uint256)
-    {
+    function mintNFT(
+        address payable recipient,
+        string memory _tokenURI,
+        string memory _description
+    ) public returns (uint256) {
         _tokenIds.increment();
 
         uint256 newItemId = _tokenIds.current();
         _mint(recipient, newItemId);
         _setTokenURI(newItemId, _tokenURI);
-        kulfies[newItemId] = Kulfy(newItemId, _description, _tokenURI, 0, recipient);
+        kulfies[newItemId] = Kulfy(
+            newItemId,
+            _description,
+            _tokenURI,
+            0,
+            recipient
+        );
 
         return newItemId;
     }
@@ -57,7 +66,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
 
         address payable _author = _kulfy.author;
 
-        //address(_author).transfer(msg.value);
+        payable(address(_author)).transfer(msg.value);
 
         _kulfy.tipAmount = _kulfy.tipAmount + msg.value;
 
