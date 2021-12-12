@@ -174,17 +174,6 @@ class App extends Component {
         
 
 
-        <Navbar account={this.state.account}/>
-        <Home account={this.state.account}/>
-        {this.state.loading
-          ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
-          : <Main
-            kulfies={this.state.kulfies}
-            captureFile={this.captureFile}
-            uploadKulfy={this.uploadKulfy}
-            tipkulfyOwner={this.tipKulfyOwner}
-          />
-        }
       </div>
     );
   }
