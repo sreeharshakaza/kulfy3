@@ -10,6 +10,7 @@ class Navbar extends Component {
   render() {
     return (
       <div>
+      
         <nav className="navbar  navbar-light bg-none">
           <div className="container-fluid">
             <button className="navbar-dp">

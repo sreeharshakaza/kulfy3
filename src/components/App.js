@@ -3,8 +3,16 @@ import Web3 from 'web3';
 import './App.css';
 import KulfyV3 from '../abis/KulfyV3.json'
 import Navbar from './Navbar'
+import NFTs from './NFTs'
+import Home from './Home'
 import Main from './Main'
 import axios from "axios";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const { create, urlSource } = require('ipfs-http-client')
 const ipfs = create({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
@@ -43,7 +51,8 @@ class App extends Component {
       const kulfyV3 = new web3.eth.Contract(KulfyV3.abi, networkData.address)
       console.log(`kulfyV3`, kulfyV3);
       this.setState({ kulfyV3 })
-      const kulfiesCount = await kulfyV3.methods.kulfyCount().call()
+      //const kulfiesCount = await kulfyV3.methods.kulfyCount().call()
+      const kulfiesCount = 0
       console.log(`kulfiesCount`, kulfiesCount);
       this.setState({ kulfiesCount })
 
@@ -143,8 +152,30 @@ class App extends Component {
 
   render() {
     return (
+
+
+
+
       <div>
+      <Router>
+      <Switch>
+          <Route path="/nfts">
+            <NFTs />
+          </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      
+    </Router>
+        
+
+
         <Navbar account={this.state.account}/>
+        <Home account={this.state.account}/>
         {this.state.loading
           ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
           : <Main

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Identicon from 'identicon.js';
 
+
 class Main extends Component {
 
   render() {
