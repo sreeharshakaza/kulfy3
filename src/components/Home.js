@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
+
 import ReactDOM from "react-dom";
 import { Dropdown } from 'react-bootstrap';
 import Navbar from './Navbar';

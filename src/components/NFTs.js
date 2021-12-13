@@ -32,7 +32,7 @@ const NFTs = () => {
 
   async function getTransactions() {
 
-  	const nftPortApiRoot = 'https://api.nftport.xyz/v0/search?text=video&chain=all&order_by=relevance';
+  	const nftPortApiRoot = 'https://api.nftport.xyz/v0/search?text=indian video&chain=all&order_by=relevance';
     const convoApiToken = 'CONVO'
 
     axios.defaults.headers.common = {
@@ -68,7 +68,7 @@ const NFTs = () => {
 
  async function createMeme(item) {
 
- 	window.location.href = 'https://create.kulfyapp.com/?nft='+item.cached_file_url;
+ 	window.location.href = 'http://create.kulfy.io/?nft='+item.cached_file_url;
   }
 
 
