@@ -9,6 +9,8 @@ import Mint from './Mint'
 import Home from './Home'
 import Main from './Main'
 import axios from "axios";
+//import 'bootstrap/dist/css/bootstrap.min.css';
+
 import {
   BrowserRouter as Router,
   Switch,

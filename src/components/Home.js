@@ -16,16 +16,11 @@ items.forEach((item,index)=>{
 const NFTs = () => {
   const [trasactions, setTrasactions] = useState([]);
 
-
+  const [keyword, setKeyword] = useState(null);
   useEffect(() => {
-    // TODO: don't just fetch once; subscribe!
-    // 
-    // 
-    // 
-    
+
     console.log('items ',trasactions);
         getTransactions();
-        getUserStamps();
 
     
   }, []);
@@ -92,57 +87,15 @@ const NFTs = () => {
 
   async function searchNFTs() {
 
-    window.location.href = '/nfts?search=indian+video';
+    console.log('keyword ', keyword );
+
+
+    window.location.href = '/nfts?search='+keyword;
     
    
   }
 
-  async function getUserStamps() {
-
-    const response = await fetch('https://api.projectkelvin.io/uservotes/getUserStamps?user=gkolluri.testnet');
-    const response_body = await response.json();
-    votes = response_body.data;
-    
-   setTrasactions(votes);
-  }
-
- async function AddVote(item,collection) {
-    votes = votes - 1;
-    console.log('add vote transaction before ',item);
-    item.votes = item.votes  + 1;
-    console.log('add vote transaction after',item);
-   
-
-
-    if(collection == 'time' ){
-        item.timevotes = item.timevotes  + 1;
-    }else if(collection == 'temperature'){
-        item.tempvotes = item.tempvotes +1
-    }else if(collection == 'capital'){
-        item.capitalvotes = item.capitalvotes+1;
-    }
-     setTrasactions(item);
-    const response = await fetch(`https://api.projectkelvin.io/uservotes/updateVoteForProposal?stampType=stamp&proposer=${item.proposer}&proposerName=null&toIdSource=null&toProposal=${item.proposalId}&fromId=${item.proposer}&fromName=null&collection=${collection}&negative=false`);
-    //const users = await response.json();
-    //setUsers(users);
-  }
-
-async function DownVote(item,collection) {
-    votes = votes - 1;
-    item.votes = item.votes  - 1;
-
-        if(collection == 'time' ){
-        item.timevotes = item.timevotes  - 1;
-    }else if(collection == 'temperature'){
-        item.tempvotes = item.tempvotes -1
-    }else if(collection == 'capital'){
-        item.capitalvotes = item.capitalvotes-1;
-    }
-    setTrasactions(item);
-    const response = await fetch(`https://api.projectkelvin.io/uservotes/updateVoteForProposal?stampType=stamp&proposer=${item.proposer}&proposerName=null&toIdSource=null&toProposal=${item.proposalId}&fromId=${item.proposer}&fromName=null&collection=${collection}&negative=true`);
-    const users = await response.json();
-    
-  }
+ 
 
   return (
     <>
@@ -171,7 +124,7 @@ async function DownVote(item,collection) {
         <div class="row">
             <div class="search">
                 <div class="inside">
-                    <input type="text" name="search" id="" placeholder="Search on Kulfy" />
+                    <input type="text" onChange={e => setKeyword(e.target.value)} name="keyword" id="" placeholder="Search on Kulfy" />
                     <img src="https://cdn.kulfyapp.com/kulfy/kulfy-radium.svg" alt="" />
                 </div>
                 <button type="submit" class="bg-radium">

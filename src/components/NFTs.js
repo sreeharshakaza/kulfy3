@@ -6,6 +6,7 @@ import { Dropdown } from 'react-bootstrap';
 import Navbar from './Navbar';
 import { DefaultPlayer as Video } from 'react-html5video';
 import 'react-html5video/dist/styles.css';
+import { useCookies } from 'react-cookie';
 
 
 let items=[];
@@ -18,6 +19,8 @@ items.forEach((item,index)=>{
 
 const NFTs = () => {
   const [trasactions, setTrasactions] = useState([]);
+  const [cookies, setCookie] = useCookies(['user']);
+
 
 
   useEffect(() => {
@@ -33,15 +36,18 @@ const NFTs = () => {
   async function getTransactions() {
 
 
-   let keyword = 'indian video';
+   let keyword = 'video';
     let search = window.location.search;
     let params = new URLSearchParams(search);
-    keyword = params.get('search')+' video';
+    if(params){
+    	keyword = params.get('search')+' video';
+    }	
+    
 
 
 
   	const nftPortApiRoot = `https://api.nftport.xyz/v0/search?text=${keyword}&chain=all&order_by=relevance`;
-    const convoApiToken = 'CONVO'
+
 
     axios.defaults.headers.common = {
       "Content-Type": "application/json",
@@ -60,30 +66,17 @@ const NFTs = () => {
     const nfts = await response;
     items = nfts.data.search_results;
 
-    console.log('items ',items);
 
-    //getProposalScores(items);
-    //getVotesForTransactions(items,'temperature');
-    //getVotesForTransactions(items,'time');
-    //getVotesForTransactions(items,'capital');
     setTrasactions(items);
-  }
-
-
-
-
+}
 
 
  async function createMeme(item) {
-
+ 		console.log('item ',JSON.stringify(item))
+ 	 setCookie('kulfy', JSON.stringify(item), { path: '/' });
+ 	 debugger;
  	window.location.href = 'http://create.kulfy.io/?nft='+item.cached_file_url;
   }
-
-
-
-
-
-
 
 
 
@@ -115,6 +108,8 @@ const NFTs = () => {
         <div class="row p-05">
 
  		{items.map(function(item, index){
+ 				if(item.cached_file_url.endsWith('.mp4')){
+
     	 		return (<>
 
             <div class="col-6 col-md-4 col-lg-3 grid-item">
@@ -146,13 +141,14 @@ Your browser does not support the video tag.
                        <div >
                 	<a onClick={() => createMeme(item)} href="#"> Create Meme </a>
                 </div>
-                
+
                     {item.name} 
                 </h6>
         
             </div>
 
 			</>);
+		}
           })}
             
         </div>
