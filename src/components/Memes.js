@@ -6,8 +6,8 @@ import Navbar from './Navbar'
 import axios from "axios";
 
 import PinataSDK from 'pinata-web-sdk'
-const pinata = new PinataSDK('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIxMDVhNmMwNy0yNDlmLTRlOTAtOWEwNC0yZDk0M2VmYjIwZTYiLCJlbWFpbCI6ImdpcmlzaGtvbGx1cmlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siaWQiOiJOWUMxIiwiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjF9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZX0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjkxNjk3MTAzZWRlYWFiOThlNDFlIiwic2NvcGVkS2V5U2VjcmV0IjoiYzMxNDc5MzZlN2RhZjNhOWY5MjBiMmFjMTQyNDgxNDcyZTY1ODY0NDAwNTRlOTg1YTU3ZGE0ZTY3MzIyY2JjYyIsImlhdCI6MTYzOTM5MzQ0Nn0.C7ERlKMw_9vJLQFQpC4K2ibNYciXh5Ms4xazOdxE2tw')
 
+const pinata = new PinataSDK('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIxMDVhNmMwNy0yNDlmLTRlOTAtOWEwNC0yZDk0M2VmYjIwZTYiLCJlbWFpbCI6ImdpcmlzaGtvbGx1cmlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siaWQiOiJOWUMxIiwiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjF9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZX0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjkxNjk3MTAzZWRlYWFiOThlNDFlIiwic2NvcGVkS2V5U2VjcmV0IjoiYzMxNDc5MzZlN2RhZjNhOWY5MjBiMmFjMTQyNDgxNDcyZTY1ODY0NDAwNTRlOTg1YTU3ZGE0ZTY3MzIyY2JjYyIsImlhdCI6MTYzOTM5MzQ0Nn0.C7ERlKMw_9vJLQFQpC4K2ibNYciXh5Ms4xazOdxE2tw')
 
 
 const { create, urlSource } = require('ipfs-http-client')
@@ -36,10 +36,10 @@ class App extends Component {
     }
   }
 
-async tipKulfy(id){
-    console.log('tip item kulfy ',id,this.state.account);
+  async tipKulfy(id) {
+    console.log('tip item kulfy ', id, this.state.account);
     this.tipKulfyOwner(id, "10")
-}
+  }
 
 
   async loadBlockchainData() {
@@ -61,32 +61,26 @@ async tipKulfy(id){
 
       // Load Images
       for (let i = 1; i <= kulfiesCount; i++) {
+        //get tokenURI from contract
+        const ipfs_metadata = await kulfyV3.methods.tokenURI(i).call()
+        console.log('ipfs_metadata ', ipfs_metadata);
 
-       //get tokenURI from contract
-       const ipfs_metadata = await kulfyV3.methods.tokenURI(i).call()
-       console.log('ipfs_metadata ',ipfs_metadata);
-
-       //get owner of
-       const owner_address = await kulfyV3.methods.ownerOf(i).call()
-       console.log('ipfs_metadata ',ipfs_metadata,i,owner_address);
+        //get owner of
+        const owner_address = await kulfyV3.methods.ownerOf(i).call()
+        console.log('ipfs_metadata ', ipfs_metadata, i, owner_address);
 
         const kulfy = await kulfyV3.methods.kulfies(i).call()
         this.setState({
           kulfies: [...this.state.kulfies, kulfy]
         })
       }
-
-    console.log(this.state.kulfies);
-
+      console.log(this.state.kulfies);
       this.setState({ loading: false })
     } else {
       window.alert('Kulfy contarct not deployed to any network')
     }
-
-
   }
 
-  
 
   async tipKulfyOwner(id, tipAmount) {
     this.setState({ loading: true })
@@ -94,7 +88,7 @@ async tipKulfy(id){
       from: this.state.account,
       value: window.web3.utils.toWei('1', 'Ether')
     }).on('transactionHash', (hash) => {
-        console.log('tans hash ',hash);
+      console.log('tans hash ', hash);
       this.setState({ loading: false })
     })
   }
@@ -107,91 +101,79 @@ async tipKulfy(id){
       kulfyV3: '',
       kulfies: [],
       loading: true,
-      kulfy:''
+      kulfy: ''
     }
   }
 
   render() {
     return (
-
-
-<>
-
-   <Navbar />
-
- <section class="container-fluid featured-grid">
-        <div class="row d-flex justify-content-between">
+      <>
+        <Navbar/>
+        <section class="container-fluid featured-grid">
+          <div class="row d-flex justify-content-between">
             <div class="col-6">
-                <button class="btn btn-outline-secondary dropdown-toggle filter-featured" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        FEATURED GIFS<img src="https://cdn.kulfyapp.com/kulfy/downarrow_2.svg" alt="" class="dropdown-arrow2" />
-                    </button>
-                <ul class="dropdown-menu dropdown-menu-featured bg-color2">
-                    <li>
-                        <a class="dropdown-item" href="#">FRESH-IN</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">POPULAR</a>
-                    </li>
-                </ul>
+              <button class="btn btn-outline-secondary dropdown-toggle filter-featured" type="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                FEATURED GIFS<img src="https://cdn.kulfyapp.com/kulfy/downarrow_2.svg" alt="" class="dropdown-arrow2"/>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-featured bg-color2">
+                <li>
+                  <a class="dropdown-item" href="#">FRESH-IN</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">POPULAR</a>
+                </li>
+              </ul>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-primary border-none bg-none" data-bs-toggle="button" autocomplete="off">
-                        <img src="https://cdn.kulfyapp.com/kulfy/grid_play.svg" alt="" class="language-icon" />
-                    </button>
+              <button type="button" class="btn btn-primary border-none bg-none" data-bs-toggle="button"
+                      autocomplete="off">
+                <img src="https://cdn.kulfyapp.com/kulfy/grid_play.svg" alt="" class="language-icon"/>
+              </button>
             </div>
-        </div>
-        <div class="row p-05">
- <a onClick={() => this.tipKulfy(2)}   href="#"> tip meme</a>
-         {this.state.kulfies.map(function(item, index){
-                 return (<>
+          </div>
+          <div class="row p-05">
 
-            <div class="col-6 col-md-4 col-lg-3 grid-item">
-                <div class="grid-image" >
+            {this.state.kulfies.map((item, index) => {
+              return (<>
+
+                <div class="col-6 col-md-4 col-lg-3 grid-item">
+                  <div class="grid-image">
                     <div class="grid-info">
-                        <div>
-                            <img src="https://cdn.kulfyapp.com/kulfy/gifs_stack.svg" alt="" />
-                            <span>GIF</span>
-                            <span>16s</span>
-                        </div>
-            
-            <video  autoPlay loop muted width="320" height="240" controls>
-  <source src='https://media.kulfyapp.com/434FAV/434FAV.mp4' type="video/mp4" />
-Your browser does not support the video tag.
-</video>              
-
-
-
-                        <button type="button" class="btn btn-primary border-none btn-bookmark " data-bs-toggle="button" autocomplete="off">
-                            <img src="https://cdn.kulfyapp.com/kulfy/bookmarks_small.svg" alt="" class="language-icon" />
-                        </button>
-                                    </div>
-
+                      <div>
+                        <img src="https://cdn.kulfyapp.com/kulfy/gifs_stack.svg" alt=""/>
+                        <span>GIF</span>
+                        <span>16s</span>
+                      </div>
+                      <video autoPlay loop muted width="320" height="240" controls>
+                        <source src='https://media.kulfyapp.com/434FAV/434FAV.mp4' type="video/mp4"/>
+                        Your browser does not support the video tag.
+                      </video>
+                      <button type="button" class="btn btn-primary border-none btn-bookmark " data-bs-toggle="button"
+                              autocomplete="off">
+                        <img src="https://cdn.kulfyapp.com/kulfy/bookmarks_small.svg" alt="" class="language-icon"/>
+                      </button>
                     </div>
+                  </div>
+                  <h6>
+                    <div>
 
-                 
-                <h6>
-
-                       <div >
-                    <a  href="#"> Create Meme </a>
+                      <button onClick={() => true}>Create Meme</button>
+                      <button onClick={() => this.tipKulfy(item.id)}>tip meme</button>
+                    </div>
+                    name: {item.description} <br/>
+                    tip: {item.tipAmount}<br/>
+                    id: {item.id}<br/>
+                    tokenURI: {item.tokenURI}<br/>
+                  </h6>
                 </div>
-                
-                   name: {item.description} <br />
-                   tip: {item.tipAmount}<br />
-                   id: {item.id}<br />
-                   tokenURI: {item.tokenURI}<br />
-     
-                </h6>
+              </>);
+            })}
 
-        
-            </div>
+          </div>
 
-            </>);
-          })}
-            
-        </div>
-
-    </section>
-    </>
+        </section>
+      </>
     );
   }
 }
