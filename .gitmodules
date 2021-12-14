@@ -1,6 +1,3 @@
 [submodule "graph-cli"]
 	path = graph-cli
 	url = https://github.com/graphprotocol/graph-cli.git
-[submodule "indexer"]
-	path = indexer
-	url = https://github.com/blocklytics/ethereum-blocks
