@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/sreeharshakaza/kulfy3/static/css/main.0383d8fb.chunk.css",
+    "main.js": "/sreeharshakaza/kulfy3/static/js/main.04995ade.chunk.js",
+    "main.js.map": "/sreeharshakaza/kulfy3/static/js/main.04995ade.chunk.js.map",
+    "runtime-main.js": "/sreeharshakaza/kulfy3/static/js/runtime-main.24a26bd0.js",
+    "runtime-main.js.map": "/sreeharshakaza/kulfy3/static/js/runtime-main.24a26bd0.js.map",
+    "static/css/2.bf2b82e3.chunk.css": "/sreeharshakaza/kulfy3/static/css/2.bf2b82e3.chunk.css",
+    "static/js/2.dfa3b7b0.chunk.js": "/sreeharshakaza/kulfy3/static/js/2.dfa3b7b0.chunk.js",
+    "static/js/2.dfa3b7b0.chunk.js.map": "/sreeharshakaza/kulfy3/static/js/2.dfa3b7b0.chunk.js.map",
+    "index.html": "/sreeharshakaza/kulfy3/index.html",
+    "static/css/2.bf2b82e3.chunk.css.map": "/sreeharshakaza/kulfy3/static/css/2.bf2b82e3.chunk.css.map",
+    "static/css/main.0383d8fb.chunk.css.map": "/sreeharshakaza/kulfy3/static/css/main.0383d8fb.chunk.css.map",
+    "static/js/2.dfa3b7b0.chunk.js.LICENSE.txt": "/sreeharshakaza/kulfy3/static/js/2.dfa3b7b0.chunk.js.LICENSE.txt",
+    "static/media/dp.488ccf7b.svg": "/sreeharshakaza/kulfy3/static/media/dp.488ccf7b.svg",
+    "static/media/hamburger.522ccd7a.svg": "/sreeharshakaza/kulfy3/static/media/hamburger.522ccd7a.svg",
+    "static/media/logo_green.93b2d27d.svg": "/sreeharshakaza/kulfy3/static/media/logo_green.93b2d27d.svg",
+    "static/media/App.css": "/sreeharshakaza/kulfy3/static/media/sample1.dbc45153.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.24a26bd0.js",
+    "static/css/2.bf2b82e3.chunk.css",
+    "static/js/2.dfa3b7b0.chunk.js",
+    "static/css/main.0383d8fb.chunk.css",
+    "static/js/main.04995ade.chunk.js"
+  ]
+}

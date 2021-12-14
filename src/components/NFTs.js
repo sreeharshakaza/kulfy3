@@ -32,7 +32,15 @@ const NFTs = () => {
 
   async function getTransactions() {
 
-  	const nftPortApiRoot = 'https://api.nftport.xyz/v0/search?text=indian video&chain=all&order_by=relevance';
+
+   let keyword = 'indian video';
+    let search = window.location.search;
+    let params = new URLSearchParams(search);
+    keyword = params.get('search')+' video';
+
+
+
+  	const nftPortApiRoot = `https://api.nftport.xyz/v0/search?text=${keyword}&chain=all&order_by=relevance`;
     const convoApiToken = 'CONVO'
 
     axios.defaults.headers.common = {
@@ -124,17 +132,24 @@ Your browser does not support the video tag.
 </video>              
 
 
+
                         <button type="button" class="btn btn-primary border-none btn-bookmark " data-bs-toggle="button" autocomplete="off">
                             <img src="https://cdn.kulfyapp.com/kulfy/bookmarks_small.svg" alt="" class="language-icon" />
                         </button>
+                                    </div>
+
                     </div>
-                </div>
+
+                 
                 <h6>
-                    {item.name} 
-                </h6>
-                <div >
+
+                       <div >
                 	<a onClick={() => createMeme(item)} href="#"> Create Meme </a>
                 </div>
+                
+                    {item.name} 
+                </h6>
+        
             </div>
 
 			</>);

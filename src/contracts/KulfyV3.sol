@@ -11,7 +11,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
     //string public name = "KulfyV3";
     mapping(uint256 => Kulfy) public kulfies;
     using Counters for Counters.Counter;
-    Counters.Counter private _tokenIds;
+    Counters.Counter public _tokenIds;
 
     constructor() public ERC721("KULFY", "KUL") {}
 

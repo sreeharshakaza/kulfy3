@@ -4,6 +4,7 @@ import './App.css';
 import KulfyV3 from '../abis/KulfyV3.json'
 import Navbar from './Navbar'
 import NFTs from './NFTs'
+import Memes from './Memes'
 import Mint from './Mint'
 import Home from './Home'
 import Main from './Main'
@@ -169,9 +170,13 @@ class App extends Component {
           <Route path="/mint">
             <Mint />
           </Route>
+          <Route path="/memes">
+            <Memes />
+          </Route>
           <Route path="/">
             <Home />
           </Route>
+    
         </Switch>
       
     </Router>
