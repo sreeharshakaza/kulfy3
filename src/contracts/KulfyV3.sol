@@ -69,7 +69,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
 
         address payable _author = _kulfy.author;
 
-        payable(address(_author)).transfer(msg.value);
+        _author.transfer(msg.value);
 
         _kulfy.tipAmount = _kulfy.tipAmount + msg.value;
 
