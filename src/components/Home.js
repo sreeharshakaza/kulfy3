@@ -87,12 +87,8 @@ const NFTs = () => {
 
   async function searchNFTs() {
 
-    console.log('keyword ', keyword );
-
-
     window.location.href = '/nfts?search='+keyword;
-    
-   
+  
   }
 
  

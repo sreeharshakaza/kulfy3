@@ -54,7 +54,7 @@ class App extends Component {
       const kulfyV3 = new web3.eth.Contract(KulfyV3.abi, networkData.address)
       console.log(`kulfyV3`, kulfyV3);
       this.setState({ kulfyV3 })
-      const kulfiesCount = await kulfyV3.methods.balanceOf('0x77f9eFB6FD07D08309F7c8882ac1905508ABbd07').call()
+      const kulfiesCount = await kulfyV3.methods.tokenIds().call()
       //const kulfiesCount = 0
       console.log(`kulfiesCount`, kulfiesCount);
       this.setState({ kulfiesCount })

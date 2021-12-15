@@ -72,11 +72,17 @@ a:hover {
 .navbar {
   padding-top: 1rem;
   padding-bottom: 1rem;
+  
+}
+
+.navbar-logo  {
+  background-color: #000;
 }
 
 .navbar-logo > img {
   width: 90.31px;
   height: 16.42px;
+  background-color: #000;
 }
 .navbar-logo > .creator {
   height: 32px !important;

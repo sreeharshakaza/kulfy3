@@ -73,7 +73,7 @@ const NFTs = () => {
 
  async function createMeme(item) {
 
- 	localStorage.setItem('NFT', item);
+ 	localStorage.setItem('NFT', JSON.stringify(item));
  	window.location.href = 'http://create.kulfy.io/?nft='+item.cached_file_url;
   }
 

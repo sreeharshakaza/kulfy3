@@ -10,7 +10,6 @@ class Navbar extends Component {
   render() {
     return (
       <div>
-      
         <nav className="navbar  navbar-light bg-none">
           <div className="container-fluid">
             <button className="navbar-dp">
@@ -30,38 +29,38 @@ class Navbar extends Component {
             <div className="col">
               <div className="input-group mb-3">
                 <span className="input-group-text searchbar-icon" id="addon-wrapping"><img
-                  src="assets/images/search.svg" alt=""/></span>
+                  src="https://cdn.kulfyapp.com/kulfy/search.svg" alt=""/></span>
                 <input type="text" className="form-control searchbar-text"
                        aria-label="Text input with dropdown button"/>
                 <button className="btn btn-outline-secondary dropdown-toggle language-select" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="assets/images/letter_english.svg" alt="" className="language-icon"/><img
-                  src="assets/images/downarrow_2.svg" alt="" className="dropdown-arrow2"/>
+                  <img src="https://cdn.kulfyapp.com/kulfy/letter_english.svg" alt="" className="language-icon"/><img
+                  src="https://cdn.kulfyapp.com/kulfy/downarrow_2.svg" alt="" className="dropdown-arrow2"/>
                 </button>
                 <ul className="dropdown-menu dropdown-menu-language bg-color2">
                   <li>
                     <button className="dropdown-item">
-                      <img src="assets/images/letter_english.svg" alt=""/>
+                      <img src="https://cdn.kulfyapp.com/kulfy/letter_english.svg" alt=""/>
                     </button>
                   </li>
                   <li>
                     <button className="dropdown-item">
-                      <img src="assets/images/letter_telugu.svg" alt=""/>
+                      <img src="https://cdn.kulfyapp.com/kulfy/letter_telugu.svg" alt=""/>
                     </button>
                   </li>
                   <li>
                     <button className="dropdown-item">
-                      <img src="assets/images/letter_tamil.svg" alt=""/>
+                      <img src="https://cdn.kulfyapp.com/kulfy/letter_tamil.svg" alt=""/>
                     </button>
                   </li>
                   <li>
                     <button className="dropdown-item">
-                      <img src="assets/images/letter_malayalam.svg" alt=""/>
+                      <img src="https://cdn.kulfyapp.com/kulfy/letter_malayalam.svg" alt=""/>
                     </button>
                   </li>
                   <li>
                     <button className="dropdown-item">
-                      <img src="assets/images/letter_hindi.svg" alt=""/>
+                      <img src="https://cdn.kulfyapp.com/kulfy/letter_hindi.svg" alt=""/>
                     </button>
                   </li>
                 </ul>

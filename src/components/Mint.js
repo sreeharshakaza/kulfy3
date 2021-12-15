@@ -68,7 +68,8 @@ class App extends Component {
 
     const result = await ipfs.add(urlSource(this.state.kulfy.video_url));
     const asseturl = `https://ipfs.io/ipfs/${result.cid.toString()}`;
-    const original =  localStorage.getItem('NFT');
+    let original =  localStorage.getItem('NFT');
+    original = JSON.parse(original)
     this.state.asset = asseturl;
     const body = {
       name: this.state.kulfy.name,
@@ -78,7 +79,7 @@ class App extends Component {
       description: "Kulfy NFT Memes",
       source: original
     };
-    
+
     const options2 = {
       pinataMetadata: {
         name: `${this.state.kulfy.kid}-metadata`,
@@ -156,60 +157,7 @@ class App extends Component {
     }
   }
 
-  captureFile = event => {
-    event.preventDefault()
-    const file = event.target.files[0]
-    const reader = new window.FileReader()
-    reader.readAsArrayBuffer(file)
-
-    reader.onloadend = () => {
-      this.setState({ buffer: Buffer(reader.result) })
-      this.setState({ file: file });
-      console.log('buffer', this.state.buffer)
-    }
-  }
-
-  uploadKulfy = async description => {
-    // upload file to kulfy server to preprocess
-    console.log("Submitting file to kulfy for preprocessing...", this.state.file);
-    let formData = new FormData();
-    formData.append('kulfy', this.state.file);
-    formData.append('language', 'TELUGU');
-    formData.append('tags', 'gif,Remove it');
-    formData.append('title', description);
-    console.log(formData);
-    console.log(this.state.file);
-
-    let kulfy = await httpClient.post('https://gateway.kulfyapp.com/V3/gifs/upload',
-      formData,
-      {
-        'Accept': 'application/json'
-      });
-    console.log(kulfy.data);
-
-    // upon success download image from kulfy s3 as binary
-    let fileBuffer = Buffer((await httpClient.get(kulfy.data.kulfy_info.gif_url, {
-      responseType: 'arraybuffer',
-    })).data);
-
-    // submit it to IPFS
-    // console.log(fileBuffer);
-    console.log("Submitting file to ipfs...")
-
-    //adding file to the IPFS
-    const result = await ipfs.add(this.state.buffer);
-    // const result = await ipfs.add(urlSource(kulfy.data.kulfy_info.gif_url));
-
-    console.log('Ipfs result', result)
-
-    this.setState({ loading: true })
-    this.state.kulfyV3.methods
-      .uploadKulfy(result.path, description)
-      .send({ from: this.state.account })
-      .on('transactionHash', (hash) => {
-        this.setState({ loading: false })
-      })
-  }
+  
 
   tipKulfyOwner(id, tipAmount) {
     this.setState({ loading: true })
