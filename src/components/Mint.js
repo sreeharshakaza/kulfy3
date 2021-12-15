@@ -65,16 +65,20 @@ class App extends Component {
   }
 
   async processKulfy(item) {
+
+    const result = await ipfs.add(urlSource(this.state.kulfy.video_url));
+    const asseturl = `https://ipfs.io/ipfs/${result.cid.toString()}`;
+    const original =  localStorage.getItem('NFT');
+    this.state.asset = asseturl;
     const body = {
       name: this.state.kulfy.name,
       tags: this.state.kulfy.category.join(),
       kid: this.state.kulfy.kid,
-      image: 'ipfs://abc',
+      image: asseturl,
       description: "Kulfy NFT Memes",
-      origin_chain: "ethereum",
-      original_contractaddress: "x0",
-      original_token_id: "123",
+      source: original
     };
+    
     const options2 = {
       pinataMetadata: {
         name: `${this.state.kulfy.kid}-metadata`,
@@ -103,7 +107,7 @@ class App extends Component {
   async mintKulfy() {
     this.setState({ loading: true })
     this.state.kulfyV3.methods
-      .mintNFT(this.state.account, this.state.url, 'test')
+      .mintNFT(this.state.account, this.state.url,this.state.asset, 'test')
       .send({ from: this.state.account })
       .on('transactionHash', (hash) => {
         this.setState({ loading: false })

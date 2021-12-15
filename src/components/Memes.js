@@ -146,7 +146,7 @@ class App extends Component {
                         <span>16s</span>
                       </div>
                       <video autoPlay loop muted width="320" height="240" controls>
-                        <source src='https://media.kulfyapp.com/434FAV/434FAV.mp4' type="video/mp4"/>
+                        <source src={item.assetURI} type="video/mp4"/>
                         Your browser does not support the video tag.
                       </video>
                       <button type="button" class="btn btn-primary border-none btn-bookmark " data-bs-toggle="button"
@@ -157,8 +157,6 @@ class App extends Component {
                   </div>
                   <h6>
                     <div>
-
-                      <button onClick={() => true}>Create Meme</button>
                       <button onClick={() => this.tipKulfy(item.id)}>tip meme</button>
                     </div>
                     name: {item.description} <br/>

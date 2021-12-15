@@ -11,7 +11,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
     //string public name = "KulfyV3";
     mapping(uint256 => Kulfy) public kulfies;
     using Counters for Counters.Counter;
-    Counters.Counter public _tokenIds;
+    Counters.Counter public tokenIds;
 
     constructor() public ERC721("KULFY", "KUL") {}
 
@@ -19,6 +19,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
         uint256 id;
         string description;
         string tokenURI;
+        string assetURI;
         uint256 tipAmount;
         address payable author;
     }
@@ -42,17 +43,19 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
     function mintNFT(
         address payable recipient,
         string memory _tokenURI,
+        string memory _assetURI,
         string memory _description
     ) public returns (uint256) {
-        _tokenIds.increment();
+        tokenIds.increment();
 
-        uint256 newItemId = _tokenIds.current();
+        uint256 newItemId = tokenIds.current();
         _mint(recipient, newItemId);
         _setTokenURI(newItemId, _tokenURI);
         kulfies[newItemId] = Kulfy(
             newItemId,
             _description,
             _tokenURI,
+            _assetURI,
             0,
             recipient
         );
@@ -61,7 +64,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
     }
 
     function tipKulfyOwner(uint256 _id) public payable {
-        require(_id > 0 && _id <= _tokenIds.current());
+        require(_id > 0 && _id <= tokenIds.current());
         Kulfy memory _kulfy = kulfies[_id];
 
         address payable _author = _kulfy.author;
