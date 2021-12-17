@@ -72,11 +72,10 @@ a:hover {
 .navbar {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  
 }
 
-.navbar-logo  {
-  background-color: #000;
+.navbar-logo {
+  background-color: none;
 }
 
 .navbar-logo > img {
@@ -87,6 +86,11 @@ a:hover {
 .navbar-logo > .creator {
   height: 32px !important;
 }
+.nav-search {
+  width: 50%;
+  height: 40px;
+}
+
 .navbar-ham {
   width: 20px;
   height: 15px;
@@ -121,9 +125,15 @@ a:hover {
   padding-right: 18px;
   border: none;
   background: #2f3137;
-  color: #ffffff;
-  font-size: 11px;
+  color: #ffffff !important;
+  font-size: 14px;
   flex-grow: 1;
+  outline: none;
+}
+.searchbar-text:focus {
+  border: none !important;
+  background: #2f3137;
+  box-shadow: none;
 }
 
 .language-select {
@@ -136,7 +146,14 @@ a:hover {
   background: #2f3137;
   /* padding: 13px; */
 }
-
+.nav-links {
+  /* text-transform: uppercase; */
+  font-size: 13px;
+  font-weight: 600;
+}
+.nav-links:hover {
+  color: #e9f968 !important;
+}
 .language-select > .language-icon {
   width: 16px;
 }
@@ -387,9 +404,13 @@ a.tag > span {
   position: relative;
   z-index: 4;
 }
-
+.grid-image video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
 .grid-image {
-  background: url('https://cdn.kulfyapp.com/kulfy/sample1.png');
+  background: #383a40;
   width: 100%;
   height: calc(width * 1);
   border-radius: 11px 11px 0px 0px;
@@ -412,7 +433,7 @@ a.tag > span {
 }
 
 .grid-item {
-  margin-bottom: 0.75rem;
+  margin-bottom: 5.75rem;
   padding-left: 0.25rem;
   padding-right: 0.25rem;
 }
@@ -503,7 +524,21 @@ a.tag > span {
   width: 24.6px;
   line-height: 0px;
 }
-
+.btn-create {
+  background: linear-gradient(96.66deg, #e9f968 -13.24%, #ffe629 140.64%);
+  border-radius: 33px;
+  padding: 10px 15px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #3b3d42;
+  border: none;
+}
+.btn-create:hover {
+  background: linear-gradient(96.66deg, #ffe629 -13.24%, #e9f968 140.64%);
+  color: #3b3d42 !important;
+}
 .clip-player {
   filter: blur(87.921px);
 }
@@ -655,7 +690,8 @@ a.tag > span {
 .search > .inside {
   border: 1px solid #d1f591;
   /* height: 41; */
-  padding: 14px;
+  padding: 4px 14px;
+
   border-radius: 5px 0px 0px 5px;
   flex-grow: 1;
   display: flex;
@@ -665,8 +701,12 @@ a.tag > span {
 .search > .inside > input {
   background: none;
   border: none;
-  font-size: 11px;
+  font-size: 13px;
+  color: #fafafa;
+  outline: none;
+  width: 100%;
 }
+
 .search > .inside > img {
   width: 40px;
 }
