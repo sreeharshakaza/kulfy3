@@ -466,6 +466,7 @@ a.tag > span {
   font-size: 11px;
   line-height: 13px;
   color: #ffffff;
+  word-break: break-all;
 }
 .grid-item-details > hr {
   margin: 8px 0;
