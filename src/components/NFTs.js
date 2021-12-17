@@ -153,7 +153,11 @@ const NFTs = () => {
                       <h6>{item.name}</h6>
                       <hr />
                       <div class="user-details">
-                        <a onClick={() => createMeme(item)} href="#">
+                        <a
+                          onClick={() => createMeme(item)}
+                          href="#"
+                          className="btn-create"
+                        >
                           {" "}
                           Create Meme{" "}
                         </a>

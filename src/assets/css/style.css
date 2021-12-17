@@ -433,9 +433,11 @@ a.tag > span {
 }
 
 .grid-item {
-  margin-bottom: 5.75rem;
+  margin-bottom: 0.75rem;
   padding-left: 0.25rem;
   padding-right: 0.25rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .grid-item > h6 {
