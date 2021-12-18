@@ -11,7 +11,7 @@ class Navbar extends Component {
       <div>
         <nav className="navbar  navbar-light bg-none mb-3">
           <div className="container-fluid">
-            <a href="#" className="navbar-logo mx-2">
+            <a href="/" className="navbar-logo mx-2">
               <Logo />
             </a>
             <div className="input-group nav-search">
@@ -29,13 +29,13 @@ class Navbar extends Component {
               />
             </div>
             <div>
-              <a href="#" className="mx-2 nav-links ">
+              <a href="/nfts" className="mx-2 nav-links ">
                 NFT's
               </a>
-              <a href="#" className="mx-2 nav-links ">
+              <a href="/memes" className="mx-2 nav-links ">
                 Memes
               </a>
-              <a href="#" className="mx-2 btn-create">
+              <a href="/create" className="mx-2 btn-create">
                 Create
               </a>
               {/* <a href="#" className="navbar-dp mx-3">

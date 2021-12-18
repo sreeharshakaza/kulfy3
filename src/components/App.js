@@ -166,7 +166,7 @@ class App extends Component {
           <Route path="/nfts">
             <NFTs />
           </Route>
-          <Route path="/home">
+          <Route path="/create">
             <Home />
           </Route>
           <Route path="/mint">
@@ -176,7 +176,7 @@ class App extends Component {
             <Memes />
           </Route>
           <Route path="/">
-            <Home />
+            <Memes />
           </Route>
     
         </Switch>

@@ -13,7 +13,7 @@ items.forEach((item,index)=>{
 )
 })
 
-const NFTs = () => {
+const Home = () => {
   const [trasactions, setTrasactions] = useState([]);
 
   const [keyword, setKeyword] = useState(null);
@@ -120,7 +120,7 @@ const NFTs = () => {
         <div class="row">
             <div class="search">
                 <div class="inside">
-                    <input type="text" onChange={e => setKeyword(e.target.value)} name="keyword" id="" placeholder="Search on Kulfy" />
+                    <input type="text" onChange={e => setKeyword(e.target.value)} name="keyword" id="" placeholder="Search for NFTs" />
                     <img src="https://cdn.kulfyapp.com/kulfy/kulfy-radium.svg" alt="" />
                 </div>
                 <button type="submit" class="bg-radium">
@@ -146,6 +146,6 @@ const NFTs = () => {
   );
 };
 
-export default NFTs;
+export default Home;
 
 

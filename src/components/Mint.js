@@ -17,7 +17,7 @@ const ipfs = create({ host: "ipfs.infura.io", port: 5001, protocol: "https" });
 const httpClient = axios.create();
 httpClient.defaults.timeout = 500000;
 
-class App extends Component {
+class Mint extends Component {
   async componentDidMount() {
     await this.getKulfy();
     await this.loadWeb3();
@@ -329,4 +329,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Mint;
