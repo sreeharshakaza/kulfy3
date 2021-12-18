@@ -1,8 +1,8 @@
 {
-  "name": "name...",
+  "name": "KulfyV3",
   "version": "0.1.0",
-  "description": "description...",
-  "author": "gregory@dappuniversity.com",
+  "description": "Kulfy V3",
+  "author": "namaste@kulfyapp.com",
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.0",
     "@truffle/hdwallet-provider": "^1.7.0",
