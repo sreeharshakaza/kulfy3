@@ -967,3 +967,16 @@ a.tag > span {
   color: #3b3d42;
   border: none;
 }
+/* FOOTER */
+
+footer {
+  color: #828586;
+  font-size: 12px;
+  text-align: center;
+}
+footer a {
+  color: #e9f968;
+  font-size: 11px;
+  margin-right: 1em;
+  opacity: 0.7;
+}

@@ -127,6 +127,21 @@ class Navbar extends Component {
             </div>
           </div>
         </div> */}
+
+        <footer class="footer mt-auto py-2 bg-dark fixed-bottom">
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <span class="text-muted">© Copyright 2021 Kulfy Inc</span>
+              </div>
+              <div class="col-6">
+                <a href="#">Twitter</a>
+                <a href="#">Discord</a>
+                <a href="#">Telegram</a>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     );
   }

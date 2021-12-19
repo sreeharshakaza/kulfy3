@@ -138,7 +138,7 @@ class App extends Component {
                 </li>
               </ul>
             </div>
-            <div class="col-2">
+            {/* <div class="col-2">
               <button
                 type="button"
                 class="btn btn-primary border-none bg-none"
@@ -151,7 +151,7 @@ class App extends Component {
                   class="language-icon"
                 />
               </button>
-            </div>
+            </div> */}
           </div>
           <div class="row p-05">
             {this.state.kulfies.map((item, index) => {
