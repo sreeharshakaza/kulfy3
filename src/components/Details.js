@@ -182,7 +182,7 @@ let id = "";
         <div class="row">
             <div class="col-md-6 ">
                 <img class="w-100 br-18" src="./assets/images/sample-image.png" alt="" />
-                <div class="user-overlay">
+                <div>
                     <img src="./assets/images/sample-user.svg" alt="" />
                      <video
                         autoPlay
@@ -191,9 +191,8 @@ let id = "";
                         width="480"
                         height="480"
                         controls
-                        
+                        src={this.state.asset_url}
                       >
-                        <source src={this.state.asset_url} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
                     <span>Chai Biscuit</span>
