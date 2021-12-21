@@ -17,72 +17,22 @@ const Home = () => {
   const [trasactions, setTrasactions] = useState([]);
 
   const [keyword, setKeyword] = useState(null);
+
   useEffect(() => {
 
     console.log('items ',trasactions);
-        getTransactions();
+       // getTransactions();
 
     
   }, []);
 
-  async function getTransactions() {
-    const response = await fetch('https://api.projectkelvin.io/uservotes/getProposalPage?pageNumber=1');
-    const users = await response.json();
-    items = users.data;
 
-    getProposalScores(items);
-    getVotesForTransactions(items,'temperature');
-    getVotesForTransactions(items,'time');
-    getVotesForTransactions(items,'capital');
-    setTrasactions(users);
-  }
-
-  async function getProposalScores(items) {
-    let transactions_request = '';
-    for(var i = 0;i<items.length;i++){
-        transactions_request = transactions_request+'&proposals='+items[i].proposalId;
+  function onKeyUp(event) {
+    
+    if (event.charCode === 13) {
+      console.log('presing enter',event.target.value, keyword);
+     searchNFTs();
     }
-
-   
-    const response = await fetch('https://api.projectkelvin.io/uservotes/getProposalScore?'+transactions_request);
-    let proposal_score = await response.json();
-    proposal_score = proposal_score.data;
-
-    for(var i = 0;i<proposal_score.length;i++){
-            items[i].votes = proposal_score[i]; 
-    } 
-
-
-    setTrasactions(proposal_score);
-  }
-
-
-  async function getVotesForTransactions(items,collection) {
-    let transactions_request = '';
-    for(var i = 0;i<items.length;i++){
-        transactions_request = transactions_request+'&proposals='+items[i].proposalId;
-    }
-
-    transactions_request = transactions_request+`&collection=`+collection;
-    const response = await fetch('https://api.projectkelvin.io/uservotes/getVotesByProposal?'+transactions_request);
-    let transaction_votes = await response.json();
-    transaction_votes = transaction_votes.data;
-
-    if(collection == 'time'){
-        for(var i = 0;i<transaction_votes.length;i++){
-            items[i].timevotes = transaction_votes[i]; 
-        }    
-    } else if(collection == 'capital'){
-        for(var i = 0;i<transaction_votes.length;i++){
-            items[i].capitalvotes = transaction_votes[i]; 
-        }        
-    } else if(collection == 'temperature'){
-        for(var i = 0;i<transaction_votes.length;i++){
-            items[i].tempvotes = transaction_votes[i]; 
-        } 
-    }
-
-    setTrasactions(transaction_votes);
   }
 
   async function searchNFTs() {
@@ -95,6 +45,7 @@ const Home = () => {
 
   return (
     <>
+
     <Navbar />
 
 <section class="container hero-creator">
@@ -120,7 +71,7 @@ const Home = () => {
         <div class="row">
             <div class="search">
                 <div class="inside">
-                    <input type="text" onChange={e => setKeyword(e.target.value)} name="keyword" id="" placeholder="Search for NFTs" />
+                    <input type="text" onChange={e => setKeyword(e.target.value)} name="keyword" id="" onKeyPress={e => onKeyUp(e)}  placeholder="Search for NFTs" />
                     <img src="https://cdn.kulfyapp.com/kulfy/kulfy-radium.svg" alt="" />
                 </div>
                 <button type="submit" class="bg-radium">
@@ -130,16 +81,17 @@ const Home = () => {
         </div>
         <div class="row my-2  ">
             <div class="hero-actions col-md-6 m-auto">
-                <a href="#">
+                <a href="/creator">
                     <img src="https://cdn.kulfyapp.com/kulfy/upload-radium.svg" alt="" />
                     <span>Or Upload Video</span>
                 </a>
-                <a href="#">
+                <a href="/creator">
                     <img src="https://cdn.kulfyapp.com/kulfy/link-radium.svg" alt="" />
                     <span>Or Paste a link</span>
                 </a>
             </div>
         </div>
+        
     </section>
   
     </>

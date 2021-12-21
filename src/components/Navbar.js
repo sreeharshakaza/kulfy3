@@ -14,26 +14,11 @@ class Navbar extends Component {
             <a href="/" className="navbar-logo mx-2">
               <Logo />
             </a>
-            <div className="input-group nav-search">
-              <span
-                className="input-group-text searchbar-icon"
-                id="addon-wrapping"
-              >
-                <img src="https://cdn.kulfyapp.com/kulfy/search.svg" alt="" />
-              </span>
-              <input
-                type="text"
-                className="form-control searchbar-text"
-                aria-label="Text input with dropdown button"
-                placeholder="Search here"
-              />
-            </div>
+          
             <div>
-              <a href="/nfts" className="mx-2 nav-links ">
-                NFT's
-              </a>
-              <a href="/memes" className="mx-2 nav-links ">
-                Memes
+
+              <a href="/kulfys" className="mx-2 nav-links ">
+                Kulfys
               </a>
               <a href="/create" className="mx-2 btn-create">
                 Create
@@ -43,7 +28,7 @@ class Navbar extends Component {
                 <small id="account">{this.props.account}</small>
               </a>
 
-              <a href="#" className="navbar-ham">
+              <a href="/" className="navbar-ham">
                 <NavHam />
               </a> */}
             </div>
@@ -135,9 +120,9 @@ class Navbar extends Component {
                 <span class="text-muted">© Copyright 2021 Kulfy Inc</span>
               </div>
               <div class="col-6">
-                <a href="#">Twitter</a>
-                <a href="#">Discord</a>
-                <a href="#">Telegram</a>
+                <a href="https://twitter.com/kulfyapp" target="blank">Twitter</a>
+                <a href="https://discord.gg/Su4m642a">Discord</a>
+                <a href="https://t.me/KulfyGifs">Telegram</a>
               </div>
             </div>
           </div>

@@ -29,6 +29,7 @@ class Mint extends Component {
     let search = window.location.search;
     let params = new URLSearchParams(search);
     kid = params.get("kid");
+    this.state.kid = kid;
 
     const getKulfyAPI =
       "https://gateway.kulfyapp.com/V3/gifs/getKulfy?client=web&id=" +
@@ -69,8 +70,13 @@ class Mint extends Component {
     }
   }
 
-  async processKulfy(item) {
-    const result = await ipfs.add(urlSource(this.state.kulfy.video_url));
+  async processKulfy() {
+   
+  }
+
+  async mintKulfy() {
+
+       const result = await ipfs.add(urlSource(this.state.kulfy.video_url));
     const asseturl = `https://ipfs.io/ipfs/${result.cid.toString()}`;
     let original = localStorage.getItem("NFT");
     original = JSON.parse(original);
@@ -80,7 +86,6 @@ class Mint extends Component {
       tags: this.state.kulfy.category.join(),
       kid: this.state.kulfy.kid,
       image: asseturl,
-      description: "Kulfy NFT Memes",
       source: original,
     };
 
@@ -104,21 +109,26 @@ class Mint extends Component {
         hash = `https://ipfs.io/ipfs/${hash}`;
         this.state.url = hash;
         console.log("ipfs url is", hash);
+      this.setState({ loading: true });
+      this.state.kulfyV3.methods
+      .mintNFT(this.state.account, this.state.url, this.state.asset, this.state.kid)
+      .send({ from: this.state.account })
+      .on("transactionHash", (hash) => {
+        this.setState({ loading: false });
+         window.location.href = "/kulfys"
+      });
+
+
       })
       .catch((err) => {
         //handle error here
         console.log(err);
       });
-  }
 
-  async mintKulfy() {
-    this.setState({ loading: true });
-    this.state.kulfyV3.methods
-      .mintNFT(this.state.account, this.state.url, this.state.asset, "test")
-      .send({ from: this.state.account })
-      .on("transactionHash", (hash) => {
-        this.setState({ loading: false });
-      });
+
+
+    
+
   }
 
   async loadBlockchainData() {
@@ -194,13 +204,13 @@ class Mint extends Component {
         <header>
           <nav class="navbar  navbar-light bg-none">
             <div class="container-fluid justify-content-start">
-              <a class="navbar-dp" href="#">
+              <a class="navbar-dp" href="/">
                 <img
                   src="https://cdn.kulfyapp.com/kulfy/back-white.svg"
                   alt="back"
                 />
               </a>
-              <a class="navbar-logo" href="#">
+              <a class="navbar-logo" href="/">
                 <img
                   class="creator"
                   src="https://cdn.kulfyapp.com/kulfy/kulfy-creator.svg"
@@ -254,59 +264,10 @@ class Mint extends Component {
                     </span>
                   </div>
                 </div>
-                <div class="form-group my-3">
-                  <label for="language">Language</label>
-                  <div class="language-lists my-1">
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="hindi"
-                        value="hindi"
-                      />
-                      <label class="form-check-label" for="hindi">
-                        Hindi
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="telugu"
-                        value="telugu"
-                      />
-                      <label class="form-check-label" for="telugu">
-                        Telugu
-                      </label>
-                    </div>
-                  </div>
-                </div>
+
+  
               </div>
               <div class="bar-publish">
-                <div class="content-type">
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="hindi"
-                      value="hindi"
-                    />
-                    <label class="form-check-label" for="hindi">
-                      Video
-                    </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="telugu"
-                      value="telugu"
-                    />
-                    <label class="form-check-label" for="telugu">
-                      GIF
-                    </label>
-                  </div>
-                </div>
                 <div class="publish-actions">
                   {/* <button><img src="https://cdn.kulfyapp.com/kulfy/delete-white.svg" alt=""/></button> */}
                   <button type="submit" onClick={() => this.processKulfy()}>

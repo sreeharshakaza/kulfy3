@@ -17,6 +17,7 @@ items.forEach((item, index) => {
 
 const NFTs = () => {
   const [trasactions, setTrasactions] = useState([]);
+  const [keyword, setKeyword] = useState(null);
   const [cookies, setCookie] = useCookies(["user"]);
 
   useEffect(() => {
@@ -31,6 +32,8 @@ const NFTs = () => {
     if (params) {
       keyword = params.get("search") + " video";
     }
+
+    setKeyword(keyword);
 
     const nftPortApiRoot = `https://api.nftport.xyz/v0/search?text=${keyword}&chain=all&order_by=relevance`;
 
@@ -57,7 +60,7 @@ const NFTs = () => {
   async function createMeme(item) {
     localStorage.setItem("NFT", JSON.stringify(item));
     window.location.href =
-      "http://create.kulfy.io/?nft=" + item.cached_file_url;
+      "/creator?nft=" + item.cached_file_url;
   }
 
   return (
@@ -73,7 +76,7 @@ const NFTs = () => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              FEATURED GIFS
+              NFT Results for {keyword}s
               <img
                 src="https://cdn.kulfyapp.com/kulfy/downarrow_2.svg"
                 alt=""
@@ -159,7 +162,7 @@ const NFTs = () => {
                           className="btn-create"
                         >
                           {" "}
-                          Create Meme{" "}
+                          Create Kulfy{" "}
                         </a>
                       </div>
                     </div>

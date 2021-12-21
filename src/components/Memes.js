@@ -3,6 +3,7 @@ import Web3 from "web3";
 import "./App.css";
 import KulfyV3 from "../abis/KulfyV3.json";
 import Navbar from "./Navbar";
+import Kulfys from './Kulfys'
 import axios from "axios";
 
 import PinataSDK from "pinata-web-sdk";
@@ -17,7 +18,7 @@ const ipfs = create({ host: "ipfs.infura.io", port: 5001, protocol: "https" });
 const httpClient = axios.create();
 httpClient.defaults.timeout = 500000;
 
-class App extends Component {
+class Memes extends Component {
   async componentDidMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
@@ -109,119 +110,10 @@ class App extends Component {
     return (
       <>
         <Navbar />
-        <section class="container featured-grid">
-          <div class="row d-flex justify-content-between">
-            <div class="col-6">
-              <button
-                class="btn btn-outline-secondary dropdown-toggle filter-featured"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                FEATURED GIFS
-                <img
-                  src="https://cdn.kulfyapp.com/kulfy/downarrow_2.svg"
-                  alt=""
-                  class="dropdown-arrow2"
-                />
-              </button>
-              <ul class="dropdown-menu dropdown-menu-featured bg-color2">
-                <li>
-                  <a class="dropdown-item" href="#">
-                    FRESH-IN
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    POPULAR
-                  </a>
-                </li>
-              </ul>
-            </div>
-            {/* <div class="col-2">
-              <button
-                type="button"
-                class="btn btn-primary border-none bg-none"
-                data-bs-toggle="button"
-                autocomplete="off"
-              >
-                <img
-                  src="https://cdn.kulfyapp.com/kulfy/grid_play.svg"
-                  alt=""
-                  class="language-icon"
-                />
-              </button>
-            </div> */}
-          </div>
-          <div class="row p-05">
-            {this.state.kulfies.map((item, index) => {
-              return (
-                <>
-                  <div class="col-6 col-md-4 col-lg-3 grid-item">
-                    <div class="grid-image">
-                      <video
-                        autoPlay
-                        loop
-                        muted
-                        width="320"
-                        height="240"
-                        controls
-                      >
-                        <source src={item.assetURI} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-
-                      {/* <div class="grid-info">
-                        <div>
-                          <img
-                            src="https://cdn.kulfyapp.com/kulfy/gifs_stack.svg"
-                            alt=""
-                          />
-                          <span>GIF</span>
-                          <span>16s</span>
-                        </div>
-                        <button
-                          type="button"
-                          class="btn btn-primary border-none btn-bookmark "
-                          data-bs-toggle="button"
-                          autocomplete="off"
-                        >
-                          <img
-                            src="https://cdn.kulfyapp.com/kulfy/bookmarks_small.svg"
-                            alt=""
-                            class="language-icon"
-                          />
-                        </button>
-                      </div> */}
-                    </div>
-                    <div class="grid-item-details">
-                      <h6>name: {item.description}</h6>
-                      <h6>tih6: {item.tih6Amount}</h6>
-                      <h6>id: {item.id}</h6>
-                      <h6>tokenURI: {item.tokenURI}</h6>
-                      <hr />
-                      <div class="user-details">
-                        <a
-                          href="#"
-                          className="btn-create "
-                          onClick={() => this.tipKulfy(item.id)}
-                        >
-                          Tip Meme
-                        </a>
-                        {/* <button onClick={() => this.tipKulfy(item.id)}>
-                          tip meme
-                        </button> */}
-                      </div>
-                    </div>
-                  </div>
-                </>
-              );
-            })}
-          </div>
-        </section>
+        <Kulfys />
       </>
     );
   }
 }
 
-export default App;
+export default Memes;
