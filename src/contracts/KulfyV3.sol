@@ -17,7 +17,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
 
     struct Kulfy {
         uint256 id;
-        string description;
+        string kid;
         string tokenURI;
         string assetURI;
         uint256 tipAmount;
@@ -27,7 +27,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
     event KulfyCreated(
         uint256 id,
         string hash,
-        string description,
+        string kid,
         uint256 tipAmount,
         address payable author
     );
@@ -35,7 +35,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
     event KulfyTipped(
         uint256 id,
         string hash,
-        string description,
+        string kid,
         uint256 tipAmount,
         address payable author
     );
@@ -44,7 +44,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
         address payable recipient,
         string memory _tokenURI,
         string memory _assetURI,
-        string memory _description
+        string memory _kid
     ) public returns (uint256) {
         tokenIds.increment();
 
@@ -53,7 +53,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
         _setTokenURI(newItemId, _tokenURI);
         kulfies[newItemId] = Kulfy(
             newItemId,
-            _description,
+            _kid,
             _tokenURI,
             _assetURI,
             0,
@@ -78,7 +78,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
         emit KulfyTipped(
             _id,
             _kulfy.tokenURI,
-            _kulfy.description,
+            _kulfy.kid,
             _kulfy.tipAmount,
             _author
         );

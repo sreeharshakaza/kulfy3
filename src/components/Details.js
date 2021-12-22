@@ -1,10 +1,13 @@
-import React, { Component } from "react";
+import React, { Component,useRef } from "react";
 import Web3 from "web3";
 import "./App.css";
 import KulfyV3 from "../abis/KulfyV3.json";
 import Navbar from "./Navbar";
-import Kulfys from './Kulfys'
+import Memes from "./Memes";
+import Kulfys from "./Kulfys";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+
 
 import PinataSDK from "pinata-web-sdk";
 
@@ -18,10 +21,14 @@ const ipfs = create({ host: "ipfs.infura.io", port: 5001, protocol: "https" });
 const httpClient = axios.create();
 httpClient.defaults.timeout = 500000;
 
-class Memes extends Component {
+class Details extends Component {
+
+
   async componentDidMount() {
+
     await this.loadWeb3();
     await this.loadBlockchainData();
+
   }
 
   async loadWeb3() {
@@ -74,12 +81,72 @@ class Memes extends Component {
           kulfies: [...this.state.kulfies, kulfy],
         });
       }
-      console.log(this.state.kulfies);
+
+     
+
+
+
+
+
+let id = "";
+    let search = window.location.search;
+    let params = new URLSearchParams(search);
+    id = params.get("id");
+
+    console.log( 'kk id is ',id);
+    this.state.id = id;
+
+
+    this.setState({asset_url:this.state.kulfies[id-1].assetURI});
+    this.setState({kid:this.state.kulfies[id-1].kid});
+
+    const getKulfyAPI =
+      "https://gateway.kulfyapp.com/V3/gifs/getKulfy?client=web&id=" +
+      this.state.kid +
+      "&language=all,telugu,tamil,hindi,malayalam,english";
+
+    axios.defaults.headers.common = {
+      "Content-Type": "application/json",
+    };
+
+    const postCommentsResponse = await axios.get(`${getKulfyAPI}`);
+    console.log(
+      `postComments Response from convo: ${JSON.stringify(
+        postCommentsResponse
+      )}`
+    );
+
+    const response = postCommentsResponse;
+    //const response = await fetch('https://api.nftport.xyz/v0/search?text=india%20video&chain=all&order_by=relevance');
+
+    console.log("resppoonse ", response.data.kulfy_info);
+
+    // items = JSON.stringify(response.data);
+
+    this.state.kulfy = response.data.kulfy_info;
+
+
+    const getMetaDataResponse = await axios.get(`${this.state.kulfies[id-1].tokenURI}`);
+
+    console.log(' getMetaDataResponse ',getMetaDataResponse.data);
+    this.setState({chain:getMetaDataResponse.data.source.chain});
+    this.setState({chain:getMetaDataResponse.data.source.chain});
+    this.setState({description:getMetaDataResponse.data.source.description});
+    this.setState({original_url:getMetaDataResponse.data.source.cached_file_url});
+   // this.state.original = getMetaDataResponse.data.source;
+
+
+
+ 
+      console.log('asset url is ',this.state.asset_url);
+
+      console.log('result is ',this.props, this.state.kulfies[0].assetURI);
       this.setState({ loading: false });
     } else {
       window.alert("Kulfy contarct not deployed to any network");
     }
   }
+
 
   async tipKulfyOwner(id, tipAmount) {
     this.setState({ loading: true });
@@ -97,6 +164,7 @@ class Memes extends Component {
 
   constructor(props) {
     super(props);
+    console.log(' props ',props);
     this.state = {
       account: "",
       kulfyV3: "",
@@ -110,10 +178,49 @@ class Memes extends Component {
     return (
       <>
         <Navbar />
-        <Kulfys />
+        <section class="container">
+        <div class="row">
+            <div class="col-md-6 ">
+                <img class="w-100 br-18" src="./assets/images/sample-image.png" alt="" />
+                <div>
+                    <img src="./assets/images/sample-user.svg" alt="" />
+                     <video
+                        autoPlay
+                        loop
+                        muted
+                        width="480"
+                        height="480"
+                        controls
+                        src={this.state.asset_url}
+                      >
+                        Your browser does not support the video tag.
+                      </video>
+                    <span>Chai Biscuit</span>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex flex-column nft-details">
+                <h1>{this.state.kulfy.name}</h1>
+                <div class="info my-2">
+                    <a href="#">
+                        <img src="./assets/images/gifs_white.svg" alt="" />
+                        <span>{this.state.kulfy.content_type}</span>
+                    </a>
+                    <a href="#"><span>480x480</span></a>
+                </div>
+                <button class="btn-radium my-3">Tip</button>
+                <hr />
+                {this.state.description}
+                <div class="nft-actions my-2">
+                    <a href={this.state.original_url} target="blank">View Original</a>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+     <Kulfys />
       </>
     );
   }
 }
 
-export default Memes;
+export default Details;

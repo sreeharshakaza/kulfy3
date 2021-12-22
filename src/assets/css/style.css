@@ -683,6 +683,23 @@ a.tag > span {
   display: flex;
   justify-content: center;
 }
+
+.hero-factory {
+  background: linear-gradient(
+      180.81deg,
+      rgba(31, 33, 39, 0) -28.29%,
+      #1f2127 85.59%
+    ),
+    url("../images/hero-creator.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .hero-creator > img {
   width: 180px;
 }

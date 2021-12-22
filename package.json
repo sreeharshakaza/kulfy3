@@ -30,7 +30,11 @@
     "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-html5video": "^2.5.1",
+<<<<<<< HEAD
     "react-identicons": "^1.2.5",
+=======
+    "react-native-video": "^5.2.0",
+>>>>>>> a184272c0bd4c82852bfac83d121b744006a63bd
     "react-router": "^6.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
