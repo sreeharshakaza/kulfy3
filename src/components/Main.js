@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Identicon from 'identicon.js';
+import Identicon from 'react-identicons';
 
 
 class Main extends Component {
