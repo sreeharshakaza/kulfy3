@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { ReactComponent as UserProfile } from "../assets/images/dp.svg";
 import { ReactComponent as Logo } from "../assets/images/logo_green.svg";
 import { ReactComponent as NavHam } from "../assets/images/hamburger.svg";
-
+import Identicon from 'react-identicons';
 class Navbar extends Component {
   render() {
     return (
@@ -38,7 +38,10 @@ class Navbar extends Component {
               <a href="/create" className="mx-2 btn-create">
                 Create
               </a>
-              {/* <a href="#" className="navbar-dp mx-3">
+              <a href="#" className="mx-2 nav-links">
+              <Identicon string="randomness" size="25"/>
+              </a>
+     {/*          <a href="#" className="navbar-dp mx-3">
                 <UserProfile />
                 <small id="account">{this.props.account}</small>
               </a>
