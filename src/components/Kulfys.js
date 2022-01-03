@@ -158,18 +158,11 @@ class Kulfys extends Component {
                 <>
                   <div class="col-6 col-md-4 col-lg-3 grid-item">
                     <div class="grid-image">
-                    <a href={'/kulfy?id='+item.id} >
-                      <video
-                        autoPlay
-                        loop
-                        muted
-                        width="320"
-                        height="240"
-                        
-                      >
-                        <source src={item.assetURI} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
+                      <a href={"/kulfy?id=" + item.id}>
+                        <video autoPlay loop muted width="320" height="240">
+                          <source src={item.assetURI} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
                       </a>
 
                       {/* <div class="grid-info">
@@ -196,18 +189,66 @@ class Kulfys extends Component {
                       </div> */}
                     </div>
                     <div class="grid-item-details">
-                     <a href={'https://kulfyapp.com/kulfy/'+item.kid} target="blank" > <h6>Kulfy: {item.kid}</h6></a>
+                      <a
+                        href={"https://kulfyapp.com/kulfy/" + item.kid}
+                        target="blank"
+                      >
+                        {" "}
+                        <h6>Kulfy: {item.kid}</h6>
+                      </a>
                       <h6>tip: {item.tipAmount}</h6>
-                    <a href={'/kulfy?id='+item.id} >  <h6>id: {item.id}</h6></a>
-                     <h6><a href={item.tokenURI} target="blank" >Token URI: {item.tokenURI}</a></h6>
+                      <a href={"/kulfy?id=" + item.id}>
+                        {" "}
+                        <h6>id: {item.id}</h6>
+                      </a>
+                      <h6>
+                        <a href={item.tokenURI} target="blank">
+                          Token URI: {item.tokenURI}
+                        </a>
+                      </h6>
                       <hr />
                       <div class="user-details">
+                        {/* 
+                        TODO:
+                        *intially show Tip Creator button.
+                        * When Tip Creator button clicked, Hide the button and show div with id tip-send.
+                        * User will enter amount and click send button. Then meta mask will open and trasction will be made.
+                        * On transaction success show hide tip-send and show div with id tip-success.
+                        * after few seconds we hide tip-success and show tip creator button
+                        */}
+                        {/* <div id="tip-success">
+                          <p>Thanks for Tipping the Creator <img src="https://cdn.kulfyapp.com/kulfy/bookmarks_small.svg"/></p>
+                          <a
+                          href="#"
+                          className="btn-create "
+                          onClick={() => this.tipKulfy(item.id)}
+                        >
+                          Send Tip
+                        </a>
+                        </div>
+                        <div id="tip-send">
+                          <input type="text" name="" id="" />
+                          <a
+                          href="#"
+                          className="btn-create "
+                          onClick={() => this.tipKulfy(item.id)}
+                        >
+                          Tip Again
+                        </a>
+                        </div>
+                        <a
+                          href="#"
+                          className="btn-create "
+                          onClick={}
+                        >
+                          Tip Creator
+                        </a> */}
                         <a
                           href="#"
                           className="btn-create "
                           onClick={() => this.tipKulfy(item.id)}
                         >
-                          Tip Kulfy
+                          Tip Creator
                         </a>
                         {/* <button onClick={() => this.tipKulfy(item.id)}>
                           tip kulfy
