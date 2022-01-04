@@ -8,6 +8,7 @@ import Memes from './Memes'
 import Mint from './Mint'
 import Creator from './Creator'
 import Home from './Home'
+import Docs from './Docs'
 import Details from './Details'
 import Kulfys from './Kulfys'
 import Main from './Main'
@@ -183,6 +184,9 @@ class App extends Component {
           </Route>
           <Route path="/kulfy" >
             <Details />
+          </Route>
+          <Route path="/docs" >
+            <Docs />
           </Route>
           <Route path="/">
             <Memes />

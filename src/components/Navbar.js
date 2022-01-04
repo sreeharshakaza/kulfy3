@@ -17,6 +17,9 @@ class Navbar extends Component {
           
             <div>
 
+              <a href='/docs?id=how-to-mint-nfts-from-kulfy' className="mx-2 nav-links ">
+                Docs
+              </a>
               <a href="/kulfys" className="mx-2 nav-links ">
                 Kulfys
               </a>
