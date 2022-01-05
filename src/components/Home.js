@@ -4,31 +4,16 @@ import ReactDOM from "react-dom";
 import { Dropdown } from 'react-bootstrap';
 import Navbar from './Navbar';
 
-
-let items=[];
-let itemList=[];
-let votes=0;
-items.forEach((item,index)=>{
-  itemList.push( 
-)
-})
-
 const Home = () => {
   const [trasactions, setTrasactions] = useState([]);
 
   const [keyword, setKeyword] = useState(null);
 
-  useEffect(() => {
-
-    console.log('items ',trasactions);
-       // getTransactions();
-
-    
+  useEffect(() => {  
   }, []);
 
 
-  function onKeyUp(event) {
-    
+  function onKeyUp(event) {   
     if (event.charCode === 13) {
       console.log('presing enter',event.target.value, keyword);
      searchNFTs();
@@ -36,12 +21,8 @@ const Home = () => {
   }
 
   async function searchNFTs() {
-
-    window.location.href = '/nfts?search='+keyword;
-  
+    window.location.href = '/nfts?search='+keyword; 
   }
-
- 
 
   return (
     <>

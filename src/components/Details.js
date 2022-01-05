@@ -83,17 +83,11 @@ class Details extends Component {
       }
 
      
-
-
-
-
-
-let id = "";
+    let id = "";
     let search = window.location.search;
     let params = new URLSearchParams(search);
     id = params.get("id");
 
-    console.log( 'kk id is ',id);
     this.state.id = id;
 
 
@@ -117,31 +111,14 @@ let id = "";
     );
 
     const response = postCommentsResponse;
-    //const response = await fetch('https://api.nftport.xyz/v0/search?text=india%20video&chain=all&order_by=relevance');
-
-    console.log("resppoonse ", response.data.kulfy_info);
-
-    // items = JSON.stringify(response.data);
-
     this.state.kulfy = response.data.kulfy_info;
-
-
     const getMetaDataResponse = await axios.get(`${this.state.kulfies[id-1].tokenURI}`);
 
-    console.log(' getMetaDataResponse ',getMetaDataResponse.data);
     this.setState({chain:getMetaDataResponse.data.source.chain});
     this.setState({chain:getMetaDataResponse.data.source.chain});
     this.setState({description:getMetaDataResponse.data.source.description});
     this.setState({original_url:getMetaDataResponse.data.source.cached_file_url});
-   // this.state.original = getMetaDataResponse.data.source;
-
-
-
- 
-      console.log('asset url is ',this.state.asset_url);
-
-      console.log('result is ',this.props, this.state.kulfies[0].assetURI);
-      this.setState({ loading: false });
+    this.setState({ loading: false });
     } else {
       window.alert("Kulfy contarct not deployed to any network");
     }
@@ -164,7 +141,6 @@ let id = "";
 
   constructor(props) {
     super(props);
-    console.log(' props ',props);
     this.state = {
       account: "",
       kulfyV3: "",
