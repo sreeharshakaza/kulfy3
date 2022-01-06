@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
-import ReactDOM from "react-dom";
-import { Dropdown } from 'react-bootstrap';
 import Navbar from './Navbar';
 
 const Home = () => {
-  const [trasactions, setTrasactions] = useState([]);
-
   const [keyword, setKeyword] = useState(null);
 
   useEffect(() => {  

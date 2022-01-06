@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Web3 from "web3";
 import "./App.css";
 import KulfyV3 from "../abis/KulfyV3.json";
-import Navbar from "./Navbar";
 import axios from "axios";
 
 import PinataSDK from "pinata-web-sdk";

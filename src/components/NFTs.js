@@ -26,7 +26,9 @@ const NFTs = () => {
   }, []);
 
   /**
-   * Get NFT assets from Ethereum and Polygon using nftport.xyz  
+   * Get NFT assets from Ethereum and Polygon using nftport.xyz APIs 
+   * @param keyword [keyword to be searched for NFT results]
+   * 
    */
   async function getNFTs() {
     let keyword = "video";

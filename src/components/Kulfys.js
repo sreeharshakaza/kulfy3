@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Web3 from "web3";
 import "./App.css";
 import KulfyV3 from "../abis/KulfyV3.json";
-import Navbar from "./Navbar";
-import axios from "axios";
 
 class Kulfys extends Component {
   async componentDidMount() {
@@ -53,12 +51,6 @@ class Kulfys extends Component {
 
       // Load Images
       for (let i = 1; i <= kulfiesCount; i++) {
-        //get tokenURI from contract
-        const ipfs_metadata = await kulfyV3.methods.tokenURI(i).call();
-
-        //get owner of
-        const owner_address = await kulfyV3.methods.ownerOf(i).call();
-
         const kulfy = await kulfyV3.methods.kulfys(i).call();
         this.setState({
           kulfies: [...this.state.kulfies, kulfy],
