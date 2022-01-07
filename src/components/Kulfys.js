@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import Web3 from "web3";
 import "./App.css";
 import KulfyV3 from "../abis/KulfyV3.json";
+import { Modal } from 'react-bootstrap';
 
 class Kulfys extends Component {
+
   async componentDidMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
@@ -28,7 +30,11 @@ class Kulfys extends Component {
 
 
   async tipKulfy(id) {
-    this.tipKulfyAuthor(id, "10");
+    this.setState({
+      inputItem: id
+    });
+    this.setState({ showModalPopup: true });
+    //this.tipKulfyAuthor(id, "10");
   }
 
   /**
@@ -74,14 +80,29 @@ class Kulfys extends Component {
       .tipKulfyAuthor(id)
       .send({
         from: this.state.account,
-        value: window.web3.utils.toWei("1", "Ether"),
+        value: window.web3.utils.toWei(tipAmount, "Ether"),
       })
       .on("transactionHash", (hash) => {
         console.log("tans hash ", hash);
         this.setState({ loading: false });
       });
   }
-
+  isShowModal(state)
+  {
+    this.setState({ showModalPopup: state });
+  }
+  updateInputitemValue(evt) {
+  
+    this.setState({
+      inputItem: evt.target.value
+    });
+  }
+  updateInputTipValue(evt) {
+ 
+    this.setState({
+      inputTip:  evt.target.value
+    });
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -90,8 +111,13 @@ class Kulfys extends Component {
       kulfies: [],
       loading: true,
       kulfy: "",
+      showModalPopup: false,
+      inputTip:"0.1",
+      inputItem:""
     };
   }
+
+  
 
   render() {
     return (
@@ -248,6 +274,45 @@ class Kulfys extends Component {
               );
             })}
           </div>
+          
+        
+
+      <Modal style={{color:'#000'}} show={this.state.showModalPopup} onHide={this.handleClose}  
+                    size="lg"  
+                    aria-labelledby="contained-modal-title-vcenter"  
+                    centered  
+                >  
+                    <Modal.Header>  
+                        <Modal.Title id="sign-in-title">  
+                            Add Tip 
+                         </Modal.Title>  
+                    </Modal.Header>  
+                    <Modal.Body>  
+                         
+                        <div className="signUp"> 
+                        <input type="hidden" value={this.state.inputItem} onChange={evt => this.updateInputitemValue(evt)}  />
+                       
+                        <input type="number" value={this.state.inputTip} onChange={evt => this.updateInputTipValue(evt)} placeholder="0.1" style={{marginRight:'10px', width : '80px'}}  required name="price"  min=".1" step="0.1" title="Currency" />
+                        <div style={{marginTop:'20px'}}>
+                        <a
+                          href="#"
+                          className="btn-create "
+                          onClick={() => this.tipKulfyAuthor(this.state.inputItem,this.state.inputTip)}
+                        >
+                          Tip
+                        </a>  
+                            <a
+                          href="#" style={{marginLeft:'10px'}}
+                          className="btn-create "
+                          onClick={() => this.isShowModal(false)}
+                        >
+                          Cancel
+                        </a>
+                        </div>
+                        </div>  
+                    </Modal.Body>  
+  
+                </Modal >  
         </section>
       </>
     );
