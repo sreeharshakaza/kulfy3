@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Web3 from "web3";
 import "./App.css";
 import KulfyV3 from "../abis/KulfyV3.json";
-import Navbar from "./Navbar";
 import axios from "axios";
 
 import PinataSDK from "pinata-web-sdk";
@@ -24,6 +23,9 @@ class Mint extends Component {
     await this.loadBlockchainData();
   }
 
+  /**
+   * [getKulfy Get Kulfy metadata from Kulfy DB]
+   */
   async getKulfy() {
     let kid = "";
     let search = window.location.search;
@@ -48,11 +50,6 @@ class Mint extends Component {
     );
 
     const response = postCommentsResponse;
-    //const response = await fetch('https://api.nftport.xyz/v0/search?text=india%20video&chain=all&order_by=relevance');
-
-    console.log("resppoonse ", response.data.kulfy_info);
-
-    // items = JSON.stringify(response.data);
 
     this.state.kulfy = response.data.kulfy_info;
   }
@@ -70,13 +67,14 @@ class Mint extends Component {
     }
   }
 
-  async processKulfy() {
-   
-  }
 
+
+  /**
+   * [mintKulfy Upload assets and metadata to IPFS and mint Kulfy as NFT using ERC 721]
+   */
   async mintKulfy() {
 
-       const result = await ipfs.add(urlSource(this.state.kulfy.video_url));
+    const result = await ipfs.add(urlSource(this.state.kulfy.video_url));
     const asseturl = `https://ipfs.io/ipfs/${result.cid.toString()}`;
     let original = localStorage.getItem("NFT");
     original = JSON.parse(original);
@@ -93,8 +91,6 @@ class Mint extends Component {
       pinataMetadata: {
         name: `${this.state.kulfy.kid}-metadata`,
         keyvalues: {
-          customKey: "customValue",
-          customKey2: "customValue2",
         },
       },
       pinataOptions: {
@@ -124,13 +120,11 @@ class Mint extends Component {
         //handle error here
         console.log(err);
       });
-
-
-
-    
-
   }
 
+  /**
+   * [loadBlockchainData Load KulfyV3 contract locally]
+   */
   async loadBlockchainData() {
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
@@ -141,50 +135,11 @@ class Mint extends Component {
     const networkData = KulfyV3.networks[networkId];
     if (networkData) {
       const kulfyV3 = new web3.eth.Contract(KulfyV3.abi, networkData.address);
-      console.log(`kulfyV3`, kulfyV3);
-      this.setState({ kulfyV3 });
-      const kulfiesCount = await kulfyV3.methods
-        .balanceOf(this.state.account)
-        .call();
-      //const kulfiesCount = 0
-      console.log(`kulfiesCount`, kulfiesCount);
-      this.setState({ kulfiesCount });
-
-      // Load Images
-      for (let i = 1; i <= kulfiesCount; i++) {
-        //get tokenURI from contract
-        const ipfs_metadata = await kulfyV3.methods.tokenURI(i).call();
-        console.log("ipfs_metadata ", ipfs_metadata);
-
-        //get owner of
-        const owner_address = await kulfyV3.methods.ownerOf(i).call();
-        console.log("ipfs_metadata ", ipfs_metadata, i, owner_address);
-
-        const kulfy = await kulfyV3.methods.kulfies(i).call();
-        this.setState({
-          kulfies: [...this.state.kulfies, kulfy],
-        });
-      }
-
-      console.log(this.state.kulfies);
-
+      this.setState({ kulfyV3 }); 
       this.setState({ loading: false });
     } else {
       window.alert("Kulfy contarct not deployed to any network");
     }
-  }
-
-  tipKulfyOwner(id, tipAmount) {
-    this.setState({ loading: true });
-    this.state.kulfyV3.methods
-      .tipKulfyOwner(id)
-      .send({
-        from: this.state.account,
-        value: tipAmount,
-      })
-      .on("transactionHash", (hash) => {
-        this.setState({ loading: false });
-      });
   }
 
   constructor(props) {
@@ -267,14 +222,7 @@ class Mint extends Component {
 
   
               </div>
-              <div class="bar-publish">
-                <div class="publish-actions">
-                  {/* <button><img src="https://cdn.kulfyapp.com/kulfy/delete-white.svg" alt=""/></button> */}
-                  <button type="submit" onClick={() => this.processKulfy()}>
-                    {" "}
-                    <span>Process</span>
-                  </button>
-                </div>
+              <div class="bar-publish">      
                 <div class="publish-actions">
                   {/* <button><img src="https://cdn.kulfyapp.com/kulfy/delete-white.svg" alt=""/></button> */}
                   <button type="submit" onClick={() => this.mintKulfy()}>

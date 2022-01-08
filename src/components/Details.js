@@ -1,25 +1,10 @@
-import React, { Component,useRef } from "react";
+import React, { Component } from "react";
 import Web3 from "web3";
 import "./App.css";
 import KulfyV3 from "../abis/KulfyV3.json";
 import Navbar from "./Navbar";
-import Memes from "./Memes";
 import Kulfys from "./Kulfys";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-
-
-import PinataSDK from "pinata-web-sdk";
-
-const pinata = new PinataSDK(
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIxMDVhNmMwNy0yNDlmLTRlOTAtOWEwNC0yZDk0M2VmYjIwZTYiLCJlbWFpbCI6ImdpcmlzaGtvbGx1cmlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siaWQiOiJOWUMxIiwiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjF9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZX0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjkxNjk3MTAzZWRlYWFiOThlNDFlIiwic2NvcGVkS2V5U2VjcmV0IjoiYzMxNDc5MzZlN2RhZjNhOWY5MjBiMmFjMTQyNDgxNDcyZTY1ODY0NDAwNTRlOTg1YTU3ZGE0ZTY3MzIyY2JjYyIsImlhdCI6MTYzOTM5MzQ0Nn0.C7ERlKMw_9vJLQFQpC4K2ibNYciXh5Ms4xazOdxE2tw"
-);
-
-const { create, urlSource } = require("ipfs-http-client");
-const ipfs = create({ host: "ipfs.infura.io", port: 5001, protocol: "https" });
-
-const httpClient = axios.create();
-httpClient.defaults.timeout = 500000;
 
 class Details extends Component {
 
@@ -83,17 +68,11 @@ class Details extends Component {
       }
 
      
-
-
-
-
-
-let id = "";
+    let id = "";
     let search = window.location.search;
     let params = new URLSearchParams(search);
     id = params.get("id");
 
-    console.log( 'kk id is ',id);
     this.state.id = id;
 
 
@@ -117,31 +96,14 @@ let id = "";
     );
 
     const response = postCommentsResponse;
-    //const response = await fetch('https://api.nftport.xyz/v0/search?text=india%20video&chain=all&order_by=relevance');
-
-    console.log("resppoonse ", response.data.kulfy_info);
-
-    // items = JSON.stringify(response.data);
-
     this.state.kulfy = response.data.kulfy_info;
-
-
     const getMetaDataResponse = await axios.get(`${this.state.kulfies[id-1].tokenURI}`);
 
-    console.log(' getMetaDataResponse ',getMetaDataResponse.data);
     this.setState({chain:getMetaDataResponse.data.source.chain});
     this.setState({chain:getMetaDataResponse.data.source.chain});
     this.setState({description:getMetaDataResponse.data.source.description});
     this.setState({original_url:getMetaDataResponse.data.source.cached_file_url});
-   // this.state.original = getMetaDataResponse.data.source;
-
-
-
- 
-      console.log('asset url is ',this.state.asset_url);
-
-      console.log('result is ',this.props, this.state.kulfies[0].assetURI);
-      this.setState({ loading: false });
+    this.setState({ loading: false });
     } else {
       window.alert("Kulfy contarct not deployed to any network");
     }
@@ -164,7 +126,6 @@ let id = "";
 
   constructor(props) {
     super(props);
-    console.log(' props ',props);
     this.state = {
       account: "",
       kulfyV3: "",

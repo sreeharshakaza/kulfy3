@@ -22,10 +22,15 @@ const NFTs = () => {
 
   useEffect(() => {
     console.log("items ", trasactions);
-    getTransactions();
+    getNFTs();
   }, []);
 
-  async function getTransactions() {
+  /**
+   * Get NFT assets from Ethereum and Polygon using nftport.xyz APIs 
+   * @param keyword [keyword to be searched for NFT results]
+   * 
+   */
+  async function getNFTs() {
     let keyword = "video";
     let search = window.location.search;
     let params = new URLSearchParams(search);
@@ -49,11 +54,9 @@ const NFTs = () => {
       )}`
     );
 
-    const response = postCommentsResponse;
-    //const response = await fetch('https://api.nftport.xyz/v0/search?text=india%20video&chain=all&order_by=relevance');
-    const nfts = await response;
+  const response = postCommentsResponse;
+  const nfts = await response;
     items = nfts.data.search_results;
-
     setTrasactions(items);
   }
 

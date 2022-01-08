@@ -2,27 +2,19 @@ import React, { Component } from "react";
 import Web3 from "web3";
 import "./App.css";
 import KulfyV3 from "../abis/KulfyV3.json";
-import Navbar from "./Navbar";
-import axios from "axios";
-
-import PinataSDK from "pinata-web-sdk";
-
-const pinata = new PinataSDK(
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIxMDVhNmMwNy0yNDlmLTRlOTAtOWEwNC0yZDk0M2VmYjIwZTYiLCJlbWFpbCI6ImdpcmlzaGtvbGx1cmlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siaWQiOiJOWUMxIiwiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjF9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZX0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjkxNjk3MTAzZWRlYWFiOThlNDFlIiwic2NvcGVkS2V5U2VjcmV0IjoiYzMxNDc5MzZlN2RhZjNhOWY5MjBiMmFjMTQyNDgxNDcyZTY1ODY0NDAwNTRlOTg1YTU3ZGE0ZTY3MzIyY2JjYyIsImlhdCI6MTYzOTM5MzQ0Nn0.C7ERlKMw_9vJLQFQpC4K2ibNYciXh5Ms4xazOdxE2tw"
-);
-
-const { create, urlSource } = require("ipfs-http-client");
-const ipfs = create({ host: "ipfs.infura.io", port: 5001, protocol: "https" });
-
-const httpClient = axios.create();
-httpClient.defaults.timeout = 500000;
+import { Modal } from 'react-bootstrap';
 
 class Kulfys extends Component {
+
   async componentDidMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
   }
 
+  /**
+   * [loadWeb3 Connecting to web3]
+   * 
+   */
   async loadWeb3() {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
@@ -36,11 +28,19 @@ class Kulfys extends Component {
     }
   }
 
+
   async tipKulfy(id) {
-    console.log("tip item kulfy ", id, this.state.account);
-    this.tipKulfyOwner(id, "10");
+    this.setState({
+      inputItem: id
+    });
+    this.setState({ showModalPopup: true });
+    //this.tipKulfyAuthor(id, "10");
   }
 
+  /**
+   * [loadBlockchainData Load mapping of NFT assets in the contract]
+   * 
+   */
   async loadBlockchainData() {
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
@@ -51,49 +51,58 @@ class Kulfys extends Component {
     const networkData = KulfyV3.networks[networkId];
     if (networkData) {
       const kulfyV3 = new web3.eth.Contract(KulfyV3.abi, networkData.address);
-      console.log(`kulfyV3`, kulfyV3);
       this.setState({ kulfyV3 });
       const kulfiesCount = await kulfyV3.methods.tokenIds().call();
-      //const kulfiesCount = 0
-      console.log(`kulfiesCount`, kulfiesCount);
       this.setState({ kulfiesCount });
 
       // Load Images
       for (let i = 1; i <= kulfiesCount; i++) {
-        //get tokenURI from contract
-        const ipfs_metadata = await kulfyV3.methods.tokenURI(i).call();
-        console.log("ipfs_metadata ", ipfs_metadata);
-
-        //get owner of
-        const owner_address = await kulfyV3.methods.ownerOf(i).call();
-        console.log("ipfs_metadata ", ipfs_metadata, i, owner_address);
-
-        const kulfy = await kulfyV3.methods.kulfies(i).call();
+        const kulfy = await kulfyV3.methods.kulfys(i).call();
         this.setState({
           kulfies: [...this.state.kulfies, kulfy],
         });
       }
-      console.log(this.state.kulfies);
+
       this.setState({ loading: false });
     } else {
       window.alert("Kulfy contarct not deployed to any network");
     }
   }
 
-  async tipKulfyOwner(id, tipAmount) {
+  /**
+   * [tipKulfyOwner Transfer tip amount to Kulfy author]
+   * @param  {[type]} id        [tokenId of the NFT in contract]
+   * @param  {[type]} tipAmount [amount to be transferred]
+   */
+  async tipKulfyAuthor(id, tipAmount) {
     this.setState({ loading: true });
     this.state.kulfyV3.methods
-      .tipKulfyOwner(id)
+      .tipKulfyAuthor(id)
       .send({
         from: this.state.account,
-        value: window.web3.utils.toWei("1", "Ether"),
+        value: window.web3.utils.toWei(tipAmount, "Ether"),
       })
       .on("transactionHash", (hash) => {
         console.log("tans hash ", hash);
         this.setState({ loading: false });
       });
   }
-
+  isShowModal(state)
+  {
+    this.setState({ showModalPopup: state });
+  }
+  updateInputitemValue(evt) {
+  
+    this.setState({
+      inputItem: evt.target.value
+    });
+  }
+  updateInputTipValue(evt) {
+ 
+    this.setState({
+      inputTip:  evt.target.value
+    });
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -102,8 +111,13 @@ class Kulfys extends Component {
       kulfies: [],
       loading: true,
       kulfy: "",
+      showModalPopup: false,
+      inputTip:"0.1",
+      inputItem:""
     };
   }
+
+  
 
   render() {
     return (
@@ -260,6 +274,45 @@ class Kulfys extends Component {
               );
             })}
           </div>
+          
+        
+
+      <Modal style={{color:'#000'}} show={this.state.showModalPopup} onHide={this.handleClose}  
+                    size="lg"  
+                    aria-labelledby="contained-modal-title-vcenter"  
+                    centered  
+                >  
+                    <Modal.Header>  
+                        <Modal.Title id="sign-in-title">  
+                            Add Tip 
+                         </Modal.Title>  
+                    </Modal.Header>  
+                    <Modal.Body>  
+                         
+                        <div className="signUp"> 
+                        <input type="hidden" value={this.state.inputItem} onChange={evt => this.updateInputitemValue(evt)}  />
+                       
+                        <input type="number" value={this.state.inputTip} onChange={evt => this.updateInputTipValue(evt)} placeholder="0.1" style={{marginRight:'10px', width : '80px'}}  required name="price"  min=".1" step="0.1" title="Currency" />
+                        <div style={{marginTop:'20px'}}>
+                        <a
+                          href="#"
+                          className="btn-create "
+                          onClick={() => this.tipKulfyAuthor(this.state.inputItem,this.state.inputTip)}
+                        >
+                          Tip
+                        </a>  
+                            <a
+                          href="#" style={{marginLeft:'10px'}}
+                          className="btn-create "
+                          onClick={() => this.isShowModal(false)}
+                        >
+                          Cancel
+                        </a>
+                        </div>
+                        </div>  
+                    </Modal.Body>  
+  
+                </Modal >  
         </section>
       </>
     );
