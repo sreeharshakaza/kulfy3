@@ -1,0 +1,38 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: KulfyV3
+    network: mainnet
+    source:
+      address: "0x84e90e7275b86f0eab98088ff69cf5d137b13345"
+      abi: KulfyV3
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - KulfyCreated
+        - KulfyTipped
+        - OwnershipTransferred
+        - Transfer
+      abis:
+        - name: KulfyV3
+          file: ./abis/KulfyV3.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: KulfyCreated(uint256,string,string,uint256,address)
+          handler: handleKulfyCreated
+        - event: KulfyTipped(uint256,string,string,uint256,address)
+          handler: handleKulfyTipped
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts

@@ -8,12 +8,11 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 contract KulfyV3 is ERC721URIStorage, Ownable {
-    //string public name = "KulfyV3";
     mapping(uint256 => Kulfy) public kulfies;
     using Counters for Counters.Counter;
     Counters.Counter public tokenIds;
 
-    constructor() public ERC721("KULFY", "KUL") {}
+    constructor() ERC721("KULFY", "KUL") {}
 
     struct Kulfy {
         uint256 id;
@@ -56,6 +55,14 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
             _kid,
             _tokenURI,
             _assetURI,
+            0,
+            recipient
+        );
+        
+        emit KulfyCreated(
+            newItemId,
+            _tokenURI,
+            _kid,
             0,
             recipient
         );
