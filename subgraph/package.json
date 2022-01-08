@@ -1,0 +1,17 @@
+{
+  "name": "KulfyV3",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ subgraph/KulfyV3" ,
+    "create-harmony": "graph create --node http://localhost:8020 subgraph/KulfyV3",
+    "deploy-harmony": "graph deploy --node http://localhost:8020 --ipfs http://localhost:5001 subgraph/KulfyV3",
+    "remove-local": "graph remove --node http://localhost:8020/ subgraph/KulfyV3",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 subgraph/KulfyV3"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.25.1",
+    "@graphprotocol/graph-ts": "0.24.1"
+  }
+}

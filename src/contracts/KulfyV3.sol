@@ -20,7 +20,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter public tokenIds;
 
-    constructor() public ERC721("KULFY", "KUL") {}
+    constructor() ERC721("KULFY", "KUL") {}
 
     /// Structure of hold Kulfys
     struct Kulfy {
@@ -84,6 +84,14 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
             _assetURI,
             0,
             author
+        );
+        
+        emit KulfyCreated(
+            newItemId,
+            _tokenURI,
+            _kid,
+            0,
+            recipient
         );
 
         /// emit Kulfy minted event

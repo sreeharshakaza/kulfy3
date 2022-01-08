@@ -1,0 +1,14 @@
+type ExampleEntity @entity {
+  id: ID!
+  count: Int!
+  owner: Bytes! # address
+  approved: Bytes! # address
+}
+
+type Kulfy @entity {
+  id: ID!
+  idk: String!
+  uri: String!
+  tipAmount: BigInt! # address
+  author: Bytes! # address
+}
