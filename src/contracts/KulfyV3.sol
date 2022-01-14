@@ -6,7 +6,6 @@ pragma solidity ^0.8.7;
 /// @notice You can use this contract for Minting GIFs & Video Clips as NFTs with Tips functionality.
 /// @dev All function calls are currently implemented without side effects
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
