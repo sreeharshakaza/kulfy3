@@ -99,7 +99,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
      */
     function tipKulfyAuthor(uint256 _id) public payable {
         /// Check valid tokenId
-        require(_id > 0 && _id <= tokenIds.current());
+        require(_id > 0 && _id <= tokenIds.current(), "Invalid token id");
 
         /// Load specific Kulfy based on tokenId
         Kulfy memory _kulfy = kulfys[_id];
