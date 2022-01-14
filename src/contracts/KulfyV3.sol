@@ -64,7 +64,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
         string memory _tokenURI,
         string memory _assetURI,
         string memory _kid
-    ) public returns (uint256) {
+    ) external returns (uint256) {
 
         /// Increment tokenId
         tokenIds.increment();
