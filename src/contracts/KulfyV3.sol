@@ -1,6 +1,6 @@
 //Contract based on [https://docs.openzeppelin.com/contracts/4.x/erc721](https://docs.openzeppelin.com/contracts/4.x/erc721)
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7;
+pragma solidity 0.8.7;
 
 /// @title Kulfy Minting and Tipping Contract
 /// @notice You can use this contract for Minting GIFs & Video Clips as NFTs with Tips functionality.
