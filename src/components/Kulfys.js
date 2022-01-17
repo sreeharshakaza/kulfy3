@@ -3,6 +3,7 @@ import Web3 from "web3";
 import "./App.css";
 import KulfyV3 from "../abis/KulfyV3.json";
 import { Modal } from 'react-bootstrap';
+import ReactLoading from 'react-loading';
 
 class Kulfys extends Component {
 
@@ -42,6 +43,7 @@ class Kulfys extends Component {
    * 
    */
   async loadBlockchainData() {
+    this.setState({ loading: true });
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });
@@ -76,6 +78,7 @@ class Kulfys extends Component {
    */
   async tipKulfyAuthor(id, tipAmount) {
     this.setState({ loading: true });
+    this.isShowModal(false)
     this.state.kulfyV3.methods
       .tipKulfyAuthor(id)
       .send({
@@ -122,6 +125,12 @@ class Kulfys extends Component {
   render() {
     return (
       <>
+        {this.state.loading ? (
+          <div style={{marginLeft:'47%',marginTop: '5%'}}>
+            <ReactLoading type="spinningBubbles" color="#ffffff" height={100} width={70} />
+          </div>
+       
+      ) :(
         <section class="container featured-grid">
           <div class="row d-flex justify-content-between">
             <div class="col-6">
@@ -270,9 +279,11 @@ class Kulfys extends Component {
                       </div>
                     </div>
                   </div>
+              
                 </>
               );
-            })}
+            })
+            }
           </div>
           
         
@@ -314,6 +325,7 @@ class Kulfys extends Component {
   
                 </Modal >  
         </section>
+            )}
       </>
     );
   }
