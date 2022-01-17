@@ -77,7 +77,6 @@ class Kulfys extends Component {
    * @param  {[type]} tipAmount [amount to be transferred]
    */
   async tipKulfyAuthor(id, tipAmount) {
-    this.setState({ loading: true });
     this.isShowModal(false)
     this.state.kulfyV3.methods
       .tipKulfyAuthor(id)
@@ -87,7 +86,6 @@ class Kulfys extends Component {
       })
       .on("transactionHash", (hash) => {
         console.log("tans hash ", hash);
-        this.setState({ loading: false });
       });
   }
   isShowModal(state)
