@@ -1,12 +1,11 @@
 //Contract based on [https://docs.openzeppelin.com/contracts/4.x/erc721](https://docs.openzeppelin.com/contracts/4.x/erc721)
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7;
+pragma solidity 0.8.7;
 
 /// @title Kulfy Minting and Tipping Contract
 /// @notice You can use this contract for Minting GIFs & Video Clips as NFTs with Tips functionality.
 /// @dev All function calls are currently implemented without side effects
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
@@ -19,6 +18,9 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
     // Auto Counter for Token Ids
     using Counters for Counters.Counter;
     Counters.Counter public tokenIds;
+    
+    // gas limit for transactions
+    uint256 public gasLimit = 5000;
 
     constructor() public ERC721("KULFY", "KUL") {}
 
@@ -64,7 +66,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
         string memory _tokenURI,
         string memory _assetURI,
         string memory _kid
-    ) public returns (uint256) {
+    ) external returns (uint256) {
 
         /// Increment tokenId
         tokenIds.increment();
@@ -97,9 +99,12 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
      * @param  {[type]} uint256 _id           [tokenID of the NFT in the contract ]
      * @return {[type]}                       [Transer Tip amount to creator via Internal Transfers]
      */
-    function tipKulfyAuthor(uint256 _id) public payable {
+    function tipKulfyAuthor(uint256 _id, uint256 _gas) public payable {
         /// Check valid tokenId
         require(_id > 0 && _id <= tokenIds.current(), "Invalid token id");
+        /// Check that gas doesn't exceed limit
+        require(_gas <= gasLimit);
+
 
         /// Load specific Kulfy based on tokenId
         Kulfy memory _kulfy = kulfys[_id];
@@ -108,7 +113,8 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
         address payable _author = _kulfy.author;
 
         /// Transfer Tip amount to the creator
-        _author.transfer(msg.value);
+        (bool sent, bytes memory data) = _author.call{value: msg.value, gas: _gas}("");
+        require(sent, "Failed to send Ether");
 
         /// Add new tip to the Kulfy's total tip amount
         _kulfy.tipAmount = _kulfy.tipAmount + msg.value;
@@ -125,5 +131,10 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
             _author,
             msg.sender
         );
+    }
+    
+    function changeGasLimit(uint256 newGasLimit) private {
+        //change gas limit, depending on changes to the EVM
+        gasLimit = newGasLimit;
     }
 }
