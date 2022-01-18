@@ -133,7 +133,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
         );
     }
     
-    function changeGasLimit(uint256 newGasLimit) private {
+    function changeGasLimit(uint256 newGasLimit) public onlyOwner {
         //change gas limit, depending on changes to the EVM
         gasLimit = newGasLimit;
     }
