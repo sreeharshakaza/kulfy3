@@ -7,6 +7,13 @@ import Creator from './Creator'
 import Home from './Home'
 import Docs from './Docs'
 import Details from './Details'
+import TagManager from 'react-gtm-module'
+ 
+const tagManagerArgs = {
+    gtmId: 'GTM-WRCDXD7'
+}
+ 
+TagManager.initialize(tagManagerArgs)
 
 import {
   BrowserRouter as Router,

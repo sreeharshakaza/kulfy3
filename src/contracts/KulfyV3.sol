@@ -114,7 +114,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
 
         /// Transfer Tip amount to the creator
         (bool sent, bytes memory data) = _author.call{value: msg.value, gas: _gas}("");
-        require(sent, "Failed to send Ether");
+        require(sent, "Failed to send ONE");
 
         /// Add new tip to the Kulfy's total tip amount
         _kulfy.tipAmount = _kulfy.tipAmount + msg.value;
