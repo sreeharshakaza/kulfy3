@@ -97,11 +97,12 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
     /*
      * This function is to transfer desired Tip amount from Tipper to Kulfy author
      * @param  {[type]} uint256 _id           [tokenID of the NFT in the contract ]
+     * 
      * @return {[type]}                       [Transer Tip amount to creator via Internal Transfers]
      */
     function tipKulfyAuthor(uint256 _id, uint256 _gas) public payable {
         /// Check valid tokenId
-        require(_id > 0 && _id <= tokenIds.current(), "Invalid token id");
+        require(_id > 0 && _id <= tokenIds.current(), "Invalid token ID");
         /// Check that gas doesn't exceed limit
         require(_gas <= gasLimit);
 
@@ -114,7 +115,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
 
         /// Transfer Tip amount to the creator
         (bool sent, bytes memory data) = _author.call{value: msg.value, gas: _gas}("");
-        require(sent, "Failed to send ONE");
+        require(sent, "Failed to send Ether");
 
         /// Add new tip to the Kulfy's total tip amount
         _kulfy.tipAmount = _kulfy.tipAmount + msg.value;
