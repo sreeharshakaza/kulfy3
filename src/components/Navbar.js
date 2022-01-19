@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import Identicon from 'identicon.js';
-// import photo from '../photo.png'
 import { ReactComponent as UserProfile } from "../assets/images/dp.svg";
 import { ReactComponent as Logo } from "../assets/images/logo_green.svg";
 import { ReactComponent as NavHam } from "../assets/images/hamburger.svg";
@@ -17,8 +15,11 @@ class Navbar extends Component {
           
             <div>
 
-              <a href='/docs?id=how-to-mint-nfts-from-kulfy' className="mx-2 nav-links ">
-                Docs
+              <a href='https://kulfyapp.com/' target='_blank' className="mx-2 nav-links ">
+                App
+              </a>
+              <a href='/docs?id=documentation' className="mx-2 nav-links ">
+                Docs 
               </a>
               <a href="/kulfys" className="mx-2 nav-links ">
                 Kulfys
@@ -29,7 +30,7 @@ class Navbar extends Component {
               <a href="#" className="mx-2 nav-links">
               <Identicon string="randomness" size="25"/>
               </a>
-     {/*          <a href="#" className="navbar-dp mx-3">
+     {/*          <a href="/" className="navbar-dp mx-3">
                 <UserProfile />
                 <small id="account">{this.props.account}</small>
               </a>

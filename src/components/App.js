@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 import NFTs from './NFTs'
 import Memes from './Memes'
 import Mint from './Mint'
@@ -7,12 +12,15 @@ import Creator from './Creator'
 import Home from './Home'
 import Docs from './Docs'
 import Details from './Details'
+import TagManager from 'react-gtm-module'
+ 
+const tagManagerArgs = {
+    gtmId: 'GTM-WRCDXD7'
+}
+ 
+TagManager.initialize(tagManagerArgs)
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+
 
 class App extends Component {
 

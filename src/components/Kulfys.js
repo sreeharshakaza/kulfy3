@@ -79,7 +79,7 @@ class Kulfys extends Component {
   async tipKulfyAuthor(id, tipAmount) {
     this.isShowModal(false)
     this.state.kulfyV3.methods
-      .tipKulfyAuthor(id)
+      .tipKulfyAuthor(id,5000)
       .send({
         from: this.state.account,
         value: window.web3.utils.toWei(tipAmount, "Ether"),
@@ -113,7 +113,7 @@ class Kulfys extends Component {
       loading: false,
       kulfy: "",
       showModalPopup: false,
-      inputTip:"0.1",
+      inputTip:"1",
       inputItem:""
     };
   }
@@ -138,7 +138,7 @@ class Kulfys extends Component {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                FEATURED GIFS
+                Latest Kulfys
                 <img
                   src="https://cdn.kulfyapp.com/kulfy/downarrow_2.svg"
                   alt=""
@@ -301,7 +301,7 @@ class Kulfys extends Component {
                         <div className="signUp"> 
                         <input type="hidden" value={this.state.inputItem} onChange={evt => this.updateInputitemValue(evt)}  />
                        
-                        <input type="number" value={this.state.inputTip} onChange={evt => this.updateInputTipValue(evt)} placeholder="0.1" style={{marginRight:'10px', width : '80px'}}  required name="price"  min=".1" step="0.1" title="Currency" />
+                        <input type="number" value={this.state.inputTip} onChange={evt => this.updateInputTipValue(evt)} placeholder="1" style={{marginRight:'10px', width : '80px'}}  required name="price"  min=".1" step="0.1" title="Currency" /> ONE
                         <div style={{marginTop:'20px'}}>
                         <a
                           href="#"
