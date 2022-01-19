@@ -110,7 +110,7 @@ class Kulfys extends Component {
       account: "",
       kulfyV3: "",
       kulfies: [],
-      loading: true,
+      loading: false,
       kulfy: "",
       showModalPopup: false,
       inputTip:"0.1",

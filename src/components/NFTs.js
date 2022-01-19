@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import { DefaultPlayer as Video } from "react-html5video";
 import "react-html5video/dist/styles.css";
 import { useCookies } from "react-cookie";
+import ReactLoading from 'react-loading';
 
 let items = [];
 let itemList = [];
@@ -18,10 +19,13 @@ items.forEach((item, index) => {
 const NFTs = () => {
   const [trasactions, setTrasactions] = useState([]);
   const [keyword, setKeyword] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const [cookies, setCookie] = useCookies(["user"]);
 
   useEffect(() => {
     console.log("items ", trasactions);
+    
     getNFTs();
   }, []);
 
@@ -31,6 +35,7 @@ const NFTs = () => {
    * 
    */
   async function getNFTs() {
+    setLoading(true);
     let keyword = "video";
     let search = window.location.search;
     let params = new URLSearchParams(search);
@@ -58,6 +63,7 @@ const NFTs = () => {
   const nfts = await response;
     items = nfts.data.search_results;
     setTrasactions(items);
+    setLoading(false);
   }
 
   async function createMeme(item) {
@@ -68,8 +74,14 @@ const NFTs = () => {
 
   return (
     <>
+   
       <Navbar />
-
+      {loading ? (
+          <div style={{marginLeft:'47%',marginTop: '5%'}}>
+            <ReactLoading type="spinningBubbles" color="#ffffff" height={100} width={70} />
+          </div>
+       
+      ) :(
       <section class="container featured-grid">
         <div class="row d-flex justify-content-between">
           <div class="col-6">
@@ -176,6 +188,7 @@ const NFTs = () => {
           })}
         </div>
       </section>
+      )}
     </>
   );
 };

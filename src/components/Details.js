@@ -5,7 +5,7 @@ import KulfyV3 from "../abis/KulfyV3.json";
 import Navbar from "./Navbar";
 import Kulfys from "./Kulfys";
 import axios from "axios";
-
+import ReactLoading from 'react-loading';
 class Details extends Component {
 
 
@@ -43,6 +43,7 @@ class Details extends Component {
     const networkId = await web3.eth.net.getId();
     const networkData = KulfyV3.networks[networkId];
     if (networkData) {
+      
       const kulfyV3 = new web3.eth.Contract(KulfyV3.abi, networkData.address);
       console.log(`kulfyV3`, kulfyV3);
       this.setState({ kulfyV3 });
@@ -65,9 +66,11 @@ class Details extends Component {
         this.setState({
           kulfies: [...this.state.kulfies, kulfy],
         });
+        
       }
 
      
+      this.setState({ loading: true });
     let id = "";
     let search = window.location.search;
     let params = new URLSearchParams(search);
@@ -107,11 +110,11 @@ class Details extends Component {
     } else {
       window.alert("Kulfy contarct not deployed to any network");
     }
+    
   }
 
 
   async tipKulfyOwner(id, tipAmount) {
-    this.setState({ loading: true });
     this.state.kulfyV3.methods
       .tipKulfyOwner(id)
       .send({
@@ -120,7 +123,6 @@ class Details extends Component {
       })
       .on("transactionHash", (hash) => {
         console.log("tans hash ", hash);
-        this.setState({ loading: false });
       });
   }
 
@@ -130,7 +132,7 @@ class Details extends Component {
       account: "",
       kulfyV3: "",
       kulfies: [],
-      loading: true,
+      loading: false,
       kulfy: "",
     };
   }
@@ -139,6 +141,12 @@ class Details extends Component {
     return (
       <>
         <Navbar />
+        {this.state.loading ? (
+          <div style={{marginLeft:'47%',marginTop: '5%'}}>
+            <ReactLoading type="spinningBubbles" color="#ffffff" height={100} width={70} />
+          </div>
+       
+      ) :(
         <section class="container">
         <div class="row">
             <div class="col-md-6 ">
@@ -178,7 +186,9 @@ class Details extends Component {
             </div>
         </div>
     </section>
+     )}
      <Kulfys />
+     
       </>
     );
   }
