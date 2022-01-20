@@ -9,8 +9,9 @@ pragma solidity 0.8.7;
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-contract KulfyV3 is ERC721URIStorage, Ownable {
+contract KulfyV3 is ERC721URIStorage, Ownable, ReentrancyGuard {
   
     /// Mapping to store Kulfys
     mapping(uint256 => Kulfy) public kulfys;
@@ -100,7 +101,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable {
      * 
      * @return {[type]}                       [Transer Tip amount to creator via Internal Transfers]
      */
-    function tipKulfyAuthor(uint256 _id, uint256 _gas) public payable {
+    function tipKulfyAuthor(uint256 _id, uint256 _gas) public payable nonReentrant() {
         /// Check valid tokenId
         require(_id > 0 && _id <= tokenIds.current(), "Invalid token ID");
         /// Check that gas doesn't exceed limit

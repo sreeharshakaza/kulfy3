@@ -2688,12 +2688,12 @@
     "1666700000": {
       "events": {},
       "links": {},
-      "address": "0xeA18F1F73196BF60E2111eF600a4135B2FD13B40",
-      "transactionHash": "0x8b37535f10b8c99bbfc7553650f140a62aba7357f69057e01d93cb264f25ca33"
+      "address": "0xb6C14876742C5Eb67e97d850390802c4Cc8a9979",
+      "transactionHash": "0xe4a19e7f38069984752d5e949229612faa0afb16c3abdec393076aad20da5b81"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2022-01-18T07:37:50.390Z",
+  "updatedAt": "2022-01-20T23:31:16.186Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
