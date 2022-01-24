@@ -5,7 +5,7 @@ import KulfyV3 from "../abis/KulfyV3.json";
 import Navbar from "./Navbar";
 import Kulfys from "./Kulfys";
 import axios from "axios";
-import { Modal } from 'react-bootstrap';
+import ModelPopUp from './ModelPopUp';
 import ReactLoading from 'react-loading';
 class Details extends Component {
 
@@ -35,7 +35,9 @@ class Details extends Component {
     this.setState({
       inputItem: id
     });
-    this.setState({ showModalPopup: true });
+    this.child.current.setInputitemValue (this.state.account)
+    this.child.current.isShowModal(true);
+   //this.setState({ showModalPopup: true });
     //this.tipKulfyOwner(id, "10");
   }
 
@@ -150,6 +152,7 @@ class Details extends Component {
 
   constructor(props) {
     super(props);
+    this.child=React.createRef();
     this.state = {
       account: "",
       kulfyV3: "",
@@ -211,42 +214,7 @@ class Details extends Component {
             </div>
         </div>
         
-      <Modal style={{color:'#000'}} show={this.state.showModalPopup} onHide={this.handleClose}  
-                    size="lg"  
-                    aria-labelledby="contained-modal-title-vcenter"  
-                    centered  
-                >  
-                    <Modal.Header>  
-                        <Modal.Title id="sign-in-title">  
-                            Add Tip 
-                         </Modal.Title>  
-                    </Modal.Header>  
-                    <Modal.Body>  
-                         
-                        <div className="signUp"> 
-                        <input type="hidden" value={this.state.inputItem} onChange={evt => this.updateInputitemValue(evt)}  />
-                       
-                        <input type="number" value={this.state.inputTip} onChange={evt => this.updateInputTipValue(evt)} placeholder="1" style={{marginRight:'10px', width : '80px'}}  required name="price"  min=".1" step="0.1" title="Currency" /> ONE
-                        <div style={{marginTop:'20px'}}>
-                        <a
-                          href="#"
-                          className="btn-create "
-                          onClick={() => this.tipKulfyAuthor(this.state.inputItem,this.state.inputTip)}
-                        >
-                          Tip
-                        </a>  
-                            <a
-                          href="#" style={{marginLeft:'10px'}}
-                          className="btn-create "
-                          onClick={() => this.isShowModal(false)}
-                        >
-                          Cancel
-                        </a>
-                        </div>
-                        </div>  
-                    </Modal.Body>  
-  
-                </Modal >  
+        <ModelPopUp ref={this.child} account={this.state.account} showModalPopup={this.state.showModalPopup} kulfyV3={this.state.kulfyV3}  />
     </section>
      )}
      <Kulfys />
