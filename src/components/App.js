@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Buffer } from 'buffer';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,6 +18,7 @@ import TagManager from 'react-gtm-module'
 const tagManagerArgs = {
     gtmId: 'GTM-WRCDXD7'
 }
+global.Buffer = Buffer;
  
 TagManager.initialize(tagManagerArgs)
 

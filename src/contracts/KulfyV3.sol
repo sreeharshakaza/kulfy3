@@ -101,7 +101,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable, ReentrancyGuard {
      * 
      * @return {[type]}                       [Transer Tip amount to creator via Internal Transfers]
      */
-    function tipKulfyAuthor(uint256 _id, uint256 _gas) public payable nonReentrant() {
+    function tipKulfyAuthor(uint256 _id, uint256 _gas) public payable {
         /// Check valid tokenId
         require(_id > 0 && _id <= tokenIds.current(), "Invalid token ID");
         /// Check that gas doesn't exceed limit
