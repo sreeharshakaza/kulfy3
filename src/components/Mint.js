@@ -174,53 +174,53 @@ class Mint extends Component {
         </div>
      
     ) :(
-      <div class="body-to-margin">
+      <div className="body-to-margin">
         <header>
-          <nav class="navbar  navbar-light bg-none">
-            <div class="container-fluid justify-content-start">
-              <a class="navbar-dp" href="/">
+          <nav className="navbar  navbar-light bg-none">
+            <div className="container-fluid justify-content-start">
+              <a className="navbar-dp" href="/">
                 <img
                   src="https://cdn.kulfyapp.com/kulfy/back-white.svg"
                   alt="back"
                 />
               </a>
-              <a class="navbar-logo" href="/">
+              <a className="navbar-logo" href="/">
                 <img
-                  class="creator"
+                  className="creator"
                   src="https://cdn.kulfyapp.com/kulfy/kulfy-creator.svg"
                   alt="kulfy-creator-logo"
                 />
               </a>
-              <span class="navbar-text-right">Almost there!</span>
+              <span className="navbar-text-right">Almost there!</span>
             </div>
           </nav>
         </header>
 
-        <section class="container">
-          <div class="row">
-            <div class="col-md-6 my-4">
-              <img class="w-100" src={this.state.kulfy?this.state.kulfy.sticker_url:''} alt="" />
+        <section className="container">
+          <div className="row">
+            <div className="col-md-6 my-4">
+              <img className="w-100" src={this.state.kulfy?this.state.kulfy.sticker_url:''} alt="" />
             </div>
-            <div class="col-md-6 d-flex justify-content-between flex-column">
-              <div class="form publish-form">
-                <div class="form-group text-input-with-label my-3">
+            <div className="col-md-6 d-flex justify-content-between flex-column">
+              <div className="form publish-form">
+                <div className="form-group text-input-with-label my-3">
                   <label for="filename">
                     Name 
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="filename"
                     aria-describedby="filename"
                     value={this.state.kulfy?this.state.kulfy.name:''}
                     placeholder="Ex. Naku English Raadu"
                   />
                 </div>
-                <div class="form-group d-flex flex-column my-3">
+                <div className="form-group d-flex flex-column my-3">
                   <label for="tags my-2">Add Tags</label>
                   <input
                     type="text"
-                    class="tag-input my-1"
+                    className="tag-input my-1"
                     name="tags"
                     id="tags"
                     value={this.state.kulfy?this.state.kulfy.category:''}
@@ -231,8 +231,8 @@ class Mint extends Component {
 
 
               </div>
-              <div class="bar-publish">      
-                <div class="publish-actions">
+              <div className="bar-publish">      
+                <div className="publish-actions">
                   {/* <button><img src="https://cdn.kulfyapp.com/kulfy/delete-white.svg" alt=""/></button> */}
                   <button type="submit" onClick={() => this.mintKulfy()}>
                     <span>Mint</span>

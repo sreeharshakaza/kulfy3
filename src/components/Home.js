@@ -24,15 +24,15 @@ const Home = () => {
 
     <Navbar />
 
-<section class="container hero-creator">
-        <div class="row ">
+<section className="container hero-creator">
+        <div className="row ">
             <img src="https://cdn.kulfyapp.com/kulfy/kulfy-creator.svg" alt="" />
         </div>
     </section>
-    <section class="tab-bar footer fixed-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="tabs">
+    <section className="tab-bar footer fixed-bottom">
+        <div className="container">
+            <div className="row">
+                <div className="tabs">
                     <a href=""><img src="https://cdn.kulfyapp.com/kulfy/tab-bar_home_active.svg" alt="" /></a>
                     <a href=""><img src="https://cdn.kulfyapp.com/kulfy/tab-bar-search-inactive.svg" alt="" /></a>
                     <a href=""><img src="https://cdn.kulfyapp.com/kulfy/tab-bar-create-inactive.svg" alt="" /></a>
@@ -43,20 +43,20 @@ const Home = () => {
             </div>
         </div>
     </section>
-    <section class="container col-md-6">
-        <div class="row">
-            <div class="search">
-                <div class="inside">
+    <section className="container col-md-6">
+        <div className="row">
+            <div className="search">
+                <div className="inside">
                     <input type="text" onChange={e => setKeyword(e.target.value)} name="keyword" id="" onKeyPress={e => onKeyUp(e)}  placeholder="Search for NFTs" />
                     <img src="https://cdn.kulfyapp.com/kulfy/kulfy-radium.svg" alt="" />
                 </div>
-                <button type="submit" class="bg-radium">
+                <button type="submit" className="bg-radium">
                  <a onClick={() => searchNFTs()} href="#">   <img src="https://cdn.kulfyapp.com/kulfy/search-button.svg" alt="" /></a>
                 </button>
             </div>
         </div>
-        <div class="row my-2  ">
-            <div class="hero-actions col-md-6 m-auto">
+        <div className="row my-2  ">
+            <div className="hero-actions col-md-6 m-auto">
                 <a href="/creator">
                     <img src="https://cdn.kulfyapp.com/kulfy/upload-radium.svg" alt="" />
                     <span>Or Upload Video</span>

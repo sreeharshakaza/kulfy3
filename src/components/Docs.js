@@ -33,8 +33,8 @@ const Docs = () => {
     <>
       <Navbar />
       <h1 className="text-center">{title}</h1>
-      <section class="container featured-grid mb-5">
-        <div class="row d-flex justify-content-between p-3 mark-links">
+      <section className="container featured-grid mb-5">
+        <div className="row d-flex justify-content-between p-3 mark-links">
           <ReactMarkdown children={body} remarkPlugins={[remarkGfm]} />
         </div>
       </section>

@@ -82,11 +82,11 @@ const NFTs = () => {
           </div>
        
       ) :(
-      <section class="container featured-grid">
-        <div class="row d-flex justify-content-between">
-          <div class="col-6">
+      <section className="container featured-grid">
+        <div className="row d-flex justify-content-between">
+          <div className="col-6">
             <button
-              class="btn btn-outline-secondary dropdown-toggle filter-featured"
+              className="btn btn-outline-secondary dropdown-toggle filter-featured"
               type="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
@@ -95,44 +95,44 @@ const NFTs = () => {
               <img
                 src="https://cdn.kulfyapp.com/kulfy/downarrow_2.svg"
                 alt=""
-                class="dropdown-arrow2"
+                className="dropdown-arrow2"
               />
             </button>
-            <ul class="dropdown-menu dropdown-menu-featured bg-color2">
+            <ul className="dropdown-menu dropdown-menu-featured bg-color2">
               <li>
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   FRESH-IN
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   POPULAR
                 </a>
               </li>
             </ul>
           </div>
-          {/* <div class="col-2">
+          {/* <div className="col-2">
             <button
               type="button"
-              class="btn btn-primary border-none bg-none"
+              className="btn btn-primary border-none bg-none"
               data-bs-toggle="button"
               autocomplete="off"
             >
               <img
                 src="https://cdn.kulfyapp.com/kulfy/grid_play.svg"
                 alt=""
-                class="language-icon"
+                className="language-icon"
               />
             </button>
           </div> */}
         </div>
-        <div class="row p-05">
+        <div className="row p-05">
           {items.map(function (item, index) {
             if (item.cached_file_url.endsWith(".mp4")) {
               return (
                 <>
-                  <div class="col-6 col-md-4 col-lg-3 grid-item">
-                    <div class="grid-image">
+                  <div className="col-6 col-md-4 col-lg-3 grid-item">
+                    <div className="grid-image">
                       <video
                         autoPlay
                         loop
@@ -144,7 +144,7 @@ const NFTs = () => {
                         <source src={item.cached_file_url} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
-                      <div class="grid-info">
+                      <div className="grid-info">
                         <div>
                           <img
                             src="https://cdn.kulfyapp.com/kulfy/gifs_stack.svg"
@@ -155,22 +155,22 @@ const NFTs = () => {
                         </div>
                         <button
                           type="button"
-                          class="btn btn-primary border-none btn-bookmark "
+                          className="btn btn-primary border-none btn-bookmark "
                           data-bs-toggle="button"
                           autocomplete="off"
                         >
                           <img
                             src="https://cdn.kulfyapp.com/kulfy/bookmarks_small.svg"
                             alt=""
-                            class="language-icon"
+                            className="language-icon"
                           />
                         </button>
                       </div>
                     </div>
-                    <div class="grid-item-details">
+                    <div className="grid-item-details">
                       <h6>{item.name}</h6>
                       <hr />
-                      <div class="user-details">
+                      <div className="user-details">
                         <a
                           onClick={() => createMeme(item)}
                           href="#"

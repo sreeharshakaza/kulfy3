@@ -133,11 +133,11 @@ class Kulfys extends Component {
           </div>
        
       ) :(
-        <section class="container featured-grid">
-          <div class="row d-flex justify-content-between">
-            <div class="col-6">
+        <section className="container featured-grid">
+          <div className="row d-flex justify-content-between">
+            <div className="col-6">
               <button
-                class="btn btn-outline-secondary dropdown-toggle filter-featured"
+                className="btn btn-outline-secondary dropdown-toggle filter-featured"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -146,26 +146,26 @@ class Kulfys extends Component {
                 <img
                   src="https://cdn.kulfyapp.com/kulfy/downarrow_2.svg"
                   alt=""
-                  class="dropdown-arrow2"
+                  className="dropdown-arrow2"
                 />
               </button>
-              <ul class="dropdown-menu dropdown-menu-featured bg-color2">
+              <ul className="dropdown-menu dropdown-menu-featured bg-color2">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     FRESH-IN
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     POPULAR
                   </a>
                 </li>
               </ul>
             </div>
-            {/* <div class="col-2">
+            {/* <div className="col-2">
               <button
                 type="button"
-                class="btn btn-primary border-none bg-none"
+                className="btn btn-primary border-none bg-none"
                 data-bs-toggle="button"
                 autocomplete="off"
               >
@@ -177,12 +177,12 @@ class Kulfys extends Component {
               </button>
             </div> */}
           </div>
-          <div class="row p-05">
+          <div className="row p-05">
             {this.state.kulfies.map((item, index) => {
               return (
                 <>
-                  <div class="col-6 col-md-4 col-lg-3 grid-item">
-                    <div class="grid-image">
+                  <div className="col-6 col-md-4 col-lg-3 grid-item">
+                    <div className="grid-image">
                       <a href={"/kulfy?id=" + item.id}>
                         <video autoPlay loop muted width="320" height="240">
                           <source src={item.assetURI} type="video/mp4" />
@@ -190,7 +190,7 @@ class Kulfys extends Component {
                         </video>
                       </a>
 
-                      {/* <div class="grid-info">
+                      {/* <div className="grid-info">
                         <div>
                           <img
                             src="https://cdn.kulfyapp.com/kulfy/gifs_stack.svg"
@@ -201,19 +201,19 @@ class Kulfys extends Component {
                         </div>
                         <button
                           type="button"
-                          class="btn btn-primary border-none btn-bookmark "
+                          className="btn btn-primary border-none btn-bookmark "
                           data-bs-toggle="button"
                           autocomplete="off"
                         >
                           <img
                             src="https://cdn.kulfyapp.com/kulfy/bookmarks_small.svg"
                             alt=""
-                            class="language-icon"
+                            className="language-icon"
                           />
                         </button>
                       </div> */}
                     </div>
-                    <div class="grid-item-details">
+                    <div className="grid-item-details">
                       <a
                         href={"https://kulfyapp.com/kulfy/" + item.kid}
                         target="blank"
@@ -232,7 +232,7 @@ class Kulfys extends Component {
                         </a>
                       </h6>
                       <hr />
-                      <div class="user-details">
+                      <div className="user-details">
                         {/* 
                         TODO:
                         *intially show Tip Creator button.

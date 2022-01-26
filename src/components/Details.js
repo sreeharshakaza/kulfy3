@@ -175,10 +175,10 @@ class Details extends Component {
           </div>
        
       ) :(
-        <section class="container">
-        <div class="row">
-            <div class="col-md-6 ">
-                <img class="w-100 br-18" src="./assets/images/sample-image.png" alt="" />
+        <section className="container">
+        <div className="row">
+            <div className="col-md-6 ">
+                <img className="w-100 br-18" src="./assets/images/sample-image.png" alt="" />
                 <div>
                     <img src="./assets/images/sample-user.svg" alt="" />
                      <video
@@ -195,19 +195,19 @@ class Details extends Component {
                     <span>Chai Biscuit</span>
                 </div>
             </div>
-            <div class="col-md-6 d-flex flex-column nft-details">
+            <div className="col-md-6 d-flex flex-column nft-details">
                 <h1>{this.state.kulfy.name}</h1>
-                <div class="info my-2">
+                <div className="info my-2">
                     <a href="#">
                         <img src="./assets/images/gifs_white.svg" alt="" />
                         <span>{this.state.kulfy.content_type}</span>
                     </a>
                     <a href="#"><span>480x480</span></a>
                 </div>
-                <button class="btn-radium my-3" onClick={() => this.tipKulfy(this.state.id)}>Tip</button>
+                <button className="btn-radium my-3" onClick={() => this.tipKulfy(this.state.id)}>Tip</button>
                 <hr />
                 {this.state.description}
-                <div class="nft-actions my-2">
+                <div className="nft-actions my-2">
                     <a href={this.state.original_url} target="blank">View Original</a>
                 </div>
                 
