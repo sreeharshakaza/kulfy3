@@ -39,7 +39,9 @@ body {
 .border-none {
   border: none !important;
 }
-
+.text-color {
+  color: #eef65c !important;
+}
 a {
   text-decoration: none;
   color: #ffffff;
@@ -973,6 +975,7 @@ a.tag > span {
   margin-right: 8px;
 }
 .btn-radium {
+  min-width: 100px;
   background: linear-gradient(96.66deg, #e9f968 -13.24%, #ffe629 140.64%);
   border-radius: 33px;
   padding: 10px 15px;
@@ -983,6 +986,26 @@ a.tag > span {
   text-align: center;
   color: #3b3d42;
   border: none;
+}
+.btn-radium:hover {
+  color: #3b3d42 !important;
+  background: #ffe629;
+}
+.btn-radium-outline {
+  min-width: 100px;
+  background: none;
+  border-radius: 33px;
+  padding: 10px 25px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  text-align: center;
+  color: #e9f968;
+  border: 1px solid #e9f968;
+}
+.btn-radium-outline:hover {
+  background: #3b3d42;
 }
 /* FOOTER */
 
@@ -996,4 +1019,41 @@ footer a {
   font-size: 11px;
   margin-right: 1em;
   opacity: 0.7;
+}
+
+/* MODEL CSS */
+.modal-content {
+  background: #000 !important;
+  color: #fff;
+  border: 1px solid #eef65c;
+}
+.modal-title {
+  display: flex;
+  justify-content: center;
+}
+.modal-title > h1 {
+  color: #eef65c;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18.0645px;
+  line-height: 22px;
+  color: #eef65c;
+  text-transform: uppercase;
+}
+.tip-pop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal-header {
+  border-bottom: 1px solid #eef65c;
+}
+.input-text-radium {
+  color: #eef65c;
+  background: none;
+  border: 1px solid #eef65c;
+  margin-right: 5px;
+  width: 80px;
 }
