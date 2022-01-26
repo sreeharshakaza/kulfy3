@@ -70,7 +70,7 @@ class Details extends Component {
         const owner_address = await kulfyV3.methods.ownerOf(i).call();
         console.log("ipfs_metadata ", ipfs_metadata, i, owner_address);
 
-        const kulfy = await kulfyV3.methods.kulfies(i).call();
+        const kulfy = await kulfyV3.methods.kulfys(i).call();
         this.setState({
           kulfies: [...this.state.kulfies, kulfy],
         });

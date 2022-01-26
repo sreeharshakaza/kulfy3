@@ -53,9 +53,16 @@ class Mint extends Component {
 
     const response = postCommentsResponse;
 
-    this.state.kulfy = response.data.kulfy_info;
     
-    this.setState({ loading: false });
+
+    if(response.data.kulfy_info){
+      this.state.kulfy = response.data.kulfy_info;
+      this.setState({ loading: false });
+    }else{
+      this.getKulfy();
+    }
+    
+    
   }
 
   async loadWeb3() {
@@ -78,6 +85,7 @@ class Mint extends Component {
    */
   async mintKulfy() {
 
+    //this.setState({ loading: true });
     const result = await ipfs.add(urlSource(this.state.kulfy.video_url));
     const asseturl = `https://ipfs.io/ipfs/${result.cid.toString()}`;
     let original = localStorage.getItem("NFT");
@@ -109,7 +117,7 @@ class Mint extends Component {
         hash = `https://ipfs.io/ipfs/${hash}`;
         this.state.url = hash;
         console.log("ipfs url is", hash);
-      this.setState({ loading: true });
+     
       this.state.kulfyV3.methods
       .mintNFT(this.state.account, this.state.url, this.state.asset, this.state.kid)
       .send({ from: this.state.account })
@@ -191,20 +199,20 @@ class Mint extends Component {
         <section class="container">
           <div class="row">
             <div class="col-md-6 my-4">
-              <img class="w-100" src={this.state.kulfy.sticker_url} alt="" />
+              <img class="w-100" src={this.state.kulfy?this.state.kulfy.sticker_url:''} alt="" />
             </div>
             <div class="col-md-6 d-flex justify-content-between flex-column">
               <div class="form publish-form">
                 <div class="form-group text-input-with-label my-3">
                   <label for="filename">
-                    File Name - {this.state.kulfy.kid}
+                    Name 
                   </label>
                   <input
                     type="text"
                     class="form-control"
                     id="filename"
                     aria-describedby="filename"
-                    value={this.state.kulfy.name}
+                    value={this.state.kulfy?this.state.kulfy.name:''}
                     placeholder="Ex. Naku English Raadu"
                   />
                 </div>
@@ -215,23 +223,13 @@ class Mint extends Component {
                     class="tag-input my-1"
                     name="tags"
                     id="tags"
+                    value={this.state.kulfy?this.state.kulfy.category:''}
                     placeholder="Ex. Chiru, Happy, Comedy, LOL"
                   />
-                  <div class="tags-list  my-1">
-                    <span>
-                      {this.state.kulfy.category}
-                      <a href="#">
-                        <img
-                          src="https://cdn.kulfyapp.com/kulfy/delete-circle-small.svg"
-                          width="8px"
-                          alt=""
-                        />
-                      </a>
-                    </span>
-                  </div>
+
                 </div>
 
-  
+
               </div>
               <div class="bar-publish">      
                 <div class="publish-actions">
@@ -239,6 +237,7 @@ class Mint extends Component {
                   <button type="submit" onClick={() => this.mintKulfy()}>
                     <span>Mint</span>
                   </button>
+                  (This will take few seconds to upload)
                 </div>
               </div>
             </div>

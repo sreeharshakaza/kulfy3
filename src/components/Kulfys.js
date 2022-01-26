@@ -61,7 +61,7 @@ class Kulfys extends Component {
       this.setState({ kulfiesCount });
 
       // Load Images
-      for (let i = 1; i <= kulfiesCount; i++) {
+      for (let i = kulfiesCount; i >= 1; i--) {
         const kulfy = await kulfyV3.methods.kulfys(i).call();
         this.setState({
           kulfies: [...this.state.kulfies, kulfy],
