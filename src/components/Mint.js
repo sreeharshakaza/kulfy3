@@ -168,14 +168,7 @@ class Mint extends Component {
   render() {
     return (
       <>
-      {this.state.loading ? (
-        <div style={{marginLeft:'47%',marginTop: '5%'}}>
-          <ReactLoading type="spinningBubbles" color="#ffffff" height={100} width={70} />
-        </div>
-     
-    ) :(
-      <div className="body-to-margin">
-        <header>
+      <header>
           <nav className="navbar  navbar-light bg-none">
             <div className="container-fluid justify-content-start">
               <a className="navbar-dp" href="/">
@@ -195,6 +188,14 @@ class Mint extends Component {
             </div>
           </nav>
         </header>
+      {this.state.loading ? (
+        <div style={{marginLeft:'47%',marginTop: '5%'}}>
+          <ReactLoading type="spinningBubbles" color="#ffffff" height={100} width={70} />
+        </div>
+     
+    ) :(
+      <div className="body-to-margin">
+        
 
         <section className="container">
           <div className="row">
