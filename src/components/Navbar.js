@@ -3,53 +3,9 @@ import { ReactComponent as UserProfile } from "../assets/images/dp.svg";
 import { ReactComponent as Logo } from "../assets/images/logo_green.svg";
 import { ReactComponent as NavHam } from "../assets/images/hamburger.svg";
 import Identicon from 'react-identicons';
-import Web3 from "web3";
-
 class Navbar extends Component {
-  async AddToMetaMask() {
-    if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum);
-      await window.ethereum.request({ method: "eth_requestAccounts" });
-    } else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider);
-    } else {
-      window.web3 = new Web3(window.ethereum);
-    }
-    if (typeof window.web3  !== 'undefined') {
-      var network = 0;
-      network = await window.web3.eth.net.getId();
-      console.log(network.toString())
-      var params;
-      
-          if (network.toString() == "1666700000") {
-              alert("Kulfy Network has already been added to Metamask.");
-              return;
-          } else {
-              params = [{
-                  chainId: '0x6357D2E0',
-                  chainName: 'Harmony Testnet',
-                  nativeCurrency: {
-                      name: 'ONE',
-                      symbol: 'ONE',
-                      decimals: 18
-                  },
-                  rpcUrls: ['https://api.s0.b.hmny.io'],
-                  blockExplorerUrls: ['https://explorer.pops.one/']
-              }]
-          }
-      
-
-      window.ethereum.request({ method: 'wallet_addEthereumChain', params    })
-          .then(() => console.log('Success'))
-          .catch((error) => console.log("Error", error.message));
-  } else {
-      alert('Unable to locate a compatible web3 browser!');
-  }
-
-  }
   render() {
     return (
-      <>
       <div>
         <nav className="navbar  navbar-light bg-none mb-3">
           <div className="container-fluid">
@@ -58,9 +14,7 @@ class Navbar extends Component {
             </a>
           
             <div>
-            <a href='#' className="mx-2 nav-links" onClick={() => this.AddToMetaMask()}>
-                Add MetaMask Network
-              </a>
+
               <a href='https://kulfyapp.com/' target='_blank' className="mx-2 nav-links ">
                 App
               </a>
@@ -70,9 +24,13 @@ class Navbar extends Component {
               <a href="/kulfys" className="mx-2 nav-links ">
                 Kulfys
               </a>
+              <a href="/UserProfile" className="mx-2 nav-links">
+                My Kulfys
+              </a>
               <a href="/create" className="mx-2 btn-create">
                 Create
               </a>
+              
               <a href="#" className="mx-2 nav-links">
               <Identicon string="randomness" size="25"/>
               </a>
@@ -166,13 +124,13 @@ class Navbar extends Component {
           </div>
         </div> */}
 
-        <footer className="footer mt-auto py-2 bg-dark fixed-bottom">
-          <div className="container">
-            <div className="row">
-              <div className="col-6">
-                <span className="text-muted">© Copyright 2021 Kulfy Inc</span>
+        <footer class="footer mt-auto py-2 bg-dark fixed-bottom">
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <span class="text-muted">© Copyright 2021 Kulfy Inc</span>
               </div>
-              <div className="col-6">
+              <div class="col-6">
                 <a href="https://twitter.com/kulfyapp" target="blank">Twitter</a>
                 <a href="https://discord.gg/Su4m642a">Discord</a>
                 <a href="https://t.me/KulfyGifs">Telegram</a>
@@ -181,7 +139,6 @@ class Navbar extends Component {
           </div>
         </footer>
       </div>
-      </>
     );
   }
 }

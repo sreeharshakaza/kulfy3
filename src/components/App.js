@@ -13,6 +13,7 @@ import Creator from './Creator'
 import Home from './Home'
 import Docs from './Docs'
 import Details from './Details'
+import UserProfile from './UserProfile';
 import TagManager from 'react-gtm-module'
  
 const tagManagerArgs = {
@@ -55,6 +56,9 @@ class App extends Component {
           </Route>
           <Route path="/docs" >
             <Docs />
+          </Route>
+          <Route path="/UserProfile" >
+            <UserProfile />
           </Route>
           <Route path="/">
             <Memes />
