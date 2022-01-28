@@ -35,7 +35,7 @@ class Details extends Component {
     this.setState({
       inputItem: id
     });
-    this.child.current.setInputitemValue (this.state.account)
+    this.child.current.setInputitemValue (this.state.id)
     this.child.current.isShowModal(true);
    //this.setState({ showModalPopup: true });
     //this.tipKulfyOwner(id, "10");

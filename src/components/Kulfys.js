@@ -35,7 +35,7 @@ class Kulfys extends Component {
     this.setState({
       inputItem: id
     });
-     this.child.current.setInputitemValue (this.state.account)
+     this.child.current.setInputitemValue (id)
      this.child.current.isShowModal(true);
     //this.setState({ showModalPopup: true });
     //this.tipKulfyAuthor(id, "10");
