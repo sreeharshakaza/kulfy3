@@ -5,12 +5,12 @@ import KulfyV3 from "../abis/KulfyV3.json";
 import { Modal } from 'react-bootstrap';
 import ModelPopUp from './ModelPopUp';
 import ReactLoading from 'react-loading';
-
+import InfiniteScroll from "react-infinite-scroll-component";
 class Kulfys extends Component {
 
   async componentDidMount() {
     await this.loadWeb3();
-    await this.loadBlockchainData();
+    await this.loadInitialBlockchainData();
   }
 
   /**
@@ -45,8 +45,8 @@ class Kulfys extends Component {
    * [loadBlockchainData Load mapping of NFT assets in the contract]
    * 
    */
-  async loadBlockchainData() {
-    this.setState({ loading: true });
+   async loadBlockchainData () 
+  {
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });
@@ -59,19 +59,34 @@ class Kulfys extends Component {
       this.setState({ kulfyV3 });
       const kulfiesCount = await kulfyV3.methods.tokenIds().call();
       this.setState({ kulfiesCount });
-
-      // Load Images
-      for (let i = kulfiesCount; i >= 1; i--) {
-        const kulfy = await kulfyV3.methods.kulfys(i).call();
-        this.setState({
-          kulfies: [...this.state.kulfies, kulfy],
-        });
+        if(this.state.intialCount<=this.state.kulfiesCount)
+       {
+        for (let i = this.state.intialCount; i <this.state.intialCount+this.state.takeCount ; i++) {
+          
+          const kulfy = await this.state.kulfyV3.methods.kulfys(i).call();
+          setTimeout(() => {
+          this.setState({
+            kulfies: [...this.state.kulfies, kulfy],
+          });
+        }, 1500);
       }
-
-      this.setState({ loading: false });
-    } else {
+      if(this.state.intialCount<=this.state.kulfiesCount)
+       {
+        this.setState({intialCount:this.state.intialCount+this.state.takeCount})
+       }
+       }
+       else
+       {this.setState({ hasmore: false });}
+  
+    } 
+    else {
       window.alert("Kulfy contarct not deployed to any network");
     }
+  }
+  async loadInitialBlockchainData() {
+  this.setState({ loading: true });
+  await this.loadBlockchainData();
+  this.setState({ loading: false });
   }
 
   /**
@@ -118,8 +133,13 @@ class Kulfys extends Component {
       kulfy: "",
       showModalPopup: false,
       inputTip:"1",
-      inputItem:""
+      inputItem:"",
+      intialCount:1,
+      takeCount:5,
+      kulfyTotalCount:0,
+      hasmore:true,
     };
+    this.loadBlockchainData = this.loadBlockchainData.bind(this);
   }
 
   
@@ -177,6 +197,12 @@ class Kulfys extends Component {
               </button>
             </div> */}
           </div>
+          <InfiniteScroll
+          dataLength={this.state.kulfies.length}
+          next={this.loadBlockchainData}
+          hasMore={this.state.hasmore}
+          loader={<h4>Loading...</h4>}
+        >
           <div className="row p-05">
             {this.state.kulfies.map((item, index) => {
               return (
@@ -288,6 +314,7 @@ class Kulfys extends Component {
             })
             }
           </div>
+          </InfiniteScroll>
           
         <ModelPopUp ref={this.child} account={this.state.account} showModalPopup={this.state.showModalPopup} kulfyV3={this.state.kulfyV3}  />
 
