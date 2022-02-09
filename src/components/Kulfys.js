@@ -197,7 +197,7 @@ class Kulfys extends Component {
               </button>
             </div> */}
           </div>
-          <InfiniteScroll
+          {this.state.kulfies.length>0 && (<InfiniteScroll
           dataLength={this.state.kulfies.length}
           next={this.loadBlockchainData}
           hasMore={this.state.hasmore}
@@ -314,7 +314,7 @@ class Kulfys extends Component {
             })
             }
           </div>
-          </InfiniteScroll>
+          </InfiniteScroll>)}
           
         <ModelPopUp ref={this.child} account={this.state.account} showModalPopup={this.state.showModalPopup} kulfyV3={this.state.kulfyV3}  />
 
