@@ -47,6 +47,7 @@ class Kulfys extends Component {
    */
    async loadBlockchainData () 
   {
+
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });
@@ -59,25 +60,26 @@ class Kulfys extends Component {
       this.setState({ kulfyV3 });
       const kulfiesCount = await kulfyV3.methods.tokenIds().call();
       this.setState({ kulfiesCount });
-        if(this.state.intialCount<=this.state.kulfiesCount)
-       {
-        for (let i = this.state.intialCount; i <this.state.intialCount+this.state.takeCount ; i++) {
-          
-          const kulfy = await this.state.kulfyV3.methods.kulfys(i).call();
-          setTimeout(() => {
-          this.setState({
-            kulfies: [...this.state.kulfies, kulfy],
-          });
-        }, 1500);
-      }
-      if(this.state.intialCount<=this.state.kulfiesCount)
-       {
+        if(this.state.intialCount<=kulfiesCount)
+        {
+          this.setState({ hasmore: false });
+          for (let i = this.state.intialCount; i <this.state.intialCount+this.state.takeCount ; i++) {
+            
+            const kulfy = await this.state.kulfyV3.methods.kulfys(i).call();
+            if(!this.state.kulfies.map(item=>item.id).includes(kulfy.id) && kulfy.id!=0)
+            {
+              this.setState({
+                kulfies: [...this.state.kulfies, kulfy],
+              });
+            }
+            
+          }
         this.setState({intialCount:this.state.intialCount+this.state.takeCount})
-       }
-       }
+        this.setState({ hasmore: true });
+      }
        else
        {this.setState({ hasmore: false });}
-  
+
     } 
     else {
       window.alert("Kulfy contarct not deployed to any network");
@@ -135,7 +137,7 @@ class Kulfys extends Component {
       inputTip:"1",
       inputItem:"",
       intialCount:1,
-      takeCount:5,
+      takeCount:10,
       kulfyTotalCount:0,
       hasmore:true,
     };
@@ -196,8 +198,8 @@ class Kulfys extends Component {
                 />
               </button>
             </div> */}
-          </div>
-          {this.state.kulfies.length>0 && (<InfiniteScroll
+          </div> 
+          {this.state.kulfies.length>=this.state.takeCount && (<InfiniteScroll
           dataLength={this.state.kulfies.length}
           next={this.loadBlockchainData}
           hasMore={this.state.hasmore}
