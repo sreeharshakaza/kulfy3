@@ -51,7 +51,7 @@ class Details extends Component {
     const networkId = await web3.eth.net.getId();
     const networkData = KulfyV3.networks[networkId];
     if (networkData) {
-      
+      this.setState({ loading: true });
       const kulfyV3 = new web3.eth.Contract(KulfyV3.abi, networkData.address);
       console.log(`kulfyV3`, kulfyV3);
       this.setState({ kulfyV3 });
@@ -60,65 +60,48 @@ class Details extends Component {
       console.log(`kulfiesCount`, kulfiesCount);
       this.setState({ kulfiesCount });
 
-      // Load Images
-      for (let i = 1; i <= kulfiesCount; i++) {
-        //get tokenURI from contract
-        const ipfs_metadata = await kulfyV3.methods.tokenURI(i).call();
-        console.log("ipfs_metadata ", ipfs_metadata);
-
-        //get owner of
-        const owner_address = await kulfyV3.methods.ownerOf(i).call();
-        console.log("ipfs_metadata ", ipfs_metadata, i, owner_address);
-
-        const kulfy = await kulfyV3.methods.kulfys(i).call();
-        this.setState({
-          kulfies: [...this.state.kulfies, kulfy],
-        });
-        
-      }
-
+      let id = "";
+      let search = window.location.search;
+      let params = new URLSearchParams(search);
+      id = params.get("id");
+  
+      this.state.id = id;  
+      const kulfy = await kulfyV3.methods.kulfys(id).call();
+      this.setState({kulfy:kulfy});
+      this.setState({asset_url:kulfy.assetURI});
+      this.setState({kid:kulfy.kid});
+  
+      const getKulfyAPI =
+        "https://gateway.kulfyapp.com/V3/gifs/getKulfy?client=web&id=" +
+        this.state.kid +
+        "&language=all,telugu,tamil,hindi,malayalam,english";
+  
+      axios.defaults.headers.common = {
+        "Content-Type": "application/json",
+      };
+  
+      const postCommentsResponse = await axios.get(`${getKulfyAPI}`);
+      console.log(
+        `postComments Response from convo: ${JSON.stringify(
+          postCommentsResponse
+        )}`
+      );
+  
+      const response = postCommentsResponse;
+      this.state.kulfy = response.data.kulfy_info;
+      this.setState({ loading: false });
      
-      this.setState({ loading: true });
-    let id = "";
-    let search = window.location.search;
-    let params = new URLSearchParams(search);
-    id = params.get("id");
-
-    this.state.id = id;
-
-
-    this.setState({asset_url:this.state.kulfies[id-1].assetURI});
-    this.setState({kid:this.state.kulfies[id-1].kid});
-
-    const getKulfyAPI =
-      "https://gateway.kulfyapp.com/V3/gifs/getKulfy?client=web&id=" +
-      this.state.kid +
-      "&language=all,telugu,tamil,hindi,malayalam,english";
-
-    axios.defaults.headers.common = {
-      "Content-Type": "application/json",
-    };
-
-    const postCommentsResponse = await axios.get(`${getKulfyAPI}`);
-    console.log(
-      `postComments Response from convo: ${JSON.stringify(
-        postCommentsResponse
-      )}`
-    );
-
-    const response = postCommentsResponse;
-    this.state.kulfy = response.data.kulfy_info;
-    const getMetaDataResponse = await axios.get(`${this.state.kulfies[id-1].tokenURI}`);
-
-    this.setState({chain:getMetaDataResponse.data.source.chain});
-    this.setState({chain:getMetaDataResponse.data.source.chain});
-    this.setState({description:getMetaDataResponse.data.source.description});
-    this.setState({original_url:getMetaDataResponse.data.source.cached_file_url});
-    this.setState({ loading: false });
-    } else {
-      window.alert("Kulfy contarct not deployed to any network");
-    }
+      const getMetaDataResponse = await axios.get(`${kulfy.tokenURI}`);
     
+    if(getMetaDataResponse.data.source!=null){    
+      //this.setState({chain:getMetaDataResponse.data.source.chain});
+      this.setState({chain:getMetaDataResponse.data.source.chain});
+      this.setState({description:getMetaDataResponse.data.source.description});
+      this.setState({original_url:getMetaDataResponse.data.source.cached_file_url});
+    }
+      } else {
+        window.alert("Kulfy contarct not deployed to any network");
+      }    
   }
 
 
@@ -191,8 +174,7 @@ class Details extends Component {
                         src={this.state.asset_url}
                       >
                         Your browser does not support the video tag.
-                      </video>
-                    <span>Chai Biscuit</span>
+                      </video>                   
                 </div>
             </div>
             <div className="col-md-6 d-flex flex-column nft-details">
@@ -201,8 +183,7 @@ class Details extends Component {
                     <a href="#">
                         <img src="./assets/images/gifs_white.svg" alt="" />
                         <span>{this.state.kulfy.content_type}</span>
-                    </a>
-                    <a href="#"><span>480x480</span></a>
+                    </a>                    
                 </div>
                 <button className="btn-radium my-3" onClick={() => this.tipKulfy(this.state.id)}>Tip</button>
                 <hr />
