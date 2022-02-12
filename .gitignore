@@ -105,3 +105,6 @@ dist
 
 # Intellij project folder
 .idea
+
+# yarn.lock file as this project uses npm as package manager
+yarn.lock
