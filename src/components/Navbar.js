@@ -4,6 +4,7 @@ import { ReactComponent as Logo } from "../assets/images/logo_green.svg";
 import { ReactComponent as NavHam } from "../assets/images/hamburger.svg";
 import Identicon from 'react-identicons';
 import Web3 from "web3";
+import  MetaTags from 'react-meta-tags';
 
 class Navbar extends Component {
   async AddToMetaMask() {
@@ -51,6 +52,11 @@ class Navbar extends Component {
     return (
       <>
       <div>
+      <MetaTags>
+            <title>Kulfy - Minting Memes from NFTs</title>
+            <meta name="description" content="Some kulfy description." />
+            <meta property="og:title" content="MyApp Kulfy" />
+          </MetaTags>
         <nav className="navbar  navbar-light bg-none mb-3">
           <div className="container-fluid">
             <a href="/" className="navbar-logo mx-2">
