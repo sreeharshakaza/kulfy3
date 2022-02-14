@@ -91,13 +91,22 @@ class Mint extends Component {
     let original = localStorage.getItem("NFT");
     original = JSON.parse(original);
     this.state.asset = asseturl;
-    const body = {
+    let body ={};
+
+
+    body = {
       name: this.state.kulfy.name,
       tags: this.state.kulfy.category.join(),
       kid: this.state.kulfy.kid,
       image: asseturl,
       source: original,
     };
+
+    if(this.state.kulfy.source_info){
+      body.source = this.state.kulfy.source_info;
+    }else{     
+      body.source = original;
+    }
 
     const options2 = {
       pinataMetadata: {

@@ -250,10 +250,10 @@ class Kulfys extends Component {
                         <h6>Kulfy: {item.kid}</h6>
                       </a>
                       {/* <h6>tip: {item.tipAmount}</h6> */}
-                      <h6>tip: {Web3.utils.fromWei(item.tipAmount, 'ether')}</h6>
+                      <h6>Tips Recieved: {Web3.utils.fromWei(item.tipAmount, 'ether')} ONE</h6>
                       <a href={"/kulfy?id=" + item.id}>
                         {" "}
-                        <h6>id: {item.id}</h6>
+                        <h6>Token ID: {item.id}</h6>
                       </a>
                       <h6>
                         <a href={item.tokenURI} target="blank">
