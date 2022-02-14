@@ -73,9 +73,6 @@ class Navbar extends Component {
               <a href='/docs?id=documentation' className="mx-2 nav-links ">
                 Docs 
               </a>
-              <a href="/kulfys" className="mx-2 nav-links ">
-                Kulfys
-              </a>
               <a href="/UserProfile" className="mx-2 nav-links">
                 My Kulfys
               </a>
@@ -85,7 +82,7 @@ class Navbar extends Component {
               <a href="#" className="mx-2 nav-links">
               <Identicon string="randomness" size="25"/>
               </a>
-     {/*          <a href="/" className="navbar-dp mx-3">
+     {/*          <a href="/UserProfile" className="navbar-dp mx-3">
                 <UserProfile />
                 <small id="account">{this.props.account}</small>
               </a>

@@ -67,9 +67,14 @@ class Details extends Component {
   
       this.state.id = id;  
       const kulfy = await kulfyV3.methods.kulfys(id).call();
+
+      console.log('nft kulfy ',kulfy);
       this.setState({kulfy:kulfy});
       this.setState({asset_url:kulfy.assetURI});
       this.setState({kid:kulfy.kid});
+      this.setState({creator:kulfy.author});
+      this.setState({metadata:kulfy.tokenURI});
+      this.setState({tipAmount:Web3.utils.fromWei(kulfy.tipAmount, 'ether')});
   
       const getKulfyAPI =
         "https://gateway.kulfyapp.com/V3/gifs/getKulfy?client=web&id=" +
@@ -188,10 +193,18 @@ class Details extends Component {
                 <button className="btn-radium my-3" onClick={() => this.tipKulfy(this.state.id)}>Tip</button>
                 <hr />
                 {this.state.description}
-                <div className="nft-actions my-2">
+              {/*  <div className="nft-actions my-2">
                     <a href={this.state.original_url} target="blank">View Original</a>
-                </div>
-                
+                </div>   */}
+                <div className="nft-actions my-2">
+                    Tips Recieved: {this.state.tipAmount}  ONE 
+                </div> 
+                <div className="nft-actions my-2">
+                    Creator: {this.state.creator}
+                </div> 
+                <div className="nft-actions my-2">
+                    <a href={this.state.metadata} target="blank">Metadata: {this.state.metadata} </a>
+                </div> 
             </div>
         </div>
         
