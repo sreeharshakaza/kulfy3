@@ -62,20 +62,24 @@ class Kulfys extends Component {
       this.setState({ kulfiesCount });
         if(this.state.intialCount<=kulfiesCount)
         {
-          this.setState({ hasmore: false });
-          for (let i = this.state.intialCount; i <this.state.intialCount+this.state.takeCount ; i++) {
-            
+          this.setState({ hasmore: true });
+          for (let i =kulfiesCount ; i >=(kulfiesCount-(this.state.intialCount+this.state.takeCount)) 
+          ; i--) 
+            {
+              if(i>0)
+              {
             const kulfy = await this.state.kulfyV3.methods.kulfys(i).call();
             if(!this.state.kulfies.map(item=>item.id).includes(kulfy.id) && kulfy.id!=0)
-            {
+                {
               this.setState({
                 kulfies: [...this.state.kulfies, kulfy],
-              });
-            }
-            
+                            });
+                }
+              }            
           }
         this.setState({intialCount:this.state.intialCount+this.state.takeCount})
-        this.setState({ hasmore: true });
+        if((kulfiesCount-(this.state.intialCount+this.state.takeCount))<=1)
+        this.setState({ hasmore: false });
       }
        else
        {this.setState({ hasmore: false });}
