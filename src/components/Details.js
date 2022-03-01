@@ -7,6 +7,10 @@ import Kulfys from "./Kulfys";
 import axios from "axios";
 import ModelPopUp from './ModelPopUp';
 import ReactLoading from 'react-loading';
+import ReactDOM from "react-dom";
+import { ethers } from 'ethers';
+
+import { Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
 class Details extends Component {
 
 
@@ -15,7 +19,52 @@ class Details extends Component {
     await this.loadWeb3();
     await this.loadBlockchainData();
 
+    let thread_id = 'default_thread'
+    let search = window.location.search;
+    let params = new URLSearchParams(search);
+    thread_id = params.get('id');
+    console.log('thread_id ',thread_id);
+    this.setState({thread_id:thread_id})
+
   }
+
+  submitMessage = async (e) => {
+
+    e.preventDefault();
+ 
+     const convoApiRoot = 'https://theconvo.space/api';
+     const convoApiToken = 'CONVO'
+ 
+     axios.defaults.headers.common = {
+       "Content-Type": "application/json"
+     }
+     
+     let thread_id = 'default_thread'
+     let search = window.location.search;
+     let params = new URLSearchParams(search);
+     thread_id = params.get('id');
+     console.log('sumit message',this.state.thread_id);
+     // Post Comment by threadId
+      const postCommentsRequestPath = `/comments`;
+      let postCommentsRequestBody = {
+        "token": this.state.token,
+        "signerAddress": this.state.account,
+        "comment": this.state.message,
+        "threadId": thread_id,
+        "url": encodeURIComponent("http://localhost:3000/kulfy")
+      };
+
+      
+      
+      console.log(`send request to convo URL: ${convoApiRoot}${postCommentsRequestPath}?apikey=${convoApiToken} with data: ${JSON.stringify(postCommentsRequestBody)}`);
+      const postCommentsResponse = await axios.post(`${convoApiRoot}${postCommentsRequestPath}?apikey=${convoApiToken}`, postCommentsRequestBody);
+      console.log(`postComments Response from convo: ${JSON.stringify(postCommentsResponse)}`);
+     this.state.message = '';
+  
+    
+     await this.loadCommentList();
+ 
+    }
 
   async loadWeb3() {
     if (window.ethereum) {
@@ -28,6 +77,7 @@ class Details extends Component {
         "Non-Ethereum browser detected. You should consider trying ethereum based brower"
       );
     }
+    
   }
 
   async tipKulfy(id) {
@@ -44,6 +94,7 @@ class Details extends Component {
 
   async loadBlockchainData() {
     const web3 = window.web3;
+							
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });
 
@@ -84,7 +135,7 @@ class Details extends Component {
       axios.defaults.headers.common = {
         "Content-Type": "application/json",
       };
-  
+      
       const postCommentsResponse = await axios.get(`${getKulfyAPI}`);
       console.log(
         `postComments Response from convo: ${JSON.stringify(
@@ -95,7 +146,11 @@ class Details extends Component {
       const response = postCommentsResponse;
       this.state.kulfy = response.data.kulfy_info;
       this.setState({ loading: false });
-     
+      
+      	 
+      await this.loadsignature();        
+      await this.triggerOAuth();
+
       const getMetaDataResponse = await axios.get(`${kulfy.tokenURI}`);
     
     if(getMetaDataResponse.data.source!=null){    
@@ -107,6 +162,8 @@ class Details extends Component {
       } else {
         window.alert("Kulfy contarct not deployed to any network");
       }    
+
+     
   }
 
 
@@ -153,6 +210,150 @@ class Details extends Component {
     };
   }
 
+  async shouldComponentUpdate() {
+    console.log(`shouldComponentUpdate`);
+  }
+
+  async loadsignature()
+  {
+    if(sessionStorage.getItem( 'ConvoApiToken' )=='' || sessionStorage.getItem( 'ConvoApiToken' )==null){
+     
+    let provider = new ethers.providers.Web3Provider(window.web3.currentProvider);
+    let signer = provider.getSigner();
+    let signerAddress = await signer.getAddress();
+    this.setState({ signerAddress: signerAddress }); 
+    const timestamp = Date.now() 
+    this.setState({ timestamp: timestamp }); 
+    let data = `I allow this site to access my data on The Convo Space using the account ${signerAddress}. Timestamp:${timestamp}`;
+  
+    let signature = await provider.send('personal_sign',[ ethers.utils.hexlify(ethers.utils.toUtf8Bytes(data)), signerAddress.toLowerCase() ]);
+     
+    this.setState({ signature: signature });
+    
+
+const convoApiRoot = 'https://theconvo.space/api';
+    const convoApiToken = 'CONVO'
+
+    axios.defaults.headers.common = {
+      "Content-Type": "application/json"
+    }												  
+    const authTokenRequestPath = '/auth';
+    const authTokenRequestBody = {
+      "signature": this.state.signature,
+      "signerAddress": this.state.signerAddress,
+      "accountId": this.state.account,
+      "timestamp": this.state.timestamp,
+      "chain": "ethereum"
+    };
+     console.log(`send request to convo URL: ${convoApiRoot}${authTokenRequestPath}?apikey=CONVO with Data: ${JSON.stringify(authTokenRequestBody)}`);
+    const authResponse = await axios.post(`${convoApiRoot}${authTokenRequestPath}?apikey=CONVO`, authTokenRequestBody);
+     console.log(`auth Response from convo: ${JSON.stringify(authResponse)}`);
+    this.authToken = authResponse.data.message;
+    this.setState({token: authResponse.data.message})
+    this.setConvoApiToken(this.authToken);
+  }
+  else
+  {
+  this.setState({token: sessionStorage.getItem( 'ConvoApiToken' )});
+  this.authToken = sessionStorage.getItem( 'ConvoApiToken' );
+  
+  }
+  }
+
+  getInitialState = async()=> {
+    var ConvoApiToken = sessionStorage.getItem( 'ConvoApiToken' ) || '';
+    return {
+      ConvoApiToken: ConvoApiToken
+  };
+};
+
+setConvoApiToken= async(option)=> {
+  sessionStorage.setItem( 'ConvoApiToken', option );
+  this.setState( { ConvoApiToken: option } );
+}
+
+loadCommentList = async()=>{
+  const convoApiRoot = 'https://theconvo.space/api';
+  const convoApiToken = 'CONVO'
+
+  axios.defaults.headers.common = {
+    "Content-Type": "application/json"
+  }												  
+ 
+  let thread_id = 'default_thread'
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+  thread_id = params.get('id');
+
+  // Query threads
+  const queryThreadsRequestPath = '/comments';
+  // console.log(`send request to convo URL: ${convoApiRoot}${queryThreadsRequestPath}?apikey=${convoApiToken} with no data`);
+  this.queryThreadsResponse = await axios.get(`${convoApiRoot}${queryThreadsRequestPath}?apikey=${convoApiToken}&threadId=${thread_id}`);
+  this.setState({ threads: this.queryThreadsResponse.data });
+  this.threads = this.queryThreadsResponse.data;
+  //alert(JSON.stringify(this.threads));
+  this.setState({threads: this.threads})
+
+  const listView = 
+    this.state.threads.map(function(item, index){
+                  return (<>
+
+              
+                      <div class="tread d-flex flex-row mt-3" height="300">
+                        
+              <img src="https://cdn.kulfyapp.com/kelvin/dp.png" alt="" width="48" height="48" class="me-2"/>
+              <div class="context">
+                  <h6 class="username  color-text" style={{ color: "#FFE033"  }}>
+                      @{item.author}
+                  </h6>
+                  <p class="message">
+                      {item.text}
+                  </p>
+              </div>
+          </div>
+                  </>);
+                });
+  console.log('listview ',listView);
+  ReactDOM.render(
+    listView,
+    document.getElementById('threads-list')
+  );
+}
+
+  triggerOAuth = async () => {
+
+  //alert(this.authToken);
+    // Sample signature generation code using near-api-js.js
+    const convoApiRoot = 'https://theconvo.space/api';
+    const convoApiToken = 'CONVO'
+
+    axios.defaults.headers.common = {
+      "Content-Type": "application/json"
+    }												  
+   
+    if(this.authToken==null || this.authToken=='')
+    {
+    this.loadsignature();    
+    }
+
+    // Validate Token
+    const validateTokenRequestPath = '/validateAuth';
+    const validateTokenRequestBody = {
+      "signerAddress": this.state.account,
+      "token": this.authToken
+    };
+    try
+    {
+     console.log(`send request to convo URL: ${convoApiRoot}${validateTokenRequestPath}?apikey=${convoApiToken} with data: ${JSON.stringify(validateTokenRequestBody)}`);
+    const validateTokenResponse = await axios.post(`${convoApiRoot}${validateTokenRequestPath}?apikey=${convoApiToken}`, validateTokenRequestBody);
+     console.log(`validateToken Response from convo: ${JSON.stringify(validateTokenResponse)}`);
+    }
+    catch(e){
+    console.log(`ValidateToken Failed:${e}`);
+    }
+    await this.loadCommentList();
+  }
+  
   render() {
     return (
       <>
@@ -206,7 +407,40 @@ class Details extends Component {
                     <a href={this.state.metadata} target="blank">Metadata: {this.state.metadata} </a>
                 </div> 
             </div>
+            <div className="base-container page-wrapper" ref={this.props.containerRef}>
+            {/* <Header /> */}
+      <ul class="nav nav-pills nav-fill mt-2 mx-2 ">
+        {/* <li class="nav-item">
+            <a class="nav-link active color-bg" aria-current="page" href={`/flow?id=${this.state.thread_id}`}>Impact Flow</a>
+        </li> */}
+        {/* <li class="nav-item">
+            <a class="nav-link text-white" href={`/convo?id=${this.state.thread_id}`}>Impact Discussion</a>
+        </li> */}
+    </ul>
+    
+<div className="container featured-grid" ref={this.props.containerRef} style={{height:"20"}} >
+<div className="container featured-grid" style={{ width:"100%", backgroundColor:"#808080"}}><p>Thoughts & Discussions:</p></div>
+        <div class="container ">
+        <div class="discussions">
+        <div className="content"  >
+          <List id="threads-list" >
+          </List>
         </div>
+        
+        
+   <div class="send">
+            <input type="text" name="message" onChange={e => this.setState({ message: e.target.value })} 
+             placeholder="Comment" style={{ width:"60%" }}/>
+            <a href="# " onClick={this.submitMessage.bind(this)} class="send-btn ">
+              <img src="https://cdn.kulfyapp.com/kelvin/send-btn.svg " alt=" "  width="46" height="47"/></a>
+        </div>
+        </div></div>
+      </div>
+
+    <div class="container ">
+    </div>
+      </div>
+      </div>
         
         <ModelPopUp ref={this.child} account={this.state.account} showModalPopup={this.state.showModalPopup} kulfyV3={this.state.kulfyV3}  />
     </section>
