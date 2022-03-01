@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import { Modal } from "react-bootstrap";
 import KulfyV3 from "../abis/KulfyV3.json";
-
+import Kulfys from "./Kulfys";
 export class ModelPopUp extends Component {
   isShowModal(state) {
     this.setState({ showModalPopup: state });
@@ -23,7 +23,7 @@ export class ModelPopUp extends Component {
     });
   }
   async tipKulfyAuthor(id, tipAmount) {
-    console.log(id);
+    
     this.isShowModal(false);
     this.state.kulfyV3.methods
       .tipKulfyAuthor(id, 5000)
@@ -31,9 +31,11 @@ export class ModelPopUp extends Component {
         from: this.state.account,
         value: window.web3.utils.toWei(tipAmount, "Ether"),
       })
-      .on("transactionHash", (hash) => {
-        console.log("tans hash ", hash);
+      .once("confirmation", (hash) => {
+        const kulfy =  this.state.kulfyV3.methods.kulfys(id).call();
+       this.props.updateKulfyTipAmount(kulfy);
       });
+        
   }
   constructor(props) {
     super(props);

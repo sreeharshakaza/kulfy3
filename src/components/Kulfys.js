@@ -6,7 +6,7 @@ import { Modal } from 'react-bootstrap';
 import ModelPopUp from './ModelPopUp';
 import ReactLoading from 'react-loading';
 import InfiniteScroll from "react-infinite-scroll-component";
-class Kulfys extends Component {
+ class Kulfys extends Component {
 
   async componentDidMount() {
     await this.loadWeb3();
@@ -128,6 +128,14 @@ class Kulfys extends Component {
       inputTip:  evt.target.value
     });
   }
+ async updateKulfyTipAmount(kulfy)
+  { var kulfyTipped= await kulfy;
+    let kulfies = [...this.state.kulfies];
+    let index = kulfies.findIndex(item=>item.id==kulfyTipped.id);
+    kulfies[index] = kulfyTipped;
+    this.setState({kulfies: kulfies});
+    
+  }
   constructor(props) {
     super(props);
     this.child=React.createRef();
@@ -144,8 +152,11 @@ class Kulfys extends Component {
       takeCount:10,
       kulfyTotalCount:0,
       hasmore:true,
+      id:'',
+      tipAmount:''
     };
     this.loadBlockchainData = this.loadBlockchainData.bind(this);
+    this.updateKulfyTipAmount = this.updateKulfyTipAmount.bind(this);
   }
 
   
@@ -322,7 +333,7 @@ class Kulfys extends Component {
           </div>
           </InfiniteScroll>)}
           
-        <ModelPopUp ref={this.child} account={this.state.account} showModalPopup={this.state.showModalPopup} kulfyV3={this.state.kulfyV3}  />
+        <ModelPopUp ref={this.child}  updateKulfyTipAmount={this.updateKulfyTipAmount}account={this.state.account} showModalPopup={this.state.showModalPopup} kulfyV3={this.state.kulfyV3}  />
 
      
         </section>
