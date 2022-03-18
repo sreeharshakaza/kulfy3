@@ -12,14 +12,13 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract KulfyV3 is ERC721URIStorage, Ownable, ReentrancyGuard {
-  
     /// Mapping to store Kulfys
     mapping(uint256 => Kulfy) public kulfys;
 
     // Auto Counter for Token Ids
     using Counters for Counters.Counter;
     Counters.Counter public tokenIds;
-    
+
     // gas limit for transactions
     uint256 public gasLimit = 5000;
 
@@ -59,7 +58,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable, ReentrancyGuard {
      * @param  {[type]} address payable       author [Address of the Kulfy creator]
      * @param  {[type]} string  memory        _tokenURI [IPFS URL of medadata of the Kulfy]
      * @param  {[type]} string  memory        _assetURI [IPFS URL of the actual binary asset]
-     * @param  {[type]} string  memory        _kid      [KID is the unique id of Kulfy]) 
+     * @param  {[type]} string  memory        _kid      [KID is the unique id of Kulfy])
      * @return {[type]} uint256     [tokenID of the NFT in contract]
      */
     function mintNFT(
@@ -68,7 +67,6 @@ contract KulfyV3 is ERC721URIStorage, Ownable, ReentrancyGuard {
         string memory _assetURI,
         string memory _kid
     ) external returns (uint256) {
-
         /// Increment tokenId
         tokenIds.increment();
         uint256 newItemId = tokenIds.current();
@@ -79,7 +77,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable, ReentrancyGuard {
         /// calling setTokenURI from ERC721URIStorage
         _setTokenURI(newItemId, _tokenURI);
 
-        /// update mapping with new Kulfy 
+        /// update mapping with new Kulfy
         kulfys[newItemId] = Kulfy(
             newItemId,
             _kid,
@@ -90,7 +88,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable, ReentrancyGuard {
         );
 
         /// emit Kulfy minted event
-        emit KulfyCreated(newItemId,_tokenURI,_assetURI,_kid,author);
+        emit KulfyCreated(newItemId, _tokenURI, _assetURI, _kid, author);
 
         return newItemId;
     }
@@ -98,15 +96,18 @@ contract KulfyV3 is ERC721URIStorage, Ownable, ReentrancyGuard {
     /*
      * This function is to transfer desired Tip amount from Tipper to Kulfy author
      * @param  {[type]} uint256 _id           [tokenID of the NFT in the contract ]
-     * 
+     *
      * @return {[type]}                       [Transer Tip amount to creator via Internal Transfers]
      */
-    function tipKulfyAuthor(uint256 _id, uint256 _gas) public payable {
+    function tipKulfyAuthor(uint256 _id, uint256 _gas)
+        public
+        payable
+        nonReentrant
+    {
         /// Check valid tokenId
         require(_id > 0 && _id <= tokenIds.current(), "Invalid token ID");
         /// Check that gas doesn't exceed limit
         require(_gas <= gasLimit);
-
 
         /// Load specific Kulfy based on tokenId
         Kulfy memory _kulfy = kulfys[_id];
@@ -115,7 +116,10 @@ contract KulfyV3 is ERC721URIStorage, Ownable, ReentrancyGuard {
         address payable _author = _kulfy.author;
 
         /// Transfer Tip amount to the creator
-        (bool sent, bytes memory data) = _author.call{value: msg.value, gas: _gas}("");
+        (bool sent, bytes memory data) = _author.call{
+            value: msg.value,
+            gas: _gas
+        }("");
         require(sent, "Failed to send Ether");
 
         /// Add new tip to the Kulfy's total tip amount
@@ -134,7 +138,7 @@ contract KulfyV3 is ERC721URIStorage, Ownable, ReentrancyGuard {
             msg.sender
         );
     }
-    
+
     function changeGasLimit(uint256 newGasLimit) public onlyOwner {
         //change gas limit, depending on changes to the EVM
         gasLimit = newGasLimit;
