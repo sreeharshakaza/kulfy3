@@ -59,6 +59,7 @@ class Kulfys extends Component {
       const kulfyV3 = new web3.eth.Contract(KulfyV3.abi, networkData.address);
       this.setState({ kulfyV3 });
       const kulfiesCount = await kulfyV3.methods.tokenIds().call();
+      console.log("Kulfy Count"+ kulfiesCount);
       this.setState({ kulfiesCount });
         if(this.state.intialCount<=kulfiesCount)
         {
@@ -141,7 +142,7 @@ class Kulfys extends Component {
       inputTip:"1",
       inputItem:"",
       intialCount:1,
-      takeCount:10,
+      takeCount:2,
       kulfyTotalCount:0,
       hasmore:true,
     };
