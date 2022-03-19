@@ -204,7 +204,7 @@ class Kulfys extends Component {
               </button>
             </div> */}
           </div> 
-          {this.state.kulfies.length>=this.state.takeCount && (<InfiniteScroll
+          {(<InfiniteScroll
           dataLength={this.state.kulfies.length}
           next={this.loadBlockchainData}
           hasMore={this.state.hasmore}
