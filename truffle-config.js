@@ -4,11 +4,19 @@ require('dotenv').config();
 
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const mnemonic = '0x4CC7F1815F7538e1792DC4E86f21d11C0aAC241d';
-const privateKeys = process.env.PRIVATE_KEYS || ""
+//const privateKeys = process.env.PRIVATE_KEYS || ""
+const privateKeys = process.env.KEYS || ""
 
 
 module.exports = {
   networks: {
+    mainnet: {
+      provider: () => new HDWalletProvider(
+        privateKeys.split(',') // Array of account private keys
+        , 'https://api.harmony.one'),
+      network_id: 1666600000,
+      skipDryRun: true,
+    },
     testnet: {
       provider: () => new HDWalletProvider(
         privateKeys.split(',') // Array of account private keys
