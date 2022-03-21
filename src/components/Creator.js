@@ -8,16 +8,7 @@ const Creator = () => {
   }, []);
 async function loadCreatorParams() {
 
-            let myIframe = document.getElementById("myIframe");
-            let nftURL = "";
-            let search = window.location.search;
-            let params = new URLSearchParams(search);
-            nftURL = params.get("nft");
 
-    
-            let adsURL = myIframe.src +"?nft="+nftURL;
-            console.log('ads',adsURL);
-            myIframe.src = adsURL;
 }
 
 
