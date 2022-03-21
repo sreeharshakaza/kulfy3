@@ -21,13 +21,14 @@ class Navbar extends Component {
       network = await window.web3.eth.net.getId();
       console.log(network.toString())
       var params;
-      
+   
+   /*   
           if (network.toString() == "1666700000") {
-              alert("Kulfy Network has already been added to Metamask.");
+              alert("Harmony Network has already been added to Metamask.");
               return;
           } else {
               params = [{
-                  chainId: '0x6357D2E0',
+                  chainId: '0x63564C40',
                   chainName: 'Harmony Testnet',
                   nativeCurrency: {
                       name: 'ONE',
@@ -36,6 +37,24 @@ class Navbar extends Component {
                   },
                   rpcUrls: ['https://api.s0.b.hmny.io'],
                   blockExplorerUrls: ['https://explorer.pops.one/']
+              }]
+          }
+          */
+         
+          if (network.toString() == "1666600000") {
+              alert("Harmony Mainnet has already been added to Metamask.");
+              return;
+          } else {
+              params = [{
+                  chainId: '0x63564C40',
+                  chainName: 'Harmony Mainnet',
+                  nativeCurrency: {
+                      name: 'ONE',
+                      symbol: 'ONE',
+                      decimals: 18
+                  },
+                  rpcUrls: ['https://api.harmony.one'],
+                  blockExplorerUrls: ['https://explorer.harmony.one/']
               }]
           }
       
@@ -65,7 +84,7 @@ class Navbar extends Component {
           
             <div>
             <a href='#' className="mx-2 nav-links" onClick={() => this.AddToMetaMask()}>
-                Add MetaMask Network
+                Add Harmony Network
               </a>
               <a href='https://kulfyapp.com/' target='_blank' className="mx-2 nav-links ">
                 App
@@ -76,7 +95,7 @@ class Navbar extends Component {
               <a href="/UserProfile" className="mx-2 nav-links">
                 My Kulfys
               </a>
-              <a href="/create" className="mx-2 btn-create">
+              <a href="/creator" className="mx-2 btn-create">
                 Create
               </a>
               <a href="#" className="mx-2 nav-links">
