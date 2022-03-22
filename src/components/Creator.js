@@ -4,13 +4,8 @@ import Navbar from './Navbar';
 
 const Creator = () => {
   useEffect(() => {
-    loadCreatorParams();
+
   }, []);
-async function loadCreatorParams() {
-
-
-}
-
 
   return (
     <>
