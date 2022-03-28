@@ -1,7 +1,9 @@
 name: Build main Branch
 on:
   push:
-    branches: [ main ]
+    branches:
+    - main
+    - testnet/main
   workflow_dispatch:
 
 jobs:
@@ -51,7 +53,24 @@ jobs:
           ls -alrth build/
           echo "$KEY_CONTENT" | base64 --decode > $GITHUB_WORKSPACE/.key
           chmod 600 $GITHUB_WORKSPACE/.key
+        env:
+          CI: FALSE
+          KEY_CONTENT: ${{ secrets.WEB_KEY_TOKEN }}
+          PUBLIC_URL: /
+
+      - name: Production Deployment
+        if: github.branch == 'testnet/main'
+        run: |
           rsync -PvOr -e "ssh -o StrictHostKeyChecking=no -i $GITHUB_WORKSPACE/.key" --info=progress2 build/ ubuntu@3.109.137.163:/opt/kulfy3.1/
+        env:
+          CI: FALSE
+          KEY_CONTENT: ${{ secrets.WEB_KEY_TOKEN }}
+          PUBLIC_URL: /
+
+      - name: Developoment Deployment
+        if: github.branch == 'testnet/main'
+        run: |
+          rsync -PvOr -e "ssh -o StrictHostKeyChecking=no -i $GITHUB_WORKSPACE/.key" --info=progress2 build/ ubuntu@3.109.137.163:/opt/kulfy3.1_beta/
         env:
           CI: FALSE
           KEY_CONTENT: ${{ secrets.WEB_KEY_TOKEN }}
