@@ -59,7 +59,7 @@ jobs:
           PUBLIC_URL: /
 
       - name: Production Deployment
-        if: success() && github.ref == 'ref/heads/main'
+        if: ${{ github.ref == 'refs/heads/main' || github.base_ref == 'refs/heads/main' }}
         run: |
           rsync -PvOr -e "ssh -o StrictHostKeyChecking=no -i $GITHUB_WORKSPACE/.key" --info=progress2 build/ ubuntu@3.109.137.163:/opt/kulfy3.1/
         env:
@@ -68,7 +68,7 @@ jobs:
           PUBLIC_URL: /
 
       - name: Developoment Deployment
-        if: success() && github.ref == 'ref/heads/testnet/main'
+        if: ${{ github.ref == 'refs/heads/testnet/main' || github.base_ref == 'refs/heads/testnet/main' }}
         run: |
           rsync -PvOr -e "ssh -o StrictHostKeyChecking=no -i $GITHUB_WORKSPACE/.key" --info=progress2 build/ ubuntu@3.109.137.163:/opt/kulfy3.1_beta/
         env:
