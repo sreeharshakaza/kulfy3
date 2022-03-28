@@ -79,7 +79,7 @@ class Kulfys extends Component {
               }            
           }
         this.setState({intialCount:this.state.intialCount+this.state.takeCount})
-        if((kulfiesCount-(this.state.intialCount+this.state.takeCount))<=1)
+        if((kulfiesCount-(this.state.intialCount+this.state.takeCount))<=0)
         this.setState({ hasmore: false });
       }
        else
@@ -142,7 +142,7 @@ class Kulfys extends Component {
       inputTip:"1",
       inputItem:"",
       intialCount:1,
-      takeCount:2,
+      takeCount:4,
       kulfyTotalCount:0,
       hasmore:true,
     };
