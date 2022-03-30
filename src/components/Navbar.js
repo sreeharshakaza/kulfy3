@@ -95,6 +95,9 @@ class Navbar extends Component {
               <a href="/UserProfile" className="mx-2 nav-links">
                 My Kulfys
               </a>
+              <a href="/MyNFTs" className="mx-2 nav-links">
+                myNFTs
+              </a>
               <a href="/creator" className="mx-2 btn-create">
                 Create
               </a>

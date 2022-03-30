@@ -14,6 +14,7 @@ import Home from './Home'
 import Docs from './Docs'
 import Details from './Details'
 import UserProfile from './UserProfile';
+import MyNFTs from './MyNFTs';
 import TagManager from 'react-gtm-module'
  
 const tagManagerArgs = {
@@ -59,6 +60,9 @@ class App extends Component {
           </Route>
           <Route path="/UserProfile" >
             <UserProfile />
+          </Route>
+          <Route path="/MyNFTs" >
+            <MyNFTs />
           </Route>
           <Route path="/">
             <Memes />
