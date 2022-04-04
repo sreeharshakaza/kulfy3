@@ -75,7 +75,14 @@ a:hover {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-
+.navbar-toggler-icon {
+  width: 20px !important;
+}
+.navbar-toggler {
+  background: #d7f88d;
+  padding: 0px 6px;
+  margin-right: 10px;
+}
 .navbar-logo {
   background-color: none;
 }
