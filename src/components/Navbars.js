@@ -5,8 +5,11 @@ import { ReactComponent as NavHam } from "../assets/images/hamburger.svg";
 import Identicon from "react-identicons";
 import Web3 from "web3";
 import MetaTags from "react-meta-tags";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-class Navbar extends Component {
+
+class Navbars extends Component {
   async AddToMetaMask() {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
@@ -53,64 +56,31 @@ class Navbar extends Component {
     return (
       <>
         <div>
+         
           <MetaTags>
             <title>Kulfy - Minting Memes from NFTs</title>
             <meta name="description" content="Some kulfy description." />
             <meta property="og:title" content="MyApp Kulfy" />
           </MetaTags>
-          <nav className="navbar  navbar-light bg-none mb-3">
-            <div className="container-fluid">
-              <a href="/" className="navbar-logo mx-2">
-                <Logo />
-              </a>
-              <button
-                className="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown"
-                aria-expanded="false"
-              >
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                <a
-                  href="#"
-                  className="mx-2 nav-links"
-                  onClick={() => this.AddToMetaMask()}
-                >
-                  Add MetaMask Network
-                </a>
-                <a
-                  href="https://kulfyapp.com/"
-                  target="_blank"
-                  className="mx-2 nav-links "
-                >
-                  App
-                </a>
-                <a href="/docs?id=documentation" className="mx-2 nav-links ">
-                  Docs
-                </a>
-                <a href="/UserProfile" className="mx-2 nav-links">
-                  My Kulfys
-                </a>
-                <a href="/create" className="mx-2 btn-create">
-                  Create
-                </a>
-                <a href="#" className="mx-2 nav-links">
-                  <Identicon string="randomness" size="25" />
-                </a>
-                {/*          <a href="/UserProfile" className="navbar-dp mx-3">
-                <UserProfile />
-                <small id="account">{this.props.account}</small>
-              </a>
-
-              <a href="/" className="navbar-ham">
-                <NavHam />
-              </a> */}
-              </div>
-            </div>
-          </nav>
+          <Navbar className="navbar navbar-light bg-none mb-3" collapseOnSelect expand="xl" bg="dark" variant="dark">
+      <Navbar.Brand href="#home">
+      <Logo />
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className=" navbar-collapse">
+          <Nav.Link href="#" className="mx-2 nav-links " onClick={() => this.AddToMetaMask()}> Add MetaMask Network</Nav.Link>
+          <Nav.Link href="https://kulfyapp.com/" className="mx-2 nav-links " target="_blank">App</Nav.Link>
+          <Nav.Link href="/docs?id=documentation" className="mx-2 nav-links " >Docs</Nav.Link>
+          <Nav.Link href="/UserProfile" className="mx-2 nav-links " >My Kulfys</Nav.Link>
+          <Nav.Link href="/create" className="mx-2 nav-links ">Create</Nav.Link>
+          <Nav.Link href="#" className="mx-2 nav-links "><Identicon string="randomness" size="25" /></Nav.Link>
+          
+        </Nav>
+       
+      </Navbar.Collapse>
+    </Navbar>
+          
           {/* <div className="container">
           <div className="row">
             <div className="col">
@@ -212,4 +182,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+export default Navbars;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Web3 from "web3";
 import "./App.css";
 import KulfyV3 from "../abis/KulfyV3.json";
-import Navbar from "./Navbar";
+import Navbars from "./Navbars";
 import Kulfys from "./Kulfys";
 import axios from "axios";
 import ModelPopUp from "./ModelPopUp";
@@ -380,7 +380,7 @@ class Details extends Component {
   render() {
     return (
       <>
-        <Navbar />
+        <Navbars />
         {this.state.loading ? (
           <div style={{ marginLeft: "47%", marginTop: "5%" }}>
             <ReactLoading

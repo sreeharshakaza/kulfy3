@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Web3 from "web3";
 import "./App.css";
-import Navbar from "./Navbar";
+import Navbars from "./Navbars";
 import KulfyV3 from "../abis/KulfyV3.json";
 import { Modal } from 'react-bootstrap';
 import ModelPopUp from './ModelPopUp';
@@ -145,7 +145,7 @@ class UserProfile extends Component {
   render() {
     return (
       <>
-      <Navbar />
+      <Navbars />
         {this.state.loading ? (
           <div style={{marginLeft:'47%',marginTop: '5%'}}>
             <ReactLoading type="spinningBubbles" color="#ffffff" height={100} width={70} />

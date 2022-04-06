@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import Navbar from "./Navbar";
+import Navbars from "./Navbars";
 import Kulfys from './Kulfys'
 
 class Memes extends Component {
@@ -10,7 +10,8 @@ class Memes extends Component {
   render() {
     return (
       <>
-        <Navbar />
+      
+        <Navbars />
         <Kulfys />
       </>
     );
