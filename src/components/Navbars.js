@@ -1,12 +1,16 @@
+
 import React, { Component } from "react";
 import { ReactComponent as UserProfile } from "../assets/images/dp.svg";
 import { ReactComponent as Logo } from "../assets/images/logo_green.svg";
 import { ReactComponent as NavHam } from "../assets/images/hamburger.svg";
-import Identicon from 'react-identicons';
+import Identicon from "react-identicons";
 import Web3 from "web3";
-import  MetaTags from 'react-meta-tags';
+import MetaTags from "react-meta-tags";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-class Navbar extends Component {
+
+class Navbars extends Component {
   async AddToMetaMask() {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
@@ -16,103 +20,69 @@ class Navbar extends Component {
     } else {
       window.web3 = new Web3(window.ethereum);
     }
-    if (typeof window.web3  !== 'undefined') {
+    if (typeof window.web3 !== "undefined") {
       var network = 0;
       network = await window.web3.eth.net.getId();
-      console.log(network.toString())
+      console.log(network.toString());
       var params;
-   
-   /*   
-          if (network.toString() == "1666700000") {
-              alert("Harmony Network has already been added to Metamask.");
-              return;
-          } else {
-              params = [{
-                  chainId: '0x63564C40',
-                  chainName: 'Harmony Testnet',
-                  nativeCurrency: {
-                      name: 'ONE',
-                      symbol: 'ONE',
-                      decimals: 18
-                  },
-                  rpcUrls: ['https://api.s0.b.hmny.io'],
-                  blockExplorerUrls: ['https://explorer.pops.one/']
-              }]
-          }
-          */
-         
-          if (network.toString() == "1666600000") {
-              alert("Harmony Mainnet has already been added to Metamask.");
-              return;
-          } else {
-              params = [{
-                  chainId: '0x63564C40',
-                  chainName: 'Harmony Mainnet',
-                  nativeCurrency: {
-                      name: 'ONE',
-                      symbol: 'ONE',
-                      decimals: 18
-                  },
-                  rpcUrls: ['https://api.harmony.one'],
-                  blockExplorerUrls: ['https://explorer.harmony.one/']
-              }]
-          }
-      
 
-      window.ethereum.request({ method: 'wallet_addEthereumChain', params    })
-          .then(() => console.log('Success'))
-          .catch((error) => console.log("Error", error.message));
-  } else {
-      alert('Unable to locate a compatible web3 browser!');
-  }
+      if (network.toString() == "1666700000") {
+        alert("Kulfy Network has already been added to Metamask.");
+        return;
+      } else {
+        params = [
+          {
+            chainId: "0x6357D2E0",
+            chainName: "Harmony Testnet",
+            nativeCurrency: {
+              name: "ONE",
+              symbol: "ONE",
+              decimals: 18,
+            },
+            rpcUrls: ["https://api.s0.b.hmny.io"],
+            blockExplorerUrls: ["https://explorer.pops.one/"],
+          },
+        ];
+      }
 
+      window.ethereum
+        .request({ method: "wallet_addEthereumChain", params })
+        .then(() => console.log("Success"))
+        .catch((error) => console.log("Error", error.message));
+    } else {
+      alert("Unable to locate a compatible web3 browser!");
+    }
   }
   render() {
     return (
       <>
-      <div>
-      <MetaTags>
+        <div>
+         
+          <MetaTags>
             <title>Kulfy - Minting Memes from NFTs</title>
             <meta name="description" content="Some kulfy description." />
             <meta property="og:title" content="MyApp Kulfy" />
           </MetaTags>
-        <nav className="navbar  navbar-light bg-none mb-3">
-          <div className="container-fluid">
-            <a href="/" className="navbar-logo mx-2">
-              <Logo />
-            </a>
+          <Navbar className="navbar navbar-light bg-none mb-3" collapseOnSelect expand="xl" bg="dark" variant="dark">
+      <Navbar.Brand href="#home">
+      <Logo />
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className=" navbar-collapse">
+          <Nav.Link href="#" className="mx-2 nav-links " onClick={() => this.AddToMetaMask()}> Add MetaMask Network</Nav.Link>
+          <Nav.Link href="https://kulfyapp.com/" className="mx-2 nav-links " target="_blank">App</Nav.Link>
+          <Nav.Link href="/docs?id=documentation" className="mx-2 nav-links " >Docs</Nav.Link>
+          <Nav.Link href="/UserProfile" className="mx-2 nav-links " >My Kulfys</Nav.Link>
+          <Nav.Link href="/create" className="mx-2 nav-links ">Create</Nav.Link>
+          <Nav.Link href="#" className="mx-2 nav-links "><Identicon string="randomness" size="25" /></Nav.Link>
           
-            <div>
-            <a href='#' className="mx-2 nav-links" onClick={() => this.AddToMetaMask()}>
-                Add Harmony Network
-              </a>
-              <a href='https://kulfyapp.com/' target='_blank' className="mx-2 nav-links ">
-                App
-              </a>
-              <a href='/docs?id=documentation' className="mx-2 nav-links ">
-                Docs 
-              </a>
-              <a href="/UserProfile" className="mx-2 nav-links">
-                My Kulfys
-              </a>
-              <a href="/creator" className="mx-2 btn-create">
-                Create
-              </a>
-              <a href="#" className="mx-2 nav-links">
-              <Identicon string="randomness" size="25"/>
-              </a>
-     {/*          <a href="/UserProfile" className="navbar-dp mx-3">
-                <UserProfile />
-                <small id="account">{this.props.account}</small>
-              </a>
-
-              <a href="/" className="navbar-ham">
-                <NavHam />
-              </a> */}
-            </div>
-          </div>
-        </nav>
-        {/* <div className="container">
+        </Nav>
+       
+      </Navbar.Collapse>
+    </Navbar>
+          
+          {/* <div className="container">
           <div className="row">
             <div className="col">
               <div className="input-group mb-3">
@@ -191,24 +161,26 @@ class Navbar extends Component {
           </div>
         </div> */}
 
-        <footer className="footer mt-auto py-2 bg-dark fixed-bottom">
-          <div className="container">
-            <div className="row">
-              <div className="col-6">
-                <span className="text-muted">© Copyright 2021 Kulfy Inc</span>
-              </div>
-              <div className="col-6">
-                <a href="https://twitter.com/kulfyapp" target="blank">Twitter</a>
-                <a href="https://discord.gg/Su4m642a">Discord</a>
-                <a href="https://t.me/KulfyGifs">Telegram</a>
+          <footer className="footer mt-auto py-2 bg-dark fixed-bottom">
+            <div className="container">
+              <div className="row">
+                <div className="col-6">
+                  <span className="text-muted">© Copyright 2021 Kulfy Inc</span>
+                </div>
+                <div className="col-6">
+                  <a href="https://twitter.com/kulfyapp" target="blank">
+                    Twitter
+                  </a>
+                  <a href="https://discord.gg/Su4m642a">Discord</a>
+                  <a href="https://t.me/KulfyGifs">Telegram</a>
+                </div>
               </div>
             </div>
-          </div>
-        </footer>
-      </div>
+          </footer>
+        </div>
       </>
     );
   }
 }
 
-export default Navbar;
+export default Navbars;

@@ -75,7 +75,14 @@ a:hover {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-
+.-toggler-icon {
+  width: 20px !important;
+}
+.navbar-toggler {
+  background: #d7f88d;
+  padding: 0px 6px;
+  margin-right: 10px;
+}
 .navbar-logo {
   background-color: none;
 }
@@ -635,7 +642,14 @@ a.tag > span {
   border-bottom: 1px solid rgba(140, 140, 140, 0.45);
   border-right: 1px solid rgba(140, 140, 140, 0.45);
 }
-
+.other-actions > span {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  /* or 14px */
+  color: #ffffff;
+  opacity: 0.7;
+}
 .row > .other-actions:last-child {
   border-right: none;
 }
@@ -991,6 +1005,23 @@ a.tag > span {
   color: #3b3d42 !important;
   background: #ffe629;
 }
+.btn-bluepink {
+  min-width: 100px;
+  background: linear-gradient(268.96deg, #ebabe1 -8.31%, #aaecfc 97.61%);
+  border-radius: 33px;
+  padding: 10px 15px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  text-align: center;
+  color: #3b3d42;
+  border: none;
+}
+.btn-radium:hover {
+  color: #3b3d42 !important;
+  background: #aaecfc;
+}
 .btn-radium-outline {
   min-width: 100px;
   background: none;
@@ -1056,4 +1087,96 @@ footer a {
   border: 1px solid #eef65c;
   margin-right: 5px;
   width: 80px;
+}
+.link-radium {
+  color: #d7f88d;
+  text-decoration: underline;
+  display: block;
+  margin: 0;
+  font-weight: 400;
+  font-size: 12.13px;
+  line-height: 100%;
+}
+.meta-info .link-radium {
+  font-weight: 400;
+  font-size: 12.13px;
+  line-height: 100%;
+}
+.meta-info span {
+  font-weight: 400;
+  font-size: 10.5948px;
+  line-height: 100%;
+  color: #ffffff;
+  opacity: 0.7;
+}
+.meta-info h6 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+}
+.meta-info .btn-bluepink {
+  margin: 0 !important;
+}
+.tips-list span {
+  font-weight: 400;
+  font-size: 10.5948px;
+  line-height: 100%;
+  /* identical to box height, or 11px */
+
+  color: #ffffff;
+
+  opacity: 0.7;
+}
+.tips-list a {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 100%;
+  /* identical to box height, or 10px */
+
+  text-decoration-line: underline;
+
+  color: #d7f88d;
+  margin-left: 10px;
+}
+.message {
+  font-weight: 400;
+  font-size: 12px;
+}
+.tread > img {
+  border-radius: 50px;
+}
+.send-msg {
+  background: #303238;
+  opacity: 0.4;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-right: 10px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  padding: 5px;
+  color: #ffffff;
+  height: 40px;
+}
+
+.send-msg::placeholder {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  /* identical to box height */
+
+  color: #ffffff;
+
+  opacity: 0.4;
+}
+
+.section-h {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: #ffffff;
 }

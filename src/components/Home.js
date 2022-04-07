@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
+import Navbars from './Navbars';
 
 const Home = () => {
   const [keyword, setKeyword] = useState(null);
@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <>
 
-    <Navbar />
+    <Navbars />
 
 <section className="container hero-creator">
         <div className="row ">

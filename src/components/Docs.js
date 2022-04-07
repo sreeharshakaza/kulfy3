@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "./Navbar";
+import Navbars from "./Navbars";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -31,7 +31,7 @@ const Docs = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbars />
       <h1 className="text-center">{title}</h1>
       <section className="container featured-grid mb-5">
         <div className="row d-flex justify-content-between p-3 mark-links">
