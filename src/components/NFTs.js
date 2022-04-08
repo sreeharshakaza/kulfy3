@@ -3,7 +3,7 @@ import axios from "axios";
 
 import ReactDOM from "react-dom";
 import { Dropdown } from "react-bootstrap";
-import Navbar from "./Navbar";
+import Navbars from "./Navbars";
 import { DefaultPlayer as Video } from "react-html5video";
 import "react-html5video/dist/styles.css";
 import { useCookies } from "react-cookie";
@@ -75,7 +75,7 @@ const NFTs = () => {
   return (
     <>
    
-      <Navbar />
+      <Navbars />
       {loading ? (
           <div style={{marginLeft:'47%',marginTop: '5%'}}>
             <ReactLoading type="spinningBubbles" color="#ffffff" height={100} width={70} />
