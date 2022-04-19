@@ -15,7 +15,7 @@ class Kulfys extends Component {
 
   /**
    * [loadWeb3 Connecting to web3]
-   * 
+   *
    */
   async loadWeb3() {
     if (window.ethereum) {
@@ -43,9 +43,9 @@ class Kulfys extends Component {
 
   /**
    * [loadBlockchainData Load mapping of NFT assets in the contract]
-   * 
+   *
    */
-   async loadBlockchainData () 
+   async loadBlockchainData ()
   {
 
     const web3 = window.web3;
@@ -64,8 +64,8 @@ class Kulfys extends Component {
         if(this.state.intialCount<=kulfiesCount)
         {
           this.setState({ hasmore: true });
-          for (let i =kulfiesCount ; i >=(kulfiesCount-(this.state.intialCount+this.state.takeCount)) 
-          ; i--) 
+          for (let i =kulfiesCount ; i >=(kulfiesCount-(this.state.intialCount+this.state.takeCount))
+          ; i--)
             {
               if(i>0)
               {
@@ -76,7 +76,7 @@ class Kulfys extends Component {
                 kulfies: [...this.state.kulfies, kulfy],
                             });
                 }
-              }            
+              }
           }
         this.setState({intialCount:this.state.intialCount+this.state.takeCount})
         if((kulfiesCount-(this.state.intialCount+this.state.takeCount))<=0)
@@ -85,7 +85,7 @@ class Kulfys extends Component {
        else
        {this.setState({ hasmore: false });}
 
-    } 
+    }
     else {
       window.alert("Kulfy contarct not deployed to any network");
     }
@@ -118,13 +118,13 @@ class Kulfys extends Component {
     this.setState({ showModalPopup: state });
   }
   updateInputitemValue(evt) {
-  
+
     this.setState({
       inputItem: evt.target.value
     });
   }
   updateInputTipValue(evt) {
- 
+
     this.setState({
       inputTip:  evt.target.value
     });
@@ -149,7 +149,7 @@ class Kulfys extends Component {
     this.loadBlockchainData = this.loadBlockchainData.bind(this);
   }
 
-  
+
 
   render() {
     return (
@@ -158,7 +158,7 @@ class Kulfys extends Component {
           <div style={{marginLeft:'47%',marginTop: '5%'}}>
             <ReactLoading type="spinningBubbles" color="#ffffff" height={100} width={70} />
           </div>
-       
+
       ) :(
         <section className="container featured-grid">
           <div className="row d-flex justify-content-between">
@@ -203,7 +203,7 @@ class Kulfys extends Component {
                 />
               </button>
             </div> */}
-          </div> 
+          </div>
           {(<InfiniteScroll
           dataLength={this.state.kulfies.length}
           next={this.loadBlockchainData}
@@ -218,7 +218,7 @@ class Kulfys extends Component {
                     <div className="grid-image">
                       <a href={"/kulfy?id=" + item.id}>
                         <video autoPlay loop muted width="320" height="240">
-                          <source src={item.assetURI} type="video/mp4" />
+                          <source src={"https://media.kulfyapp.com/"+item.kid+"/"+item.kid+".mp4"} type="video/mp4" />
                           Your browser does not support the video tag.
                         </video>
                       </a>
@@ -267,7 +267,7 @@ class Kulfys extends Component {
                       </h6>
                       <hr />
                       <div className="user-details">
-                        {/* 
+                        {/*
                         TODO:
                         *intially show Tip Creator button.
                         * When Tip Creator button clicked, Hide the button and show div with id tip-send.
@@ -315,17 +315,17 @@ class Kulfys extends Component {
                       </div>
                     </div>
                   </div>
-              
+
                 </>
               );
             })
             }
           </div>
           </InfiniteScroll>)}
-          
+
         <ModelPopUp ref={this.child} account={this.state.account} showModalPopup={this.state.showModalPopup} kulfyV3={this.state.kulfyV3}  />
 
-     
+
         </section>
             )}
       </>

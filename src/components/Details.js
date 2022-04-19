@@ -64,8 +64,8 @@ class Details extends Component {
       let search = window.location.search;
       let params = new URLSearchParams(search);
       id = params.get("id");
-  
-      this.state.id = id;  
+
+      this.state.id = id;
       const kulfy = await kulfyV3.methods.kulfys(id).call();
 
       console.log('nft kulfy ',kulfy);
@@ -75,30 +75,30 @@ class Details extends Component {
       this.setState({creator:kulfy.author});
       this.setState({metadata:kulfy.tokenURI});
       this.setState({tipAmount:Web3.utils.fromWei(kulfy.tipAmount, 'ether')});
-  
+
       const getKulfyAPI =
         "https://gateway.kulfyapp.com/V3/gifs/getKulfy?client=web&id=" +
         this.state.kid +
         "&language=all,telugu,tamil,hindi,malayalam,english";
-  
+
       axios.defaults.headers.common = {
         "Content-Type": "application/json",
       };
-  
+
       const postCommentsResponse = await axios.get(`${getKulfyAPI}`);
       console.log(
         `postComments Response from convo: ${JSON.stringify(
           postCommentsResponse
         )}`
       );
-  
+
       const response = postCommentsResponse;
       this.state.kulfy = response.data.kulfy_info;
       this.setState({ loading: false });
-     
+
       const getMetaDataResponse = await axios.get(`${kulfy.tokenURI}`);
-    
-    if(getMetaDataResponse.data.source!=null){    
+
+    if(getMetaDataResponse.data.source!=null){
       //this.setState({chain:getMetaDataResponse.data.source.chain});
       this.setState({chain:getMetaDataResponse.data.source.chain});
       this.setState({description:getMetaDataResponse.data.source.description});
@@ -106,7 +106,7 @@ class Details extends Component {
     }
       } else {
         window.alert("Kulfy contarct not deployed to any network");
-      }    
+      }
   }
 
 
@@ -126,13 +126,13 @@ class Details extends Component {
     this.setState({ showModalPopup: state });
   }
   updateInputitemValue(evt) {
-  
+
     this.setState({
       inputItem: evt.target.value
     });
   }
   updateInputTipValue(evt) {
- 
+
     this.setState({
       inputTip:  evt.target.value
     });
@@ -161,7 +161,7 @@ class Details extends Component {
           <div style={{marginLeft:'47%',marginTop: '5%'}}>
             <ReactLoading type="spinningBubbles" color="#ffffff" height={100} width={70} />
           </div>
-       
+
       ) :(
         <section className="container">
         <div className="row">
@@ -176,10 +176,10 @@ class Details extends Component {
                         width="480"
                         height="480"
                         controls
-                        src={this.state.asset_url}
+                        src={"https://media.kulfyapp.com/"+this.state.kulfy.kid+"/"+this.state.kulfy.kid+".mp4"}
                       >
                         Your browser does not support the video tag.
-                      </video>                   
+                      </video>
                 </div>
             </div>
             <div className="col-md-6 d-flex flex-column nft-details">
@@ -188,7 +188,7 @@ class Details extends Component {
                     <a href="#">
                         <img src="./assets/images/gifs_white.svg" alt="" />
                         <span>{this.state.kulfy.content_type}</span>
-                    </a>                    
+                    </a>
                 </div>
                 <button className="btn-radium my-3" onClick={() => this.tipKulfy(this.state.id)}>Tip</button>
                 <hr />
@@ -197,22 +197,22 @@ class Details extends Component {
                     <a href={this.state.original_url} target="blank">View Original</a>
                 </div>   */}
                 <div className="nft-actions my-2">
-                    Tips Recieved: {this.state.tipAmount}  ONE 
-                </div> 
+                    Tips Recieved: {this.state.tipAmount}  ONE
+                </div>
                 <div className="nft-actions my-2">
                     Creator: {this.state.creator}
-                </div> 
+                </div>
                 <div className="nft-actions my-2">
                     <a href={this.state.metadata} target="blank">Metadata: {this.state.metadata} </a>
-                </div> 
+                </div>
             </div>
         </div>
-        
+
         <ModelPopUp ref={this.child} account={this.state.account} showModalPopup={this.state.showModalPopup} kulfyV3={this.state.kulfyV3}  />
     </section>
      )}
      <Kulfys />
-     
+
       </>
     );
   }
