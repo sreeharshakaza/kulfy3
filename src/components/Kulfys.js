@@ -269,7 +269,7 @@ class Kulfys extends Component {
                               <h6>
                                 Kulfy: {item.kid}{" "}
                                 <img
-                                  src="https://cdn.kulfyapp.com/kulfy/bookmarks_small.svg"
+                                  src="https://cdn.kulfyapp.com/kulfy/icons8-external_link.svg"
                                   height="20px"
                                 />
                               </h6>
