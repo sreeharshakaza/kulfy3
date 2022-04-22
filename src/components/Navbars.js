@@ -61,7 +61,7 @@ class Navbars extends Component {
             <meta property="og:title" content="MyApp Kulfy" />
           </MetaTags>
           <Navbar
-            className="navbar navbar-light bg-none mb-3"
+            className="navbar navbar-light bg-none mb-3 justify-content-between"
             collapseOnSelect
             expand="xl"
             bg="dark"
