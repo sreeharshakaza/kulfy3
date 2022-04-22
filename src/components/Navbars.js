@@ -30,15 +30,15 @@ class Navbars extends Component {
       } else {
         params = [
           {
-            chainId: "0x6357D2E0",
-            chainName: "Harmony Testnet",
+            chainId: "0x63564C40",
+            chainName: "Harmony Mainnet",
             nativeCurrency: {
               name: "ONE",
               symbol: "ONE",
               decimals: 18,
             },
-            rpcUrls: ["https://api.s0.b.hmny.io"],
-            blockExplorerUrls: ["https://explorer.pops.one/"],
+            rpcUrls: ["https://api.harmony.one"],
+            blockExplorerUrls: ["https://explorer.harmony.one/"],
           },
         ];
       }
