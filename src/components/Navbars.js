@@ -24,7 +24,7 @@ class Navbars extends Component {
       console.log(network.toString());
       var params;
 
-      if (network.toString() == "1666700000") {
+      if (network.toString() == "1666600000") {
         alert("Kulfy Network has already been added to Metamask.");
         return;
       } else {
