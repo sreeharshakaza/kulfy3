@@ -263,13 +263,16 @@ class Kulfys extends Component {
                             <a
                               href={"https://kulfyapp.com/kulfy/" + item.kid}
                               target="blank"
+                              className="link-radium"
                             >
                               {" "}
-                              <h6>Kulfy: {item.kid}</h6>
-                              <img
-                                src="https://cdn.kulfyapp.com/kulfy/icons8-external_link.svg"
-                                height="24px"
-                              />
+                              <h6>
+                                Kulfy: {item.kid}{" "}
+                                <img
+                                  src="https://cdn.kulfyapp.com/kulfy/bookmarks_small.svg"
+                                  height="20px"
+                                />
+                              </h6>
                             </a>
                             {/* <h6>tip: {item.tipAmount}</h6> */}
                             <h6>
