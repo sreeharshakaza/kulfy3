@@ -24,21 +24,21 @@ class Navbars extends Component {
       console.log(network.toString());
       var params;
 
-      if (network.toString() == "1666700000") {
+      if (network.toString() == "1666600000") {
         alert("Kulfy Network has already been added to Metamask.");
         return;
       } else {
         params = [
           {
-            chainId: "0x6357D2E0",
-            chainName: "Harmony Testnet",
+            chainId: "0x63564C40",
+            chainName: "Harmony Mainnet",
             nativeCurrency: {
               name: "ONE",
               symbol: "ONE",
               decimals: 18,
             },
-            rpcUrls: ["https://api.s0.b.hmny.io"],
-            blockExplorerUrls: ["https://explorer.pops.one/"],
+            rpcUrls: ["https://api.harmony.one"],
+            blockExplorerUrls: ["https://explorer.harmony.one/"],
           },
         ];
       }
@@ -61,7 +61,7 @@ class Navbars extends Component {
             <meta property="og:title" content="MyApp Kulfy" />
           </MetaTags>
           <Navbar
-            className="navbar navbar-light bg-none mb-3"
+            className="navbar navbar-light bg-none mb-3 justify-content-between"
             collapseOnSelect
             expand="xl"
             bg="dark"
